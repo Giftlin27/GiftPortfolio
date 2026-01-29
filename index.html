@@ -1,256 +1,1239 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
-
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Giftlin DK</title>
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-	<link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
-    <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giftlin Devapriya K - Electronics & Software Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Fira+Code:wght@300;400;500;600&family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --electric-cyan: #00f0ff;
+            --neon-pink: #ff0080;
+            --cyber-purple: #9d00ff;
+            --dark-bg: #0a0a0f;
+            --dark-card: #151520;
+            --dark-accent: #1f1f2e;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b8;
+            --gradient-1: linear-gradient(135deg, #00f0ff 0%, #9d00ff 100%);
+            --gradient-2: linear-gradient(135deg, #ff0080 0%, #ff6b00 100%);
+            --gradient-3: linear-gradient(135deg, #00f0ff 0%, #00ff88 100%);
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated Background Grid */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.03;
+            background-image: 
+                linear-gradient(var(--electric-cyan) 1px, transparent 1px),
+                linear-gradient(90deg, var(--electric-cyan) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Floating Orbs */
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            z-index: 0;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .orb1 { 
+            width: 400px; 
+            height: 400px; 
+            background: var(--electric-cyan); 
+            top: 10%; 
+            left: -10%;
+            animation-delay: 0s;
+        }
+
+        .orb2 { 
+            width: 300px; 
+            height: 300px; 
+            background: var(--neon-pink); 
+            top: 50%; 
+            right: -5%;
+            animation-delay: 5s;
+        }
+
+        .orb3 { 
+            width: 350px; 
+            height: 350px; 
+            background: var(--cyber-purple); 
+            bottom: 10%; 
+            left: 40%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(50px, -50px) scale(1.1); }
+            66% { transform: translate(-50px, 50px) scale(0.9); }
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 0;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+            z-index: 1000;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--electric-cyan);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-family: 'Fira Code', monospace;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+            animation: fadeInUp 0.8s ease-out 0.4s backwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            animation: fadeInUp 0.8s ease-out 0.6s backwards;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Manrope', sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--gradient-1);
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 240, 255, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--electric-cyan);
+            border: 2px solid var(--electric-cyan);
+        }
+
+        .btn-secondary:hover {
+            background: var(--electric-cyan);
+            color: var(--dark-bg);
+            transform: translateY(-3px);
+        }
+
+        /* Stats Cards */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            animation: fadeInUp 0.8s ease-out 0.8s backwards;
+        }
+
+        .stat-card {
+            background: rgba(31, 31, 46, 0.5);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--electric-cyan);
+            box-shadow: 0 15px 40px rgba(0, 240, 255, 0.2);
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 8rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--dark-card);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-10px);
+            border-color: var(--electric-cyan);
+            box-shadow: 0 20px 60px rgba(0, 240, 255, 0.2);
+        }
+
+        .skill-category h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--electric-cyan);
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .skill-tag {
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--electric-cyan);
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--electric-cyan);
+            color: var(--dark-bg);
+            transform: translateY(-2px);
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--electric-cyan), var(--cyber-purple));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 4rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            grid-column: 1;
+            grid-row: 1;
+        }
+
+        .timeline-item:nth-child(even) .timeline-date {
+            grid-column: 2;
+            text-align: left;
+        }
+
+        .timeline-content {
+            background: var(--dark-card);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            border-color: var(--electric-cyan);
+            box-shadow: 0 15px 40px rgba(0, 240, 255, 0.2);
+        }
+
+        .timeline-content h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--electric-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content h4 {
+            color: var(--neon-pink);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .timeline-date {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            font-family: 'Fira Code', monospace;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--electric-cyan);
+            border-radius: 50%;
+            border: 4px solid var(--dark-bg);
+            box-shadow: 0 0 20px var(--electric-cyan);
+            z-index: 2;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            background: var(--dark-card);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--electric-cyan);
+            box-shadow: 0 25px 60px rgba(0, 240, 255, 0.3);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(157, 0, 255, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .project-card:hover .project-image::after {
+            transform: translateX(100%);
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-content h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            color: var(--electric-cyan);
+            margin-bottom: 1rem;
+        }
+
+        .project-content p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tag {
+            background: rgba(255, 0, 128, 0.1);
+            color: var(--neon-pink);
+            padding: 0.4rem 0.9rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(255, 0, 128, 0.3);
+        }
+
+        .project-link {
+            color: var(--electric-cyan);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            gap: 1rem;
+            color: var(--neon-pink);
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .contact-info h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--electric-cyan);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(31, 31, 46, 0.5);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            border-color: var(--electric-cyan);
+            transform: translateX(10px);
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 240, 255, 0.1);
+            border: 2px solid var(--electric-cyan);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--electric-cyan);
+            text-decoration: none;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--electric-cyan);
+            color: var(--dark-bg);
+            transform: translateY(-5px) rotate(360deg);
+        }
+
+        /* Form Styling */
+        .contact-form {
+            background: var(--dark-card);
+            padding: 2.5rem;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(31, 31, 46, 0.8);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            border-radius: 8px;
+            color: white;
+            font-family: 'Manrope', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--electric-cyan);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-card);
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(0, 240, 255, 0.1);
+        }
+
+        footer p {
+            color: var(--text-secondary);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--electric-cyan);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 3rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 0;
+            }
+
+            .timeline-item {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-item:nth-child(even) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-date {
+                grid-column: 1;
+            }
+
+            .timeline-date {
+                justify-content: flex-start;
+                margin-bottom: 1rem;
+            }
+
+            .timeline-dot {
+                left: 0;
+                transform: translateX(0);
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+        }
+
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: var(--gradient-1);
+            z-index: 9999;
+            transition: width 0.1s ease;
+        }
+
+        /* Resume Viewer */
+        .resume-section {
+            background: var(--dark-card);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            margin-bottom: 3rem;
+        }
+
+        .resume-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .resume-item {
+            background: rgba(31, 31, 46, 0.5);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--electric-cyan);
+        }
+
+        .resume-item h4 {
+            color: var(--electric-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .resume-item p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+    </style>
 </head>
-
 <body>
-    <div id="mobile-menu-open" class="shadow-large">
-        <i class="fa fa-bars" aria-hidden="true"></i>
-    </div>
-    <!-- End #mobile-menu-toggle -->
-    <header>
-        <div id="mobile-menu-close">
-            <span>Close</span> <i class="fa fa-times" aria-hidden="true"></i>
-        </div>
-        <ul id="menu" class="shadow">
-            <li>
-                <a href="#about">About</a>
-            </li>
-            <li>
-                <a href="#experience">Experience</a>
-            </li>
-            <li>
-                <a href="#education">Education</a>
-            </li>
-            <li>
-                <a href="#projects">Projects</a>
-            </li>
-            <li>
-                <a href="#skills">Skills</a>
-            </li>
-            <li>
-                <a href="#contact">Contact</a>
-            </li>
-        </ul>
-    </header>
-    <!-- End header -->
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
 
-    <div id="lead">
-        <div id="lead-content">
-            <h1>Giftlin DK</h1>
-            <h2>Project Engineer</h2>
-            <a href="Giftlin_Nov'24.pdf" download="resume.pdf" class="btn-rounded-white">Get Resume</a>
-        </div>
-        <!-- End #lead-content -->
+    <!-- Background Elements -->
+    <div class="bg-grid"></div>
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
 
-        <div id="lead-overlay"></div>
-
-        <div id="lead-down">
-            <span>
-                <i class="fa fa-chevron-down" aria-hidden="true"></i>
-            </span>
-        </div>
-        <!-- End #lead-down -->
-    </div>
-    <!-- End #lead -->
-
-    <div id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <h2 class="heading">About Me</h2>
-                </div>
-                <div class="col-md-8">
-                    <p>
-                        I am a passionate software engineer having a blend mixture of knowledge in electronics and software development. Constantly, progressing on leveraging my skills in electronics and software development to drive innovation and efficiency in semiconductor technology projects. Let's connect, innovate, and drive impactful solutions in the tech industry! Beside that I am passionate about content writing.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End #about -->
-
-    <div id="skills" class="background-alt">
-        <h2 class="heading">Skills</h2>
-        <ul>
-            <li>Python</li>
-            <li>C++</li>
-            <li>LabVIEW</li>
-            <li>TestStand</li>
-            <li>JIRA</li>
-            <li>Github</li>
-	    <li>Content Writing</li>
-	    <li>Technical Documentation</li>
-        </ul>
-    </div>
-    <!-- End #skills -->
-
-    <div id="projects">
-        <h2 class="heading">Projects</h2>
-        <div class="container">
-            <div class="row">
-                <div class="project shadow-large">
-                    <div class="project-image">
-                        <img src="images/project.jpg" />
-                    </div>
-                    <!-- End .project-image -->
-                    <div class="project-info">
-                        <h3>Design and Analysis of SAR-ADC for Low Power circuits</h3>
-                        <p>
-                           An 8-bit Asynchronous Successive Approximation Register (SAR) Analog to Digital Converter (ADC) designed to leverage state-of-the-art 18nm FinFET technology. This advanced asynchronous SAR system comprises several integral components, including a meticulously engineered internal clock generator, a high-performance bootstrapped sample and hold circuit, a robust and highly efficient dynamic comparator, a precision Digital-to-Analog Converter (DAC), and a sophisticated SAR logic. One of the standout features of our design is its remarkably low power consumption, which is in the microwatt (uW) range. These characteristics positions our ADC as a compelling solution for applications that demand a delicate equilibrium between power efficiency, moderate resolution, and swift operation. </p>
-                        <a href="https://ieeexplore.ieee.org/document/10625464">View Publication</a>
-                    </div>
-                    <!-- End .project-info -->
-                </div>
-                <!-- End .project -->
-
-                <div class="project shadow-large">
-                    <div class="project-image">
-                        <img src="images/project.jpg" />
-                    </div>
-                    <!-- End .project-image -->
-                    <div class="project-info">
-                        <h3>Conversation of Industrial CO2 into the futuristic material Graphene</h3>
-                        <p>
-                            In this project, a theoretical approach of synthezing graphene using carbon dioxide and magnesium via thermal reduction process. It is an approach for synthesizing graphene using cheap reactants. Graphene can be produced by reducing carbon dioxide with the help of reducing agents like magnesium. The apparatus for the experiment is a horizontal electric tubular furnace equipped with a quartz tube or any tube made up of a heat resistant material.                        </p>
-                        <a href="https://link.springer.com/chapter/10.1007/978-981-16-8599-6_6">View Publication</a>
-                    </div>
-                    <!-- End .project-info -->
-                </div>
-                <!-- End .project -->
-            </div>
-        </div>
-    </div>
-    <!-- End #projects -->
-
-    <div id="experience" class="background-alt">
-        <h2 class="heading">Experience</h2>
-        <div id="experience-timeline">
-            <div data-date="September 2024 – Present">
-                <h3>Soliton Technologies</h3>
-                <h4>Project Engineer</h4>
-                <p>
-                    Developing highly scalable and efficent Test and Automation Software solutions for leading Semiconductor manufacturers for their relibility testing applications using LabVIEW, TestStand and Python.
-                </p>
-            </div>
-
-            <div data-date="January 2024 – August 2024">
-                <h3>Soliton Technologies</h3>
-                <h4>Intern</h4>
-                <p>
-                    Technically got trained in LabVIEW and worked with project teams and contributed for developing pipelines, automating data validations, debugging, bug fixes, testing and developing features of the software.
-                </p>
-            </div>
-
-    </div>
-    <!-- End #experience -->
-
-    <div id="education">
-        <h2 class="heading">Education</h2>
-        <div class="education-block">
-            <h3>Kumaraguru College of Technology</h3>
-            <span class="education-date">Oct 2020 - April 2024</span>
-            <h4>Bachelor of Engineering in Electronics and Communication Engineering (9.5 CGPA)</h4>
-            <ul>
-                <li>
-                    Merit Scholarship Award (All four years)
-                </li>
-                <li>
-                    Department Achiever -  Ragunath Vasudevan Memorial Award
-                </li>
-                <li>
-                    Secretary - Department Associaion
-                </li>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-content">
+            <div class="logo">GIFTLIN.DK</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
             </ul>
+            <button class="mobile-menu-btn">☰</button>
         </div>
-        <!-- End .education-block -->
+    </nav>
 
-        <div class="education-block">
-            <h3>Rose Mary Matriculation Hr. Sec. School</h3>
-            <span class="education-date">June 2005 - May 2024</span>
-            <h4>High School Diplomo with Mathematics and Biology Majors (92.67 Percent)</h4>
-            <ul>
-                <li>
-                    Class Representative (Grade 3 to Grade 6)
-                </li>
-                <li>
-                    School Choir (Grade 4 and Grade 5)
-                </li>
-                <li>
-                    School Level Throwball Player (Grade 7 to Grade 9)
-                </li>
-                <li>
-                    Perfect Score in Chemistry (Grade 11)
-                </li>
-            </ul>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Giftlin Devapriya K</h1>
+                    <div class="subtitle">&lt;Project Engineer /&gt;</div>
+                    <p>Electronics & Software Engineer specializing in LabVIEW, Test Automation, and Semiconductor Solutions. Bridging hardware and software to create innovative testing frameworks for industry leaders.</p>
+                    <div class="cta-buttons">
+                        <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                        <a href="#projects" class="btn btn-secondary">View Projects</a>
+                    </div>
+                </div>
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-number">9.57</div>
+                        <div class="stat-label">CGPA</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">2+</div>
+                        <div class="stat-label">IEEE Publications</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">4+</div>
+                        <div class="stat-label">Academic Awards</div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- End .education-block -->
-    </div>
-    <!-- End #education -->
+    </section>
 
-    <div id="contact">
-        <h2>Get in Touch</h2>
-        <div id="contact-form">
-            <form method="POST" action="https://formspree.io/xyyypojw">
-                <input type="hidden" name="_subject" value="Contact request from personal website" />
-                <input type="email" name="_replyto" placeholder="Your email" required>
-                <textarea name="message" placeholder="Your message" required></textarea>
-                <button type="submit">Send</button>
-            </form>
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
+                <p class="section-subtitle">Passionate about leveraging electronics and software to drive innovation in semiconductor technology</p>
+            </div>
+
+            <div class="resume-section">
+                <h3 style="font-family: 'Orbitron', sans-serif; color: var(--electric-cyan); margin-bottom: 2rem;">Professional Profile</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
+                    I am a passionate software engineer with a unique blend of knowledge in electronics and software development. Currently working at Soliton Technologies, I develop highly scalable and efficient Test and Automation Software solutions for leading semiconductor manufacturers. My expertise spans LabVIEW programming, TestStand, Python, and CI/CD automation, with a focus on reliability testing applications.
+                </p>
+                
+                <div class="resume-grid">
+                    <div class="resume-item">
+                        <h4>🎓 Education</h4>
+                        <p><strong>Bachelor's in ECE</strong></p>
+                        <p>Kumaraguru College of Technology</p>
+                        <p>CGPA: 9.57/10 (2020-2024)</p>
+                    </div>
+                    <div class="resume-item">
+                        <h4>🏆 Achievements</h4>
+                        <p>• Academic Excellence Award (4 years)</p>
+                        <p>• Department Achiever Award</p>
+                        <p>• Winner RiGathon'2021 Hackathon</p>
+                    </div>
+                    <div class="resume-item">
+                        <h4>📚 Certifications</h4>
+                        <p>• GitHub Professional</p>
+                        <p>• Agile Project Management</p>
+                        <p>• ChatGPT Prompt Engineering</p>
+                    </div>
+                    <div class="resume-item">
+                        <h4>💼 Leadership</h4>
+                        <p>• Secretary – Qubate of Kumaraguru</p>
+                        <p>• Treasurer – IEEE KCT Student Branch</p>
+                        <p>• Project Manager – Research Cell</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- End #contact-form -->
-    </div>
-    <!-- End #contact -->
+    </section>
 
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Experience</h2>
+                <p class="section-subtitle">Building cutting-edge solutions for semiconductor testing</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Soliton Technologies</h3>
+                        <h4>Project Engineer</h4>
+                        <p>• Reliability Support Engineer maintaining Lab Software Health</p>
+                        <p>• Developed Data Logging for Reliability Testing Software</p>
+                        <p>• CI/CD Deployment and Testing operations</p>
+                        <p>• Created comprehensive User Manuals and Technical Documentation</p>
+                        <p>• Building scalable Test & Automation solutions using LabVIEW, TestStand, and Python</p>
+                    </div>
+                    <div class="timeline-date">Jan 2024 - Present</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Soliton Technologies</h3>
+                        <h4>Intern</h4>
+                        <p>• Received technical training in LabVIEW programming</p>
+                        <p>• Collaborated with project teams on software development</p>
+                        <p>• Contributed to pipeline development and automation</p>
+                        <p>• Performed debugging, bug fixes, and feature testing</p>
+                        <p>• Automated data validations for testing frameworks</p>
+                    </div>
+                    <div class="timeline-date">Jul 2023 - Dec 2023</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Projects</h2>
+                <p class="section-subtitle">Research and innovation in electronics and software</p>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">📡</div>
+                    <div class="project-content">
+                        <h3>SAR-ADC for Low Power Circuits</h3>
+                        <p>An 8-bit Asynchronous SAR-ADC designed in Cadence Virtuoso using 18nm FinFET technology, achieving ultra-low power consumption in the microwatt range with moderate resolution and swift operation.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Cadence Virtuoso</span>
+                            <span class="project-tag">18nm FinFET</span>
+                            <span class="project-tag">Low Power Design</span>
+                            <span class="project-tag">IEEE Published</span>
+                        </div>
+                        <a href="https://ieeexplore.ieee.org/document/10625464" target="_blank" class="project-link">View Publication →</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">🔋</div>
+                    <div class="project-content">
+                        <h3>Battery Management System</h3>
+                        <p>Design and validation of Analog Front End (AFE) for current measurement in the development of Indigenous Battery Management System with precision monitoring capabilities.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">AFE Design</span>
+                            <span class="project-tag">Current Sensing</span>
+                            <span class="project-tag">PCB Design</span>
+                            <span class="project-tag">Validation</span>
+                        </div>
+                        <a href="#" class="project-link">Learn More →</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">🌿</div>
+                    <div class="project-content">
+                        <h3>Graphene Nanocomposite Synthesis</h3>
+                        <p>Innovative research on synthesizing graphene-based nanocomposites from captured industrial carbon through thermal reduction process using CO2 and magnesium.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Nanotechnology</span>
+                            <span class="project-tag">Graphene</span>
+                            <span class="project-tag">Sustainability</span>
+                            <span class="project-tag">Springer Published</span>
+                        </div>
+                        <a href="https://link.springer.com/chapter/10.1007/978-981-16-8599-6_6" target="_blank" class="project-link">View Publication →</a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">🎥</div>
+                    <div class="project-content">
+                        <h3>Video Dehazing for Automobiles</h3>
+                        <p>Real-time video dehazing solution using PYNQ FPGA to address image clarity challenges in automotive applications, advancing state-of-the-art dehazing techniques.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">FPGA</span>
+                            <span class="project-tag">Computer Vision</span>
+                            <span class="project-tag">PYNQ</span>
+                            <span class="project-tag">Real-time Processing</span>
+                        </div>
+                        <a href="#" class="project-link">Learn More →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Technical Skills</h2>
+                <p class="section-subtitle">Comprehensive expertise across hardware and software domains</p>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Programming Languages</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">LabVIEW (Expert)</span>
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">C++</span>
+                        <span class="skill-tag">TestStand</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Frameworks & Architecture</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Plugin Architecture</span>
+                        <span class="skill-tag">MVC Pattern</span>
+                        <span class="skill-tag">LVOOPs</span>
+                        <span class="skill-tag">State Machines</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Tools & Technologies</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">JIRA</span>
+                        <span class="skill-tag">Confluence</span>
+                        <span class="skill-tag">Tableau</span>
+                        <span class="skill-tag">Altium Designer</span>
+                        <span class="skill-tag">KICAD</span>
+                        <span class="skill-tag">Cadence</span>
+                        <span class="skill-tag">Proteus</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Methodologies</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Clean Code Practices</span>
+                        <span class="skill-tag">CI/CD Automation</span>
+                        <span class="skill-tag">Agile</span>
+                        <span class="skill-tag">Scrum</span>
+                        <span class="skill-tag">Kanban</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Languages</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Tamil (Native)</span>
+                        <span class="skill-tag">English (Professional)</span>
+                        <span class="skill-tag">Japanese (Basic)</span>
+                        <span class="skill-tag">German (Basic)</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Other Skills</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Technical Documentation</span>
+                        <span class="skill-tag">Content Writing</span>
+                        <span class="skill-tag">PCB Design</span>
+                        <span class="skill-tag">Video Editing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-subtitle">Let's connect and build something amazing together</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div>
+                            <strong>Email</strong><br>
+                            <a href="mailto:kgiftlindevapriya2708@gmail.com" style="color: var(--text-secondary);">kgiftlindevapriya2708@gmail.com</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">📱</div>
+                        <div>
+                            <strong>Phone</strong><br>
+                            <span style="color: var(--text-secondary);">+91 xxxxxx1173</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <strong>Location</strong><br>
+                            <span style="color: var(--text-secondary);">Tirunelveli, Tamil Nadu, India</span>
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="https://github.com/Giftlin27" target="_blank" class="social-link" title="GitHub">G</a>
+                        <a href="https://www.linkedin.com/in/giftlin-devapriya-k-60a656229/" target="_blank" class="social-link" title="LinkedIn">in</a>
+                        <a href="https://leetcode.com/u/kgiftlindevapriya2708/" target="_blank" class="social-link" title="LeetCode">LC</a>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" placeholder="Your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" placeholder="your.email@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea placeholder="Your message here..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
         <div class="container">
-            <div class="row">
-                <div class="col-sm-5 copyright">
-                    <p>
-                        Copyright &copy; 2025 GIFTLIN DK
-                    </p>
-                </div>
-                <div class="col-sm-2 top">
-                    <span id="to-top">
-                        <i class="fa fa-chevron-up" aria-hidden="true"></i>
-                    </span>
-                </div>
-                <div class="col-sm-5 social">
-                    <ul>
-                        <li>
-                            <a href="https://github.com/Giftlin27" target="_blank"><i class="fa fa-github" aria-hidden="true" style="color:#181717;"></i> </a>
-                        </li>
-                        <li>
-                            <a href="https://leetcode.com/u/kgiftlindevapriya2708/" target="_blank">
-                                <img src="https://leetcode.com/favicon.ico" alt="LeetCode" style="width:20px; height:20px;">
-                            </a>                            
-                        </li>
-                        <li>
-                            <a href="https://www.linkedin.com/in/giftlin27/" target="_blank"><i class="fa fa-linkedin" aria-hidden="true" style="color:#0077B5;"></i></a>
-                        </li>
-                        <li>
-                            <a href="https://www.youtube.com/@keebo27" target="_blank"><i class="fa fa-youtube" aria-hidden="true" style="color:#FF0000;"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+            <p>&copy; 2025 Giftlin D K. All rights reserved.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Built with passion for innovation and excellence</p>
         </div>
     </footer>
-    <!-- End footer -->
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="js/scripts.min.js"></script>
+    <script>
+        // Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scrollProgress').style.width = scrolled + '%';
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.skill-category, .project-card, .timeline-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+
+        // Form submission (you can connect this to a backend)
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            e.target.reset();
+        });
+    </script>
 </body>
-
 </html>
