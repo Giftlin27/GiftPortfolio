@@ -3,629 +3,599 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giftlin Devapriya K — Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>Giftlin Devapriya K — Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --forest:    #1b2e1e;
-            --deep:      #111a12;
-            --moss:      #2e4a2f;
-            --sage:      #5a8a5c;
-            --mint:      #a8c8a0;
-            --cream:     #f4efe4;
-            --parchment: #ede5d0;
-            --gold:      #c4922a;
-            --gold-lt:   #e0b86a;
-            --amber:     #d4a853;
-            --bark:      #6b4c2a;
-            --text-dk:   #1a1a14;
-            --text-md:   #4a4a3a;
-            --text-lt:   #8a8a78;
-            --white:     #ffffff;
-            --card-bg:   rgba(255,255,255,0.03);
-            --border:    rgba(90,138,92,0.18);
-            --ease:      cubic-bezier(0.4, 0, 0.2, 1);
+            /* Warm darks */
+            --bg:        #0c0b09;
+            --bg2:       #131210;
+            --bg3:       #1c1a16;
+            --bg4:       #252219;
+
+            /* Warm ambers / oranges */
+            --amber:     #e8973a;
+            --amber-lt:  #f0b86a;
+            --amber-dim: #a06828;
+            --rust:      #c4622a;
+            --gold:      #d4a84a;
+
+            /* Warm greys / text */
+            --cream:     #f0e8d8;
+            --warm-wht:  #d8d0c0;
+            --muted:     #8a8070;
+            --dim:       #4a4438;
+
+            /* Accent — terminal green (warm tinted) */
+            --term:      #7ec8a0;
+            --term-dim:  #3a6848;
+
+            /* Borders */
+            --bdr:       rgba(232,151,58,0.12);
+            --bdr2:      rgba(232,151,58,0.22);
+
+            --ease: cubic-bezier(0.4,0,0.2,1);
         }
 
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--deep);
-            color: var(--cream);
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--warm-wht);
             overflow-x: hidden;
             line-height: 1.7;
         }
 
-        /* ── Scrollbar ── */
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: var(--deep); }
-        ::-webkit-scrollbar-thumb { background: var(--sage); border-radius: 10px; }
-
-        /* ── Scroll Progress ── */
-        #progress {
-            position: fixed; top: 0; left: 0;
-            height: 2px; width: 0;
-            background: linear-gradient(90deg, var(--sage), var(--gold));
-            z-index: 9999;
-            transition: width 0.1s linear;
-        }
-
-        /* ── Background ── */
-        .bg-layer {
+        /* ─── Texture overlay ─── */
+        body::before {
+            content: '';
             position: fixed; inset: 0; z-index: 0;
-            background: radial-gradient(ellipse 80% 60% at 20% 10%, rgba(42,74,44,0.25) 0%, transparent 60%),
-                        radial-gradient(ellipse 60% 50% at 80% 80%, rgba(196,146,42,0.08) 0%, transparent 60%),
-                        var(--deep);
+            background-image:
+                radial-gradient(ellipse 70% 50% at 10% 20%, rgba(232,151,58,0.055) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 40% at 90% 80%, rgba(196,98,42,0.04) 0%, transparent 55%);
             pointer-events: none;
         }
 
-        /* ── Nav ── */
+        /* subtle noise */
+        body::after {
+            content: '';
+            position: fixed; inset: 0; z-index: 0;
+            opacity: 0.018;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        /* ─── Scroll progress ─── */
+        #progress {
+            position: fixed; top: 0; left: 0; z-index: 9999;
+            height: 2px; width: 0%;
+            background: linear-gradient(90deg, var(--amber-dim), var(--amber), var(--amber-lt));
+            transition: width 0.1s linear;
+        }
+
+        /* ─── Cursor blink helper ─── */
+        .cursor {
+            display: inline-block;
+            width: 2px; height: 1em;
+            background: var(--amber);
+            vertical-align: text-bottom;
+            margin-left: 2px;
+            animation: blink 1.1s step-end infinite;
+        }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+        /* ─── Nav ─── */
         nav {
             position: fixed; top: 0; left: 0; width: 100%;
             z-index: 100;
-            padding: 1.4rem 2.5rem;
+            padding: 1.2rem 2.5rem;
             display: flex; justify-content: space-between; align-items: center;
-            transition: background 0.4s var(--ease), backdrop-filter 0.4s var(--ease);
+            transition: background 0.4s var(--ease), border-color 0.4s;
+            border-bottom: 1px solid transparent;
         }
 
         nav.scrolled {
-            background: rgba(17,26,18,0.88);
-            backdrop-filter: blur(18px);
-            border-bottom: 1px solid var(--border);
+            background: rgba(12,11,9,0.92);
+            backdrop-filter: blur(20px);
+            border-color: var(--bdr);
         }
 
-        .nav-brand {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--cream);
+        .nav-logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.88rem;
+            color: var(--amber);
             letter-spacing: 0.5px;
         }
 
-        .nav-brand em { color: var(--gold); font-style: italic; }
+        .nav-logo .prompt { color: var(--term); margin-right: 6px; }
 
-        .nav-links {
-            display: flex; gap: 2.5rem; list-style: none;
-        }
+        .nav-links { display: flex; gap: 2.2rem; list-style: none; }
 
         .nav-links a {
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--mint);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--muted);
             text-decoration: none;
-            letter-spacing: 0.5px;
-            transition: color 0.3s;
-            opacity: 0.75;
+            transition: color 0.25s;
+            letter-spacing: 0.3px;
         }
 
-        .nav-links a:hover { color: var(--gold-lt); opacity: 1; }
+        .nav-links a:hover { color: var(--amber); }
 
         .nav-menu-btn {
-            display: none;
-            background: none; border: none;
-            color: var(--mint); font-size: 1.4rem; cursor: pointer;
+            display: none; background: none; border: none;
+            color: var(--amber); font-size: 1.3rem; cursor: pointer;
         }
 
-        /* ── Container ── */
-        .container { max-width: 1180px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+        /* ─── Layout ─── */
+        .container { max-width: 1160px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
 
-        /* ── Hero ── */
+        section { padding: 7rem 0; }
+
+        /* ─── Section labels ─── */
+        .sec-eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--term);
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            display: flex; align-items: center; gap: 0.6rem;
+        }
+
+        .sec-eyebrow::before { content: '//'; color: var(--dim); margin-right: 2px; }
+
+        .sec-title {
+            font-family: 'Lora', serif;
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            font-weight: 700;
+            color: var(--cream);
+            line-height: 1.2;
+            margin-bottom: 0.9rem;
+        }
+
+        .sec-title em { color: var(--amber); font-style: italic; }
+
+        .sec-sub {
+            font-size: 0.97rem;
+            color: var(--muted);
+            line-height: 1.8;
+            max-width: 500px;
+        }
+
+        .sec-head { margin-bottom: 3.5rem; }
+
+        /* ─── Hero ─── */
         .hero {
             min-height: 100vh;
             display: flex; align-items: center;
             padding: 120px 0 80px;
         }
 
-        .hero-inner {
+        .hero-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1.05fr 1fr;
             gap: 5rem;
             align-items: center;
         }
 
-        .hero-eyebrow {
-            font-family: 'DM Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--sage);
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 1.2rem;
-            display: flex; align-items: center; gap: 0.8rem;
+        /* Terminal window */
+        .terminal {
+            background: var(--bg2);
+            border: 1px solid var(--bdr2);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 24px 64px rgba(0,0,0,0.5), 0 0 0 1px rgba(232,151,58,0.06);
+            transition: box-shadow 0.4s var(--ease);
         }
 
-        .hero-eyebrow::before {
-            content: '';
-            display: inline-block;
-            width: 30px; height: 1px;
-            background: var(--sage);
+        .terminal:hover {
+            box-shadow: 0 32px 80px rgba(0,0,0,0.55), 0 0 40px rgba(232,151,58,0.06);
+        }
+
+        .term-bar {
+            background: var(--bg3);
+            padding: 0.7rem 1rem;
+            display: flex; align-items: center; gap: 0.5rem;
+            border-bottom: 1px solid var(--bdr);
+        }
+
+        .term-dot {
+            width: 11px; height: 11px; border-radius: 50%;
+        }
+        .term-dot.r { background: #e06060; }
+        .term-dot.y { background: #d4a840; }
+        .term-dot.g { background: #60b060; }
+
+        .term-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--muted);
+            margin-left: 0.5rem;
+        }
+
+        .term-body {
+            padding: 1.5rem 1.6rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            line-height: 2;
+        }
+
+        .term-line { display: flex; align-items: baseline; gap: 0.5rem; }
+
+        .t-prompt { color: var(--term); flex-shrink: 0; }
+        .t-cmd    { color: var(--amber); }
+        .t-str    { color: #c4e090; }
+        .t-key    { color: #90b8e0; }
+        .t-val    { color: var(--warm-wht); }
+        .t-cmt    { color: var(--dim); font-style: italic; }
+        .t-num    { color: var(--amber-lt); }
+        .t-blank  { height: 0.6rem; }
+        .t-out    { color: var(--warm-wht); padding-left: 1.2rem; opacity: 0.8; }
+
+        /* Hero left */
+        .hero-eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--term);
+            letter-spacing: 2px;
+            margin-bottom: 1.2rem;
         }
 
         .hero-name {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.8rem, 5vw, 4.2rem);
-            font-weight: 900;
+            font-family: 'Lora', serif;
+            font-size: clamp(2.6rem, 5vw, 3.8rem);
+            font-weight: 700;
             line-height: 1.1;
             color: var(--cream);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
         }
 
-        .hero-name span { color: var(--gold); }
+        .hero-name span { color: var(--amber); }
 
-        .hero-title {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 1.3rem;
-            color: var(--mint);
+        .hero-role {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--muted);
             margin-bottom: 1.8rem;
-            opacity: 0.8;
+            line-height: 1.6;
         }
+
+        .hero-role .hl { color: var(--amber-lt); }
 
         .hero-bio {
-            font-size: 1rem;
-            color: var(--mint);
-            opacity: 0.7;
+            font-size: 0.98rem;
+            color: var(--muted);
             line-height: 1.85;
-            margin-bottom: 2.5rem;
-            max-width: 480px;
+            margin-bottom: 2.2rem;
+            max-width: 460px;
         }
 
-        .hero-tags {
-            display: flex; flex-wrap: wrap; gap: 0.6rem;
-            margin-bottom: 2.5rem;
+        .hero-chips {
+            display: flex; flex-wrap: wrap; gap: 0.5rem;
+            margin-bottom: 2.2rem;
         }
 
-        .tag {
-            font-size: 0.78rem;
-            font-weight: 500;
-            padding: 0.35rem 1rem;
-            border-radius: 50px;
+        .chip {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            padding: 0.3rem 0.85rem;
+            border-radius: 4px;
             border: 1px solid;
-            transition: all 0.3s var(--ease);
+            transition: all 0.25s;
         }
 
-        .tag-green { color: var(--mint); border-color: rgba(168,200,160,0.3); background: rgba(90,138,92,0.1); }
-        .tag-gold  { color: var(--gold-lt); border-color: rgba(196,146,42,0.3); background: rgba(196,146,42,0.08); }
-        .tag-sage  { color: var(--sage); border-color: rgba(90,138,92,0.25); background: rgba(46,74,47,0.2); }
+        .chip-a { color: var(--amber-lt); border-color: rgba(232,151,58,0.3); background: rgba(232,151,58,0.07); }
+        .chip-t { color: var(--term);     border-color: rgba(126,200,160,0.25); background: rgba(126,200,160,0.05); }
+        .chip-m { color: var(--muted);    border-color: rgba(138,128,112,0.25); background: rgba(138,128,112,0.05); }
 
-        .hero-cta { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+        .chip:hover { transform: translateY(-1px); opacity: 0.9; }
+
+        .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
 
         .btn {
-            display: inline-flex; align-items: center; gap: 0.5rem;
-            padding: 0.85rem 2rem;
-            border-radius: 6px;
-            font-family: 'DM Sans', sans-serif;
-            font-size: 0.88rem;
-            font-weight: 600;
-            text-decoration: none;
-            letter-spacing: 0.3px;
-            transition: all 0.3s var(--ease);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            padding: 0.8rem 1.8rem;
+            border-radius: 5px;
             cursor: pointer; border: none;
+            text-decoration: none;
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            transition: all 0.25s var(--ease);
+            letter-spacing: 0.3px;
         }
 
         .btn-primary {
-            background: var(--sage);
-            color: var(--deep);
+            background: var(--amber);
+            color: var(--bg);
+            font-weight: 700;
         }
 
         .btn-primary:hover {
-            background: var(--mint);
+            background: var(--amber-lt);
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(90,138,92,0.35);
+            box-shadow: 0 8px 24px rgba(232,151,58,0.3);
         }
 
-        .btn-outline {
+        .btn-ghost {
             background: transparent;
-            color: var(--mint);
-            border: 1px solid rgba(168,200,160,0.35);
+            color: var(--warm-wht);
+            border: 1px solid var(--bdr2);
         }
 
-        .btn-outline:hover {
-            background: rgba(90,138,92,0.12);
-            border-color: var(--mint);
+        .btn-ghost:hover {
+            border-color: var(--amber);
+            color: var(--amber);
             transform: translateY(-2px);
         }
 
-        /* Hero Visual */
-        .hero-visual {
-            display: flex; flex-direction: column; gap: 1.2rem;
-            align-items: flex-end;
+        /* ─── Cards ─── */
+        .card {
+            background: var(--bg2);
+            border: 1px solid var(--bdr);
+            border-radius: 8px;
+            transition: border-color 0.3s var(--ease), box-shadow 0.3s var(--ease), transform 0.3s var(--ease);
         }
 
-        .hero-card {
-            background: rgba(27,46,30,0.55);
-            backdrop-filter: blur(16px);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.6rem 2rem;
-            width: 100%;
-            max-width: 380px;
-            transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+        .card:hover {
+            border-color: var(--bdr2);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.25);
         }
 
-        .hero-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 16px 48px rgba(0,0,0,0.25);
-        }
-
-        .hero-card-label {
-            font-family: 'DM Mono', monospace;
-            font-size: 0.65rem;
-            color: var(--sage);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 0.8rem;
-        }
-
-        .hero-card-val {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--gold-lt);
-        }
-
-        .hero-card-sub {
-            font-size: 0.82rem;
-            color: var(--mint);
-            opacity: 0.6;
-            margin-top: 0.2rem;
-        }
-
-        .hero-cards-row { display: flex; gap: 1rem; width: 100%; max-width: 380px; }
-        .hero-cards-row .hero-card { max-width: none; flex: 1; padding: 1.3rem 1.4rem; }
-        .hero-cards-row .hero-card-val { font-size: 1.4rem; }
-
-        /* ── Section Base ── */
-        section { padding: 7rem 0; }
-
-        .sec-label {
-            font-family: 'DM Mono', monospace;
-            font-size: 0.7rem;
-            color: var(--sage);
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-            display: flex; align-items: center; gap: 0.8rem;
-        }
-
-        .sec-label::before {
-            content: '';
-            display: inline-block;
-            width: 24px; height: 1px;
-            background: var(--sage);
-        }
-
-        .sec-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 3.5vw, 2.8rem);
-            font-weight: 700;
-            color: var(--cream);
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        .sec-title em { color: var(--gold); font-style: italic; }
-
-        .sec-desc {
-            font-size: 1rem;
-            color: var(--mint);
-            opacity: 0.65;
-            max-width: 520px;
-            line-height: 1.8;
-        }
-
-        .sec-head { margin-bottom: 4rem; }
-
-        /* Divider */
-        .leaf-divider {
-            text-align: center;
-            margin: 0.5rem 0 3rem;
-            color: var(--moss);
-            font-size: 0.9rem;
-            letter-spacing: 12px;
-            opacity: 0.6;
-        }
-
-        /* ── About ── */
+        /* ─── About ─── */
         .about-grid {
             display: grid;
-            grid-template-columns: 1.1fr 1fr;
-            gap: 4rem;
-            align-items: start;
+            grid-template-columns: 1.15fr 1fr;
+            gap: 4rem; align-items: start;
         }
 
-        .about-body {
-            font-size: 1.05rem;
-            color: var(--mint);
-            opacity: 0.8;
+        .about-prose {
+            font-size: 0.98rem;
+            color: var(--muted);
             line-height: 1.9;
         }
 
-        .about-body p { margin-bottom: 1.2rem; }
-        .about-body p:last-child { margin-bottom: 0; }
-        .about-body strong { color: var(--cream); font-weight: 600; opacity: 1; }
+        .about-prose p { margin-bottom: 1.1rem; }
+        .about-prose p:last-child { margin-bottom: 0; }
+        .about-prose strong { color: var(--warm-wht); font-weight: 600; }
 
-        .about-quote {
-            border-left: 2px solid var(--sage);
-            padding: 0.8rem 1.5rem;
-            margin: 2rem 0;
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 1.1rem;
-            color: var(--gold-lt);
-            opacity: 0.85;
+        .inline-code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82em;
+            background: rgba(232,151,58,0.1);
+            color: var(--amber-lt);
+            border: 1px solid rgba(232,151,58,0.2);
+            padding: 0.1em 0.45em;
+            border-radius: 3px;
         }
 
-        .about-right { display: flex; flex-direction: column; gap: 1.2rem; }
+        .about-right { display: flex; flex-direction: column; gap: 1.1rem; }
 
-        .info-card {
-            background: rgba(27,46,30,0.4);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.6rem;
-            transition: all 0.35s var(--ease);
+        .info-box {
+            background: var(--bg2);
+            border: 1px solid var(--bdr);
+            border-radius: 8px;
+            padding: 1.4rem;
+            transition: border-color 0.3s;
         }
 
-        .info-card:hover {
-            border-color: rgba(90,138,92,0.4);
-            background: rgba(27,46,30,0.6);
-            transform: translateX(6px);
+        .info-box:hover { border-color: var(--bdr2); }
+
+        .info-box-head {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--term);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.9rem;
+            display: flex; align-items: center; gap: 0.5rem;
         }
 
-        .info-card-head {
-            display: flex; align-items: center; gap: 0.8rem;
-            margin-bottom: 1rem;
-        }
+        .info-box-head::before { content: '//'; color: var(--dim); }
 
-        .info-card-icon { font-size: 1.3rem; }
-
-        .info-card-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 0.95rem;
+        .edu-name {
+            font-family: 'Lora', serif;
+            font-size: 1rem;
             font-weight: 600;
-            color: var(--gold-lt);
-        }
-
-        .info-list { list-style: none; }
-
-        .info-list li {
-            font-size: 0.9rem;
-            color: var(--mint);
-            opacity: 0.75;
-            padding: 0.3rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
-            display: flex; align-items: center; gap: 0.6rem;
-        }
-
-        .info-list li:last-child { border-bottom: none; }
-
-        .info-list li::before {
-            content: '–';
-            color: var(--sage);
-            flex-shrink: 0;
-        }
-
-        /* Education box */
-        .edu-card {
-            background: rgba(27,46,30,0.4);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.8rem;
-        }
-
-        .edu-inst {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.05rem;
-            font-weight: 700;
             color: var(--cream);
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.2rem;
         }
 
-        .edu-degree {
-            font-size: 0.9rem;
-            color: var(--mint);
-            opacity: 0.7;
+        .edu-deg {
+            font-size: 0.85rem;
+            color: var(--muted);
             margin-bottom: 0.8rem;
         }
 
-        .edu-meta {
-            display: flex; flex-wrap: wrap; gap: 0.6rem;
+        .pill-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+        .pill {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            padding: 0.25rem 0.7rem;
+            border-radius: 3px;
+            border: 1px solid;
         }
 
-        .edu-pill {
-            font-family: 'DM Mono', monospace;
-            font-size: 0.7rem;
-            padding: 0.3rem 0.9rem;
-            border-radius: 50px;
+        .pill-a { color: var(--amber-lt); border-color: rgba(232,151,58,0.3); background: rgba(232,151,58,0.08); }
+        .pill-t { color: var(--term);     border-color: rgba(126,200,160,0.25); background: rgba(126,200,160,0.05); }
+
+        .item-list { list-style: none; }
+
+        .item-list li {
+            font-size: 0.88rem;
+            color: var(--muted);
+            padding: 0.32rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            display: flex; align-items: flex-start; gap: 0.6rem;
         }
 
-        .edu-pill-gold { background: rgba(196,146,42,0.12); color: var(--gold-lt); border: 1px solid rgba(196,146,42,0.3); }
-        .edu-pill-green { background: rgba(90,138,92,0.12); color: var(--mint); border: 1px solid rgba(90,138,92,0.3); }
+        .item-list li:last-child { border-bottom: none; }
+        .item-list li::before { content: '›'; color: var(--amber-dim); flex-shrink: 0; }
 
-        /* ── Experience ── */
-        .exp-list { display: flex; flex-direction: column; gap: 1.5rem; }
+        /* ─── Experience ─── */
+        .exp-stack { display: flex; flex-direction: column; gap: 1.2rem; }
 
         .exp-card {
-            background: rgba(27,46,30,0.35);
-            border: 1px solid var(--border);
-            border-radius: 14px;
+            background: var(--bg2);
+            border: 1px solid var(--bdr);
+            border-radius: 8px;
             overflow: hidden;
-            transition: all 0.35s var(--ease);
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
 
         .exp-card:hover {
-            border-color: rgba(90,138,92,0.4);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            border-color: var(--bdr2);
+            box-shadow: 0 6px 24px rgba(0,0,0,0.2);
         }
 
-        .exp-top {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            padding: 1.8rem 2rem;
+        .exp-header {
+            display: flex; align-items: center; gap: 1.2rem;
+            padding: 1.4rem 1.6rem;
+            background: var(--bg3);
             border-bottom: 1px solid rgba(255,255,255,0.04);
         }
 
-        .exp-icon-wrap {
-            width: 48px; height: 48px;
-            background: rgba(46,74,47,0.6);
-            border: 1px solid var(--border);
-            border-radius: 10px;
+        .exp-icon {
+            width: 42px; height: 42px;
+            background: var(--bg4);
+            border: 1px solid var(--bdr);
+            border-radius: 8px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 1.4rem;
-            flex-shrink: 0;
+            font-size: 1.2rem; flex-shrink: 0;
         }
 
         .exp-company {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.15rem;
-            font-weight: 700;
+            font-family: 'Lora', serif;
+            font-size: 1.05rem;
+            font-weight: 600;
             color: var(--cream);
         }
 
         .exp-role {
-            font-family: 'DM Mono', monospace;
-            font-size: 0.72rem;
-            color: var(--sage);
-            letter-spacing: 1px;
-            margin-top: 0.2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--amber-dim);
+            letter-spacing: 1.5px;
+            margin-top: 0.15rem;
         }
+
+        .exp-meta { margin-left: auto; display: flex; align-items: center; gap: 0.7rem; flex-shrink: 0; }
 
         .exp-period {
-            margin-left: auto;
-            font-family: 'DM Mono', monospace;
-            font-size: 0.72rem;
-            color: var(--text-lt);
-            background: rgba(255,255,255,0.05);
-            padding: 0.35rem 0.9rem;
-            border-radius: 50px;
-            border: 1px solid rgba(255,255,255,0.07);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--dim);
+            background: rgba(255,255,255,0.04);
+            padding: 0.3rem 0.75rem;
+            border-radius: 3px;
+            border: 1px solid rgba(255,255,255,0.06);
             white-space: nowrap;
-            flex-shrink: 0;
         }
 
-        .exp-status {
-            font-family: 'DM Mono', monospace;
-            font-size: 0.65rem;
-            padding: 0.3rem 0.8rem;
-            border-radius: 50px;
-            flex-shrink: 0;
+        .badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            padding: 0.28rem 0.7rem;
+            border-radius: 3px;
         }
 
-        .exp-status.live {
-            background: rgba(90,138,92,0.15);
-            color: var(--mint);
-            border: 1px solid rgba(90,138,92,0.4);
+        .badge-live {
+            background: rgba(126,200,160,0.1);
+            color: var(--term);
+            border: 1px solid rgba(126,200,160,0.3);
         }
 
-        .exp-status.live::before { content: '● '; }
+        .badge-live::before { content: '● '; }
 
-        .exp-status.done {
-            background: rgba(196,146,42,0.1);
-            color: var(--amber);
-            border: 1px solid rgba(196,146,42,0.25);
+        .badge-done {
+            background: rgba(232,151,58,0.08);
+            color: var(--amber-dim);
+            border: 1px solid rgba(232,151,58,0.2);
         }
 
-        .exp-body { padding: 1.5rem 2rem; }
+        .exp-body { padding: 1.4rem 1.6rem; }
 
-        .exp-points {
-            list-style: none;
-            display: flex; flex-direction: column; gap: 0.6rem;
-            margin-bottom: 1.2rem;
+        .exp-pts { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.1rem; }
+
+        .exp-pts li {
+            font-size: 0.92rem;
+            color: var(--muted);
+            display: flex; align-items: flex-start; gap: 0.7rem;
         }
 
-        .exp-points li {
-            font-size: 0.95rem;
-            color: var(--mint);
-            opacity: 0.75;
-            display: flex; align-items: flex-start; gap: 0.8rem;
-        }
+        .exp-pts li::before { content: '→'; color: var(--amber-dim); flex-shrink: 0; margin-top: 0.05rem; }
 
-        .exp-points li::before {
-            content: '→';
-            color: var(--sage);
-            flex-shrink: 0;
-            margin-top: 0.05rem;
-        }
-
-        .exp-skills {
-            display: flex; flex-wrap: wrap; gap: 0.5rem;
+        .tech-row {
+            display: flex; flex-wrap: wrap; gap: 0.4rem;
             padding-top: 1rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
+            border-top: 1px solid rgba(255,255,255,0.04);
         }
 
-        .skill-chip {
-            font-family: 'DM Mono', monospace;
-            font-size: 0.7rem;
-            background: rgba(46,74,47,0.35);
-            color: var(--mint);
-            border: 1px solid rgba(90,138,92,0.25);
-            padding: 0.25rem 0.8rem;
-            border-radius: 50px;
+        .tech {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.67rem;
+            background: rgba(232,151,58,0.07);
+            color: var(--amber-dim);
+            border: 1px solid rgba(232,151,58,0.16);
+            padding: 0.22rem 0.65rem;
+            border-radius: 3px;
         }
 
-        /* ── Projects ── */
-        .projects-grid {
+        /* ─── Projects ─── */
+        .proj-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+            gap: 1.3rem;
         }
 
         .proj-card {
-            background: rgba(27,46,30,0.38);
-            border: 1px solid var(--border);
-            border-radius: 14px;
+            background: var(--bg2);
+            border: 1px solid var(--bdr);
+            border-radius: 8px;
             overflow: hidden;
-            transition: all 0.4s var(--ease);
+            transition: transform 0.3s var(--ease), border-color 0.3s, box-shadow 0.3s;
         }
 
         .proj-card:hover {
-            transform: translateY(-6px);
-            border-color: rgba(196,146,42,0.35);
-            box-shadow: 0 16px 48px rgba(0,0,0,0.22);
+            transform: translateY(-5px);
+            border-color: rgba(232,151,58,0.28);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
         }
 
-        .proj-banner {
-            height: 130px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 3.5rem;
-            position: relative;
-            overflow: hidden;
+        .proj-top {
+            padding: 1.4rem 1.5rem 1rem;
+            display: flex; justify-content: space-between; align-items: flex-start;
         }
 
-        .proj-b1 { background: linear-gradient(135deg, rgba(46,74,47,0.9), rgba(17,26,18,0.95)); }
-        .proj-b2 { background: linear-gradient(135deg, rgba(90,138,92,0.25), rgba(17,26,18,0.95)); }
-        .proj-b3 { background: linear-gradient(135deg, rgba(196,146,42,0.18), rgba(27,46,30,0.95)); }
-        .proj-b4 { background: linear-gradient(135deg, rgba(107,76,42,0.3), rgba(17,26,18,0.95)); }
+        .proj-emoji { font-size: 2rem; }
 
-        .proj-badge {
-            position: absolute;
-            top: 10px; right: 12px;
-            font-family: 'DM Mono', monospace;
+        .proj-pub-badge {
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.6rem;
             padding: 0.25rem 0.65rem;
-            border-radius: 50px;
+            border-radius: 3px;
         }
 
-        .badge-pub { background: rgba(196,146,42,0.2); color: var(--gold-lt); border: 1px solid rgba(196,146,42,0.4); }
-        .badge-res { background: rgba(90,138,92,0.15); color: var(--mint); border: 1px solid rgba(90,138,92,0.35); }
+        .pub-ieee { background: rgba(90,140,200,0.12); color: #90b8e0; border: 1px solid rgba(90,140,200,0.25); }
+        .pub-springer { background: rgba(200,90,90,0.1); color: #e0a0a0; border: 1px solid rgba(200,90,90,0.22); }
+        .pub-res { background: rgba(126,200,160,0.08); color: var(--term); border: 1px solid rgba(126,200,160,0.2); }
 
-        .proj-body { padding: 1.5rem; }
+        .proj-body { padding: 0 1.5rem 1.5rem; }
 
         .proj-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.05rem;
-            font-weight: 700;
+            font-family: 'Lora', serif;
+            font-size: 1rem;
+            font-weight: 600;
             color: var(--cream);
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.55rem;
         }
 
         .proj-desc {
-            font-size: 0.9rem;
-            color: var(--mint);
-            opacity: 0.65;
+            font-size: 0.88rem;
+            color: var(--muted);
             line-height: 1.75;
             margin-bottom: 1rem;
         }
@@ -633,308 +603,303 @@
         .proj-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
 
         .proj-tag {
-            font-family: 'DM Mono', monospace;
-            font-size: 0.65rem;
-            background: rgba(27,46,30,0.6);
-            color: var(--sage);
-            border: 1px solid rgba(90,138,92,0.2);
-            padding: 0.2rem 0.7rem;
-            border-radius: 50px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            background: var(--bg3);
+            color: var(--muted);
+            border: 1px solid rgba(255,255,255,0.07);
+            padding: 0.2rem 0.6rem;
+            border-radius: 3px;
         }
 
         .proj-link {
-            font-size: 0.83rem;
-            font-weight: 600;
-            color: var(--gold);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--amber);
             text-decoration: none;
-            display: inline-flex; align-items: center; gap: 0.4rem;
+            display: inline-flex; align-items: center; gap: 0.35rem;
             transition: all 0.25s;
         }
 
-        .proj-link:hover { color: var(--gold-lt); gap: 0.7rem; }
+        .proj-link:hover { color: var(--amber-lt); gap: 0.6rem; }
 
-        /* ── Skills ── */
-        .skills-layout {
+        /* ─── Skills ─── */
+        .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
-            gap: 1.4rem;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.2rem;
         }
 
-        .skill-group {
-            background: rgba(27,46,30,0.38);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.6rem;
-            transition: all 0.3s var(--ease);
+        .sk-group {
+            background: var(--bg2);
+            border: 1px solid var(--bdr);
+            border-radius: 8px;
+            padding: 1.4rem;
+            transition: border-color 0.3s;
         }
 
-        .skill-group:hover { border-color: rgba(90,138,92,0.38); }
+        .sk-group:hover { border-color: var(--bdr2); }
 
-        .skill-group-head {
-            display: flex; align-items: center; gap: 0.7rem;
-            margin-bottom: 1.2rem;
-        }
-
-        .skill-group-icon { font-size: 1.2rem; }
-
-        .skill-group-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--gold-lt);
-        }
-
-        .skill-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-
-        .s-pill {
-            font-family: 'DM Mono', monospace;
+        .sk-head {
+            font-family: 'JetBrains Mono', monospace;
             font-size: 0.7rem;
-            padding: 0.35rem 0.85rem;
-            border-radius: 50px;
-            border: 1px solid;
-            transition: all 0.25s;
+            color: var(--amber-dim);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            display: flex; align-items: center; gap: 0.5rem;
         }
 
-        .s-pill:hover { transform: translateY(-1px); }
+        .sk-head::before { content: '//'; color: var(--dim); }
 
-        .s-pill.hi  { color: var(--cream);   border-color: rgba(196,146,42,0.45); background: rgba(196,146,42,0.1); }
-        .s-pill.mid { color: var(--mint);     border-color: rgba(90,138,92,0.35);  background: rgba(90,138,92,0.08); }
-        .s-pill.lo  { color: var(--text-lt);  border-color: rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); }
+        .sk-pills { display: flex; flex-wrap: wrap; gap: 0.45rem; }
 
-        /* ── Contact ── */
+        .sk {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            padding: 0.3rem 0.75rem;
+            border-radius: 3px;
+            border: 1px solid;
+            transition: all 0.2s;
+        }
+
+        .sk:hover { transform: translateY(-1px); }
+
+        .sk-hi  { color: var(--amber-lt); border-color: rgba(232,151,58,0.35); background: rgba(232,151,58,0.08); }
+        .sk-mid { color: var(--warm-wht); border-color: rgba(255,255,255,0.1);  background: rgba(255,255,255,0.03); }
+        .sk-lo  { color: var(--muted);    border-color: rgba(138,128,112,0.15); background: transparent; }
+
+        /* ─── Contact ─── */
         .contact-wrap {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
+            gap: 5rem; align-items: start;
         }
 
-        .contact-left {}
+        .contact-list { display: flex; flex-direction: column; gap: 0.9rem; margin-top: 1.8rem; }
 
-        .contact-links { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
-
-        .contact-item {
-            display: flex; align-items: center; gap: 1.2rem;
-            background: rgba(27,46,30,0.38);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 1.1rem 1.4rem;
+        .c-item {
+            display: flex; align-items: center; gap: 1rem;
+            background: var(--bg2);
+            border: 1px solid var(--bdr);
+            border-radius: 7px;
+            padding: 1rem 1.3rem;
             text-decoration: none;
-            color: var(--cream);
-            transition: all 0.3s var(--ease);
+            color: var(--warm-wht);
+            transition: all 0.25s var(--ease);
         }
 
-        .contact-item:hover {
-            border-color: rgba(90,138,92,0.4);
-            transform: translateX(6px);
-            background: rgba(27,46,30,0.55);
+        .c-item:hover {
+            border-color: var(--bdr2);
+            transform: translateX(5px);
         }
 
-        .contact-item-icon {
-            width: 40px; height: 40px;
-            background: rgba(46,74,47,0.5);
-            border-radius: 8px;
+        .c-icon {
+            width: 36px; height: 36px;
+            background: var(--bg3);
+            border: 1px solid var(--bdr);
+            border-radius: 6px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 1.1rem;
-            flex-shrink: 0;
+            font-size: 1rem; flex-shrink: 0;
         }
 
-        .contact-item-lbl {
-            font-family: 'DM Mono', monospace;
-            font-size: 0.65rem;
-            color: var(--sage);
+        .c-lbl {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--term);
             letter-spacing: 1.5px;
             text-transform: uppercase;
         }
 
-        .contact-item-val {
-            font-size: 0.9rem;
-            color: var(--mint);
+        .c-val {
+            font-size: 0.88rem;
+            color: var(--muted);
             margin-top: 0.1rem;
         }
 
         .contact-right {}
 
-        .contact-tagline {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
+        .contact-headline {
+            font-family: 'Lora', serif;
+            font-size: 1.7rem;
             font-weight: 700;
-            color: var(--cream);
             line-height: 1.35;
-            margin-bottom: 1.2rem;
-        }
-
-        .contact-tagline em { color: var(--gold); font-style: italic; }
-
-        .contact-note {
-            font-size: 1rem;
-            color: var(--mint);
-            opacity: 0.65;
-            line-height: 1.8;
-            margin-bottom: 2rem;
-        }
-
-        .socials { display: flex; gap: 1rem; }
-
-        .social-btn {
-            width: 46px; height: 46px;
-            background: rgba(27,46,30,0.5);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            color: var(--mint);
-            font-weight: 700;
-            font-size: 0.85rem;
-            text-decoration: none;
-            transition: all 0.3s var(--ease);
-        }
-
-        .social-btn:hover {
-            background: rgba(90,138,92,0.2);
-            border-color: var(--sage);
             color: var(--cream);
-            transform: translateY(-3px);
+            margin-bottom: 1rem;
         }
 
-        /* ── Footer ── */
+        .contact-headline em { color: var(--amber); font-style: italic; }
+
+        .contact-body {
+            font-size: 0.95rem;
+            color: var(--muted);
+            line-height: 1.8;
+            margin-bottom: 1.8rem;
+        }
+
+        .social-row { display: flex; gap: 0.8rem; }
+
+        .soc-btn {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            width: 44px; height: 44px;
+            background: var(--bg2);
+            border: 1px solid var(--bdr);
+            border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--muted);
+            text-decoration: none;
+            transition: all 0.25s;
+        }
+
+        .soc-btn:hover { border-color: var(--amber); color: var(--amber); transform: translateY(-2px); }
+
+        /* ─── Footer ─── */
         footer {
-            border-top: 1px solid var(--border);
-            padding: 2.5rem 0;
+            border-top: 1px solid var(--bdr);
+            padding: 2.8rem 0;
         }
 
         .footer-inner {
-            max-width: 1180px; margin: 0 auto; padding: 0 2rem;
+            max-width: 1160px; margin: 0 auto; padding: 0 2rem;
             display: flex; flex-direction: column; align-items: center;
-            gap: 1rem; text-align: center;
+            gap: 1.1rem; text-align: center;
+        }
+
+        .footer-verse-wrap {
+            background: var(--bg2);
+            border: 1px solid var(--bdr);
+            border-radius: 6px;
+            padding: 1.2rem 2rem;
+            max-width: 520px;
         }
 
         .footer-verse {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Lora', serif;
             font-style: italic;
-            font-size: 1rem;
-            color: var(--gold-lt);
-            opacity: 0.75;
-            max-width: 520px;
-            line-height: 1.7;
+            font-size: 0.98rem;
+            color: var(--amber-lt);
+            line-height: 1.65;
         }
 
         .footer-verse cite {
             display: block;
-            font-family: 'DM Mono', monospace;
+            font-family: 'JetBrains Mono', monospace;
             font-style: normal;
-            font-size: 0.68rem;
-            color: var(--sage);
-            letter-spacing: 1.5px;
-            margin-top: 0.4rem;
+            font-size: 0.62rem;
+            color: var(--dim);
+            letter-spacing: 2px;
+            margin-top: 0.5rem;
+            text-transform: uppercase;
         }
 
         .footer-copy {
-            font-family: 'DM Mono', monospace;
-            font-size: 0.7rem;
-            color: var(--text-lt);
-            opacity: 0.5;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.67rem;
+            color: var(--dim);
         }
 
-        .footer-dots { color: var(--moss); letter-spacing: 6px; font-size: 0.7rem; opacity: 0.5; }
-
-        /* ── Animations / Reveal ── */
+        /* ─── Reveal ─── */
         .reveal {
             opacity: 0;
-            transform: translateY(28px);
-            transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+            transform: translateY(24px);
+            transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
         }
 
-        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal.on { opacity: 1; transform: translateY(0); }
+        .reveal.d1 { transition-delay: 0.1s; }
+        .reveal.d2 { transition-delay: 0.2s; }
+        .reveal.d3 { transition-delay: 0.3s; }
+        .reveal.d4 { transition-delay: 0.4s; }
 
-        .reveal-delay-1 { transition-delay: 0.1s; }
-        .reveal-delay-2 { transition-delay: 0.2s; }
-        .reveal-delay-3 { transition-delay: 0.3s; }
-        .reveal-delay-4 { transition-delay: 0.4s; }
-
-        /* ── Responsive ── */
+        /* ─── Responsive ─── */
         @media (max-width: 900px) {
-            .hero-inner, .about-grid, .contact-wrap { grid-template-columns: 1fr; gap: 3rem; }
-            .hero-visual { align-items: stretch; }
-            .hero-cards-row .hero-card { flex: none; }
+            .hero-grid, .about-grid, .contact-wrap { grid-template-columns: 1fr; gap: 3rem; }
             .nav-links { display: none; }
             .nav-menu-btn { display: block; }
         }
 
         @media (max-width: 600px) {
-            .hero { padding: 100px 0 60px; }
-            .hero-cta { flex-direction: column; }
             section { padding: 5rem 0; }
-            .exp-top { flex-wrap: wrap; }
+            .hero { padding: 100px 0 60px; }
+            .hero-cta { flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
 <body>
 
 <div id="progress"></div>
-<div class="bg-layer"></div>
 
-<!-- ── Navigation ── -->
+<!-- ── Nav ── -->
 <nav id="nav">
-    <div class="nav-brand">Giftlin <em>DK</em></div>
+    <div class="nav-logo"><span class="prompt">~/giftlin $</span> portfolio<span class="cursor"></span></div>
     <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#about">about</a></li>
+        <li><a href="#experience">experience</a></li>
+        <li><a href="#projects">projects</a></li>
+        <li><a href="#skills">skills</a></li>
+        <li><a href="#contact">contact</a></li>
     </ul>
-    <button class="nav-menu-btn" id="menuBtn">☰</button>
+    <button class="nav-menu-btn" id="menuBtn">≡</button>
 </nav>
 
 <!-- ── Hero ── -->
 <section id="home">
     <div class="container">
-        <div class="hero-inner">
+        <div class="hero-grid">
 
-            <div class="hero-left">
-                <div class="hero-eyebrow">Electronics &amp; Software Engineer</div>
+            <div>
+                <div class="hero-eyebrow">// electronics &amp; software engineer</div>
                 <h1 class="hero-name">Giftlin <span>Devapriya</span> K</h1>
-                <div class="hero-title">Project Engineer · Nature Explorer · Dog Lover</div>
+                <div class="hero-role">
+                    Project Engineer @ <span class="hl">Soliton Technologies</span><br>
+                    LabVIEW · TestStand · Python · CI/CD
+                </div>
                 <p class="hero-bio">
-                    Building scalable test &amp; automation software for semiconductor reliability labs —
-                    then stepping outside to find stillness on a forest trail with my dog.
+                    I build scalable test &amp; automation software for semiconductor reliability labs —
+                    and I genuinely love the craft of clean, precise engineering.
+                    Dog person. Trail explorer. IEEE-published researcher.
                 </p>
-                <div class="hero-tags">
-                    <span class="tag tag-green">🌿 Nature Lover</span>
-                    <span class="tag tag-gold">🐕 Dog Person</span>
-                    <span class="tag tag-sage">🧭 Explorer</span>
-                    <span class="tag tag-green">⚡ LabVIEW Expert</span>
-                    <span class="tag tag-gold">📡 IEEE Published</span>
+                <div class="hero-chips">
+                    <span class="chip chip-a">⚡ LabVIEW Expert</span>
+                    <span class="chip chip-t">📡 2+ IEEE Publications</span>
+                    <span class="chip chip-a">🏆 4× Academic Excellence</span>
+                    <span class="chip chip-m">🐕 Dog Lover</span>
+                    <span class="chip chip-m">🧭 Explorer</span>
                 </div>
                 <div class="hero-cta">
                     <a href="#contact" class="btn btn-primary">Get in Touch</a>
-                    <a href="#projects" class="btn btn-outline">View Projects →</a>
-                    <a href="https://www.linkedin.com/in/giftlin27/" target="_blank" class="btn btn-outline">LinkedIn</a>
+                    <a href="#projects" class="btn btn-ghost">View Projects →</a>
+                    <a href="https://www.linkedin.com/in/giftlin27/" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
                 </div>
             </div>
 
-            <div class="hero-visual">
-                <div class="hero-card reveal">
-                    <div class="hero-card-label">Current Role</div>
-                    <div class="hero-card-val">Project Engineer</div>
-                    <div class="hero-card-sub">Soliton Technologies · Jan 2024 – Present</div>
+            <div class="terminal reveal d1">
+                <div class="term-bar">
+                    <div class="term-dot r"></div>
+                    <div class="term-dot y"></div>
+                    <div class="term-dot g"></div>
+                    <div class="term-title">giftlin@lab ~ profile.py</div>
                 </div>
-                <div class="hero-cards-row">
-                    <div class="hero-card reveal reveal-delay-1">
-                        <div class="hero-card-label">Publications</div>
-                        <div class="hero-card-val">2+</div>
-                        <div class="hero-card-sub">IEEE &amp; Springer</div>
-                    </div>
-                    <div class="hero-card reveal reveal-delay-2">
-                        <div class="hero-card-label">Awards</div>
-                        <div class="hero-card-val">4+</div>
-                        <div class="hero-card-sub">Academic Excellence</div>
-                    </div>
-                </div>
-                <div class="hero-card reveal reveal-delay-3" style="max-width:380px;width:100%;">
-                    <div class="hero-card-label">Specialty</div>
-                    <div class="hero-card-val" style="font-size:1.2rem;">Test &amp; Automation</div>
-                    <div class="hero-card-sub">LabVIEW · TestStand · Python · CI/CD</div>
+                <div class="term-body">
+                    <div class="term-line"><span class="t-cmt"># engineer profile</span></div>
+                    <div class="t-blank"></div>
+                    <div class="term-line"><span class="t-key">class</span>&nbsp;<span class="t-cmd">Engineer</span><span class="t-val">:</span></div>
+                    <div class="term-line">&nbsp;&nbsp;<span class="t-key">name</span>&nbsp;<span class="t-val">=</span>&nbsp;<span class="t-str">"Giftlin DK"</span></div>
+                    <div class="term-line">&nbsp;&nbsp;<span class="t-key">role</span>&nbsp;<span class="t-val">=</span>&nbsp;<span class="t-str">"Project Engineer"</span></div>
+                    <div class="term-line">&nbsp;&nbsp;<span class="t-key">domain</span>&nbsp;<span class="t-val">=</span>&nbsp;<span class="t-str">"Semiconductor Testing"</span></div>
+                    <div class="t-blank"></div>
+                    <div class="term-line">&nbsp;&nbsp;<span class="t-key">skills</span>&nbsp;<span class="t-val">=</span>&nbsp;<span class="t-val">[</span></div>
+                    <div class="term-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-str">"LabVIEW"</span><span class="t-val">,</span>&nbsp;<span class="t-str">"TestStand"</span><span class="t-val">,</span></div>
+                    <div class="term-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-str">"Python"</span><span class="t-val">,</span>&nbsp;<span class="t-str">"CI/CD"</span><span class="t-val">,</span></div>
+                    <div class="term-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="t-str">"PostgreSQL"</span></div>
+                    <div class="term-line">&nbsp;&nbsp;<span class="t-val">]</span></div>
+                    <div class="t-blank"></div>
+                    <div class="term-line">&nbsp;&nbsp;<span class="t-key">publications</span>&nbsp;<span class="t-val">=</span>&nbsp;<span class="t-num">2</span>&nbsp;<span class="t-cmt"># IEEE + Springer</span></div>
+                    <div class="term-line">&nbsp;&nbsp;<span class="t-key">cgpa</span>&nbsp;<span class="t-val">=</span>&nbsp;<span class="t-num">9.57</span>&nbsp;<span class="t-cmt"># out of 10</span></div>
+                    <div class="t-blank"></div>
+                    <div class="term-line"><span class="t-cmt"># currently building reliability</span></div>
+                    <div class="term-line"><span class="t-cmt"># test software @ Soliton</span></div>
                 </div>
             </div>
 
@@ -946,83 +911,69 @@
 <section id="about">
     <div class="container">
         <div class="sec-head reveal">
-            <div class="sec-label">About</div>
-            <h2 class="sec-title">Bridging <em>hardware</em> &amp; software</h2>
-            <p class="sec-desc">A curious mind at the intersection of electronics, code, and the natural world.</p>
+            <div class="sec-eyebrow">about me</div>
+            <h2 class="sec-title">Engineer by craft,<br><em>explorer by nature</em></h2>
         </div>
 
         <div class="about-grid">
-            <div class="about-body reveal">
+            <div class="about-prose reveal">
                 <p>
-                    I'm a <strong>software engineer with an electronics foundation</strong>, currently at
-                    <strong>Soliton Technologies</strong> where I design highly scalable Test &amp; Automation
-                    solutions for semiconductor reliability labs used by global industry leaders.
+                    I'm a <strong>software engineer with a deep electronics foundation</strong>, currently at
+                    <strong>Soliton Technologies</strong> building highly scalable Test &amp; Automation solutions
+                    for semiconductor reliability labs used by global industry leaders.
                 </p>
                 <p>
-                    My toolkit spans <strong>LabVIEW, TestStand, Python</strong>, and CI/CD pipelines — but
-                    what drives me is the intersection of precision engineering and real-world impact.
-                    I've authored <strong>2+ IEEE &amp; Springer publications</strong> and led teams as
-                    Secretary of Qubate, IEEE Treasurer, and Research Cell Project Manager.
+                    My work lives at the intersection of hardware and software — from
+                    <span class="inline-code">LabVIEW</span> architectures and <span class="inline-code">TestStand</span>
+                    sequencers to <span class="inline-code">Python</span> pipelines and
+                    <span class="inline-code">CI/CD</span> automation.
+                    I've published research in IEEE and Springer, and led organizations as Secretary,
+                    IEEE Treasurer, and Research Cell Project Manager.
                 </p>
-                <div class="about-quote">
-                    "The best algorithms are in nature — I just try to borrow from them."
-                </div>
                 <p>
-                    Beyond the screen, I'm a <strong>trail explorer</strong> who finds clarity on forest paths,
-                    a <strong>dog lover</strong> who believes every problem looks smaller with a dog by your side,
-                    and a quiet collector of <strong>languages</strong> — Tamil, English, Japanese, and German.
+                    Away from the screen I'm on a forest trail with my dog, or picking up a new language —
+                    currently Japanese and German alongside my native Tamil and professional English.
+                    I believe the best engineers are also <strong>curious explorers</strong>.
                 </p>
             </div>
 
             <div class="about-right">
-                <div class="edu-card reveal">
-                    <div class="info-card-head">
-                        <span class="info-card-icon">🎓</span>
-                        <span class="info-card-title" style="font-family:'Playfair Display',serif;color:var(--gold-lt);">Education</span>
-                    </div>
-                    <div class="edu-inst">Kumaraguru College of Technology</div>
-                    <div class="edu-degree">B.E. Electronics &amp; Communication Engineering · 2020 – 2024</div>
-                    <div class="edu-meta">
-                        <span class="edu-pill edu-pill-gold">CGPA 9.57 / 10</span>
-                        <span class="edu-pill edu-pill-green">Academic Excellence ×4</span>
-                        <span class="edu-pill edu-pill-green">Dept. Achiever</span>
+                <div class="info-box reveal d1">
+                    <div class="info-box-head">education</div>
+                    <div class="edu-name">Kumaraguru College of Technology</div>
+                    <div class="edu-deg">B.E. Electronics &amp; Communication · 2020 – 2024</div>
+                    <div class="pill-row">
+                        <span class="pill pill-a">CGPA 9.57 / 10</span>
+                        <span class="pill pill-t">Excellence ×4</span>
+                        <span class="pill pill-t">Dept. Achiever</span>
                     </div>
                 </div>
 
-                <div class="info-card reveal reveal-delay-1">
-                    <div class="info-card-head">
-                        <span class="info-card-icon">🏆</span>
-                        <span class="info-card-title">Achievements</span>
-                    </div>
-                    <ul class="info-list">
+                <div class="info-box reveal d2">
+                    <div class="info-box-head">achievements</div>
+                    <ul class="item-list">
                         <li>Academic Excellence Award — 4 consecutive years</li>
                         <li>Department Achiever Award</li>
                         <li>Winner — RiGathon 2021 Hackathon</li>
-                        <li>2+ IEEE &amp; Springer published research papers</li>
+                        <li>2+ IEEE &amp; Springer publications</li>
                     </ul>
                 </div>
 
-                <div class="info-card reveal reveal-delay-2">
-                    <div class="info-card-head">
-                        <span class="info-card-icon">🌍</span>
-                        <span class="info-card-title">Languages &amp; Certifications</span>
-                    </div>
-                    <ul class="info-list">
-                        <li>Tamil (Native) · English (Professional)</li>
-                        <li>Japanese (Learning) · German (Learning)</li>
-                        <li>GitHub Professional · Agile PM · ChatGPT Prompt Eng.</li>
-                    </ul>
-                </div>
-
-                <div class="info-card reveal reveal-delay-3">
-                    <div class="info-card-head">
-                        <span class="info-card-icon">⚔️</span>
-                        <span class="info-card-title">Leadership</span>
-                    </div>
-                    <ul class="info-list">
+                <div class="info-box reveal d3">
+                    <div class="info-box-head">leadership</div>
+                    <ul class="item-list">
                         <li>Secretary — Qubate of Kumaraguru</li>
                         <li>Treasurer — IEEE KCT Student Branch</li>
                         <li>Project Manager — Research Cell</li>
+                    </ul>
+                </div>
+
+                <div class="info-box reveal d4">
+                    <div class="info-box-head">languages</div>
+                    <ul class="item-list">
+                        <li>Tamil (Native) · English (Professional)</li>
+                        <li>Japanese · German (Learning)</li>
+                        <li>GitHub Pro · Agile PM · Prompt Eng.</li>
                     </ul>
                 </div>
             </div>
@@ -1034,59 +985,64 @@
 <section id="experience">
     <div class="container">
         <div class="sec-head reveal">
-            <div class="sec-label">Experience</div>
-            <h2 class="sec-title">Where I've <em>worked</em></h2>
-            <p class="sec-desc">Building semiconductor testing solutions that matter.</p>
+            <div class="sec-eyebrow">experience</div>
+            <h2 class="sec-title">Where I've <em>shipped</em></h2>
+            <p class="sec-sub">Building semiconductor testing infrastructure that runs 24/7 in production labs.</p>
         </div>
 
-        <div class="exp-list">
+        <div class="exp-stack">
             <div class="exp-card reveal">
-                <div class="exp-top">
-                    <div class="exp-icon-wrap">🏭</div>
+                <div class="exp-header">
+                    <div class="exp-icon">🏭</div>
                     <div>
                         <div class="exp-company">Soliton Technologies</div>
                         <div class="exp-role">PROJECT ENGINEER</div>
                     </div>
-                    <div class="exp-period">Jan 2024 – Present</div>
-                    <div class="exp-status live">Active</div>
+                    <div class="exp-meta">
+                        <div class="exp-period">Jan 2024 – Present</div>
+                        <div class="badge badge-live">Active</div>
+                    </div>
                 </div>
                 <div class="exp-body">
-                    <ul class="exp-points">
+                    <ul class="exp-pts">
                         <li>Build scalable Test &amp; Automation Software for semiconductor reliability labs</li>
                         <li>Developed comprehensive Data Logging systems for Reliability Testing Software</li>
                         <li>Implemented CI/CD deployment pipelines and automated testing operations</li>
                         <li>Authored User Manuals and Technical Documentation for complex systems</li>
                     </ul>
-                    <div class="exp-skills">
-                        <span class="skill-chip">LabVIEW</span>
-                        <span class="skill-chip">TestStand</span>
-                        <span class="skill-chip">Python</span>
-                        <span class="skill-chip">CI/CD</span>
-                        <span class="skill-chip">PostgreSQL</span>
+                    <div class="tech-row">
+                        <span class="tech">LabVIEW</span>
+                        <span class="tech">TestStand</span>
+                        <span class="tech">Python</span>
+                        <span class="tech">CI/CD</span>
+                        <span class="tech">PostgreSQL</span>
+                        <span class="tech">Plugin Architecture</span>
                     </div>
                 </div>
             </div>
 
-            <div class="exp-card reveal reveal-delay-1">
-                <div class="exp-top">
-                    <div class="exp-icon-wrap">🌱</div>
+            <div class="exp-card reveal d1">
+                <div class="exp-header">
+                    <div class="exp-icon">🌱</div>
                     <div>
                         <div class="exp-company">Soliton Technologies</div>
                         <div class="exp-role">INTERN</div>
                     </div>
-                    <div class="exp-period">Jul 2023 – Dec 2023</div>
-                    <div class="exp-status done">Completed</div>
+                    <div class="exp-meta">
+                        <div class="exp-period">Jul 2023 – Dec 2023</div>
+                        <div class="badge badge-done">Completed</div>
+                    </div>
                 </div>
                 <div class="exp-body">
-                    <ul class="exp-points">
+                    <ul class="exp-pts">
                         <li>Intensive technical training in LabVIEW programming</li>
                         <li>Contributed to live pipeline development and automation</li>
-                        <li>Performed debugging, feature testing &amp; automated data validations</li>
+                        <li>Debugging, feature testing &amp; automated data validations</li>
                     </ul>
-                    <div class="exp-skills">
-                        <span class="skill-chip">LabVIEW</span>
-                        <span class="skill-chip">Debugging</span>
-                        <span class="skill-chip">Automation</span>
+                    <div class="tech-row">
+                        <span class="tech">LabVIEW</span>
+                        <span class="tech">Debugging</span>
+                        <span class="tech">Automation</span>
                     </div>
                 </div>
             </div>
@@ -1098,33 +1054,33 @@
 <section id="projects">
     <div class="container">
         <div class="sec-head reveal">
-            <div class="sec-label">Projects &amp; Research</div>
+            <div class="sec-eyebrow">projects &amp; research</div>
             <h2 class="sec-title">Things I've <em>built &amp; published</em></h2>
-            <p class="sec-desc">From low-power chip design to sustainable nanotechnology.</p>
+            <p class="sec-sub">From low-power chip design to sustainable nanotechnology.</p>
         </div>
 
-        <div class="projects-grid">
+        <div class="proj-grid">
             <div class="proj-card reveal">
-                <div class="proj-banner proj-b1">
-                    <span>📡</span>
-                    <span class="proj-badge badge-pub">IEEE Published</span>
+                <div class="proj-top">
+                    <span class="proj-emoji">📡</span>
+                    <span class="proj-pub-badge pub-ieee">IEEE Published</span>
                 </div>
                 <div class="proj-body">
                     <div class="proj-title">SAR-ADC for Low Power Circuits</div>
-                    <p class="proj-desc">8-bit Asynchronous SAR-ADC in Cadence Virtuoso using 18nm FinFET — ultra-low power in the microwatt range with swift operation.</p>
+                    <p class="proj-desc">8-bit Asynchronous SAR-ADC in Cadence Virtuoso using 18nm FinFET — ultra-low power in the microwatt range.</p>
                     <div class="proj-tags">
                         <span class="proj-tag">Cadence Virtuoso</span>
                         <span class="proj-tag">18nm FinFET</span>
-                        <span class="proj-tag">Low Power</span>
+                        <span class="proj-tag">Low Power Design</span>
                     </div>
                     <a href="https://ieeexplore.ieee.org/document/10625464" target="_blank" class="proj-link">View Publication →</a>
                 </div>
             </div>
 
-            <div class="proj-card reveal reveal-delay-1">
-                <div class="proj-banner proj-b2">
-                    <span>🔋</span>
-                    <span class="proj-badge badge-res">Research</span>
+            <div class="proj-card reveal d1">
+                <div class="proj-top">
+                    <span class="proj-emoji">🔋</span>
+                    <span class="proj-pub-badge pub-res">Research</span>
                 </div>
                 <div class="proj-body">
                     <div class="proj-title">Battery Management System</div>
@@ -1138,10 +1094,10 @@
                 </div>
             </div>
 
-            <div class="proj-card reveal reveal-delay-2">
-                <div class="proj-banner proj-b3">
-                    <span>🌿</span>
-                    <span class="proj-badge badge-pub">Springer Published</span>
+            <div class="proj-card reveal d2">
+                <div class="proj-top">
+                    <span class="proj-emoji">🌿</span>
+                    <span class="proj-pub-badge pub-springer">Springer Published</span>
                 </div>
                 <div class="proj-body">
                     <div class="proj-title">Graphene Nanocomposite Synthesis</div>
@@ -1155,14 +1111,14 @@
                 </div>
             </div>
 
-            <div class="proj-card reveal reveal-delay-3">
-                <div class="proj-banner proj-b4">
-                    <span>🎥</span>
-                    <span class="proj-badge badge-res">Research</span>
+            <div class="proj-card reveal d3">
+                <div class="proj-top">
+                    <span class="proj-emoji">🎥</span>
+                    <span class="proj-pub-badge pub-res">Research</span>
                 </div>
                 <div class="proj-body">
                     <div class="proj-title">Video Dehazing for Automobiles</div>
-                    <p class="proj-desc">Real-time video dehazing via PYNQ FPGA for improved automotive vision — cutting through the fog, literally.</p>
+                    <p class="proj-desc">Real-time video dehazing via PYNQ FPGA for improved automotive vision systems.</p>
                     <div class="proj-tags">
                         <span class="proj-tag">FPGA</span>
                         <span class="proj-tag">Computer Vision</span>
@@ -1179,92 +1135,68 @@
 <section id="skills">
     <div class="container">
         <div class="sec-head reveal">
-            <div class="sec-label">Skills</div>
+            <div class="sec-eyebrow">skills</div>
             <h2 class="sec-title">Tools of the <em>trade</em></h2>
-            <p class="sec-desc">Across hardware, software, and the spaces in between.</p>
         </div>
 
-        <div class="skills-layout">
-            <div class="skill-group reveal">
-                <div class="skill-group-head">
-                    <span class="skill-group-icon">⚡</span>
-                    <span class="skill-group-name">Programming</span>
-                </div>
-                <div class="skill-pills">
-                    <span class="s-pill hi">LabVIEW</span>
-                    <span class="s-pill hi">TestStand</span>
-                    <span class="s-pill mid">Python</span>
-                    <span class="s-pill mid">C++</span>
-                    <span class="s-pill mid">PostgreSQL</span>
+        <div class="skills-grid">
+            <div class="sk-group reveal">
+                <div class="sk-head">programming</div>
+                <div class="sk-pills">
+                    <span class="sk sk-hi">LabVIEW</span>
+                    <span class="sk sk-hi">TestStand</span>
+                    <span class="sk sk-mid">Python</span>
+                    <span class="sk sk-mid">C++</span>
+                    <span class="sk sk-mid">PostgreSQL</span>
                 </div>
             </div>
-
-            <div class="skill-group reveal reveal-delay-1">
-                <div class="skill-group-head">
-                    <span class="skill-group-icon">🏗</span>
-                    <span class="skill-group-name">Architecture</span>
-                </div>
-                <div class="skill-pills">
-                    <span class="s-pill hi">Plugin Architecture</span>
-                    <span class="s-pill hi">State Machines</span>
-                    <span class="s-pill mid">MVC Pattern</span>
-                    <span class="s-pill mid">LVOOPs</span>
-                    <span class="s-pill mid">CI/CD</span>
+            <div class="sk-group reveal d1">
+                <div class="sk-head">architecture</div>
+                <div class="sk-pills">
+                    <span class="sk sk-hi">Plugin Architecture</span>
+                    <span class="sk sk-hi">State Machines</span>
+                    <span class="sk sk-mid">MVC Pattern</span>
+                    <span class="sk sk-mid">LVOOPs</span>
                 </div>
             </div>
-
-            <div class="skill-group reveal reveal-delay-2">
-                <div class="skill-group-head">
-                    <span class="skill-group-icon">🔧</span>
-                    <span class="skill-group-name">Tools &amp; EDA</span>
-                </div>
-                <div class="skill-pills">
-                    <span class="s-pill hi">Git</span>
-                    <span class="s-pill hi">JIRA</span>
-                    <span class="s-pill mid">Cadence Virtuoso</span>
-                    <span class="s-pill mid">Altium Designer</span>
-                    <span class="s-pill mid">KICAD</span>
-                    <span class="s-pill mid">Tableau</span>
-                    <span class="s-pill lo">Confluence</span>
+            <div class="sk-group reveal d2">
+                <div class="sk-head">tools &amp; eda</div>
+                <div class="sk-pills">
+                    <span class="sk sk-hi">Git</span>
+                    <span class="sk sk-hi">JIRA</span>
+                    <span class="sk sk-mid">Cadence Virtuoso</span>
+                    <span class="sk sk-mid">Altium</span>
+                    <span class="sk sk-mid">KICAD</span>
+                    <span class="sk sk-lo">Tableau</span>
+                    <span class="sk sk-lo">Confluence</span>
                 </div>
             </div>
-
-            <div class="skill-group reveal reveal-delay-3">
-                <div class="skill-group-head">
-                    <span class="skill-group-icon">📋</span>
-                    <span class="skill-group-name">Methodology</span>
-                </div>
-                <div class="skill-pills">
-                    <span class="s-pill hi">Agile / Scrum</span>
-                    <span class="s-pill hi">Kanban</span>
-                    <span class="s-pill mid">Clean Code</span>
-                    <span class="s-pill mid">Technical Writing</span>
+            <div class="sk-group reveal d3">
+                <div class="sk-head">methodology</div>
+                <div class="sk-pills">
+                    <span class="sk sk-hi">Agile / Scrum</span>
+                    <span class="sk sk-hi">CI/CD</span>
+                    <span class="sk sk-mid">Kanban</span>
+                    <span class="sk sk-mid">Clean Code</span>
+                    <span class="sk sk-mid">Tech Writing</span>
                 </div>
             </div>
-
-            <div class="skill-group reveal">
-                <div class="skill-group-head">
-                    <span class="skill-group-icon">🌍</span>
-                    <span class="skill-group-name">Languages</span>
-                </div>
-                <div class="skill-pills">
-                    <span class="s-pill hi">Tamil</span>
-                    <span class="s-pill hi">English</span>
-                    <span class="s-pill lo">Japanese</span>
-                    <span class="s-pill lo">German</span>
+            <div class="sk-group reveal">
+                <div class="sk-head">languages</div>
+                <div class="sk-pills">
+                    <span class="sk sk-hi">Tamil</span>
+                    <span class="sk sk-hi">English</span>
+                    <span class="sk sk-lo">Japanese</span>
+                    <span class="sk sk-lo">German</span>
                 </div>
             </div>
-
-            <div class="skill-group reveal reveal-delay-1">
-                <div class="skill-group-head">
-                    <span class="skill-group-icon">🎨</span>
-                    <span class="skill-group-name">Other</span>
-                </div>
-                <div class="skill-pills">
-                    <span class="s-pill mid">PCB Design</span>
-                    <span class="s-pill mid">Video Editing</span>
-                    <span class="s-pill mid">Content Writing</span>
-                    <span class="s-pill mid">Documentation</span>
+            <div class="sk-group reveal d1">
+                <div class="sk-head">other</div>
+                <div class="sk-pills">
+                    <span class="sk sk-mid">PCB Design</span>
+                    <span class="sk sk-mid">Video Editing</span>
+                    <span class="sk sk-mid">Content Writing</span>
+                    <span class="sk sk-mid">Documentation</span>
                 </div>
             </div>
         </div>
@@ -1275,53 +1207,50 @@
 <section id="contact">
     <div class="container">
         <div class="contact-wrap">
-            <div class="contact-left reveal">
-                <div class="sec-label">Contact</div>
-                <div class="contact-links">
-                    <a href="mailto:kgiftlindevapriya2708@gmail.com" class="contact-item">
-                        <div class="contact-item-icon">📧</div>
+            <div>
+                <div class="sec-eyebrow reveal">contact</div>
+                <div class="contact-list reveal d1">
+                    <a href="mailto:kgiftlindevapriya2708@gmail.com" class="c-item">
+                        <div class="c-icon">📧</div>
                         <div>
-                            <div class="contact-item-lbl">Email</div>
-                            <div class="contact-item-val">kgiftlindevapriya2708@gmail.com</div>
+                            <div class="c-lbl">Email</div>
+                            <div class="c-val">kgiftlindevapriya2708@gmail.com</div>
                         </div>
                     </a>
-                    <a href="https://www.linkedin.com/in/giftlin27/" target="_blank" class="contact-item">
-                        <div class="contact-item-icon">💼</div>
+                    <a href="https://www.linkedin.com/in/giftlin27/" target="_blank" class="c-item">
+                        <div class="c-icon">💼</div>
                         <div>
-                            <div class="contact-item-lbl">LinkedIn</div>
-                            <div class="contact-item-val">linkedin.com/in/giftlin27</div>
+                            <div class="c-lbl">LinkedIn</div>
+                            <div class="c-val">linkedin.com/in/giftlin27</div>
                         </div>
                     </a>
-                    <a href="https://github.com/Giftlin27" target="_blank" class="contact-item">
-                        <div class="contact-item-icon">🗂</div>
+                    <a href="https://github.com/Giftlin27" target="_blank" class="c-item">
+                        <div class="c-icon">🗂</div>
                         <div>
-                            <div class="contact-item-lbl">GitHub</div>
-                            <div class="contact-item-val">github.com/Giftlin27</div>
+                            <div class="c-lbl">GitHub</div>
+                            <div class="c-val">github.com/Giftlin27</div>
                         </div>
                     </a>
-                    <div class="contact-item" style="cursor:default;">
-                        <div class="contact-item-icon">📍</div>
+                    <div class="c-item" style="cursor:default">
+                        <div class="c-icon">📍</div>
                         <div>
-                            <div class="contact-item-lbl">Location</div>
-                            <div class="contact-item-val">Tirunelveli, Tamil Nadu, India</div>
+                            <div class="c-lbl">Location</div>
+                            <div class="c-val">Tirunelveli, Tamil Nadu, India</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="contact-right reveal reveal-delay-2">
-                <div class="contact-tagline">
-                    Let's build something <em>meaningful</em> together.
-                </div>
-                <p class="contact-note">
-                    Whether it's a collaboration, a project idea, or just a conversation about
-                    test automation, semiconductor engineering — or the best trails to explore —
-                    I'm always open to a good conversation.
+            <div class="reveal d2">
+                <div class="contact-headline">Let's build something <em>precise</em> together.</div>
+                <p class="contact-body">
+                    Whether it's a collaboration, a project conversation, or just a chat about
+                    test automation and semiconductor engineering — I'm always open.
                 </p>
-                <div class="socials">
-                    <a href="https://github.com/Giftlin27" target="_blank" class="social-btn">GH</a>
-                    <a href="https://www.linkedin.com/in/giftlin27/" target="_blank" class="social-btn">in</a>
-                    <a href="https://leetcode.com/u/kgiftlindevapriya2708/" target="_blank" class="social-btn">LC</a>
+                <div class="social-row">
+                    <a href="https://github.com/Giftlin27" target="_blank" class="soc-btn">GH</a>
+                    <a href="https://www.linkedin.com/in/giftlin27/" target="_blank" class="soc-btn">in</a>
+                    <a href="https://leetcode.com/u/kgiftlindevapriya2708/" target="_blank" class="soc-btn">LC</a>
                 </div>
             </div>
         </div>
@@ -1331,22 +1260,23 @@
 <!-- ── Footer ── -->
 <footer>
     <div class="footer-inner">
-        <div class="footer-dots">🌿 · · · 🐾 · · · 🌿</div>
-        <div class="footer-verse">
-            "Patient persuasion can break down the strongest resistance."
-            <cite>— Proverbs 25:15</cite>
+        <div class="footer-verse-wrap">
+            <div class="footer-verse">
+                "Patient persuasion can break down the strongest resistance."
+                <cite>— Proverbs 25:15</cite>
+            </div>
         </div>
-        <div class="footer-copy">© 2025 Giftlin Devapriya K · Built with care</div>
+        <div class="footer-copy">© 2025 Giftlin Devapriya K &nbsp;·&nbsp; built with care</div>
     </div>
 </footer>
 
 <script>
-    // Scroll progress
+    // Scroll progress + nav
     window.addEventListener('scroll', () => {
         const s = document.documentElement.scrollTop;
         const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         document.getElementById('progress').style.width = (s / h * 100) + '%';
-        document.getElementById('nav').classList.toggle('scrolled', s > 60);
+        document.getElementById('nav').classList.toggle('scrolled', s > 50);
     });
 
     // Smooth scroll
@@ -1358,26 +1288,28 @@
         })
     );
 
-    // Reveal on scroll
-    const obs = new IntersectionObserver(entries => {
-        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
-
+    // Reveal
+    const obs = new IntersectionObserver(entries =>
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); }),
+        { threshold: 0.07, rootMargin: '0px 0px -40px 0px' }
+    );
     document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-    // Mobile menu toggle (basic)
-    document.getElementById('menuBtn')?.addEventListener('click', () => {
-        const nav = document.querySelector('.nav-links');
-        const open = nav.style.display === 'flex';
-        nav.style.display = open ? 'none' : 'flex';
-        nav.style.flexDirection = 'column';
-        nav.style.position = 'absolute';
-        nav.style.top = '70px'; nav.style.right = '2rem';
-        nav.style.background = 'rgba(17,26,18,0.97)';
-        nav.style.padding = '1.5rem';
-        nav.style.borderRadius = '10px';
-        nav.style.border = '1px solid var(--border)';
-        nav.style.gap = '1.5rem';
+    // Mobile nav
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.querySelector('.nav-links');
+    menuBtn?.addEventListener('click', () => {
+        const open = navLinks.classList.toggle('open');
+        if (open) {
+            Object.assign(navLinks.style, {
+                display:'flex', flexDirection:'column', position:'absolute',
+                top:'64px', right:'1.5rem', background:'rgba(12,11,9,0.97)',
+                border:'1px solid rgba(232,151,58,0.14)', borderRadius:'8px',
+                padding:'1.2rem 1.8rem', gap:'1.2rem'
+            });
+        } else {
+            navLinks.style.display = 'none';
+        }
     });
 </script>
 </body>
