@@ -3,148 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giftlin Devapriya K - Electronics & Software Engineer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Fira+Code:wght@300;400;500;600&family=Manrope:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <title>Giftlin DK — The Explorer's Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Cinzel:wght@400;600;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --electric-cyan: #00f0ff;
-            --neon-pink: #ff0080;
-            --cyber-purple: #9d00ff;
-            --dark-bg: #0a0a0f;
-            --dark-card: #151520;
-            --dark-accent: #1f1f2e;
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0b8;
-            --gradient-1: linear-gradient(135deg, #00f0ff 0%, #9d00ff 100%);
-            --gradient-2: linear-gradient(135deg, #ff0080 0%, #ff6b00 100%);
-            --gradient-3: linear-gradient(135deg, #00f0ff 0%, #00ff88 100%);
+            --forest-dark: #0d1a0f;
+            --forest-mid: #1a2e1c;
+            --forest-light: #243d27;
+            --moss: #2d5a32;
+            --leaf-green: #4a9e52;
+            --bright-leaf: #6dbf6e;
+            --gold: #e8c547;
+            --amber: #d4882a;
+            --earth: #8b5e3c;
+            --bark: #5c3d1e;
+            --sky: #7ecce8;
+            --dusk: #9b7ed4;
+            --firefly: #d4f542;
+            --text-light: #e8e0c8;
+            --text-dim: #9e9478;
+            --parchment: #f5e8c0;
+            --hp-red: #e85555;
+            --xp-blue: #5588e8;
         }
+
+        html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Manrope', sans-serif;
-            background: var(--dark-bg);
-            color: var(--text-primary);
+            font-family: 'Crimson Text', serif;
+            background: var(--forest-dark);
+            color: var(--text-light);
             overflow-x: hidden;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
-        /* Animated Background Grid */
-        .bg-grid {
+        /* ── Forest Background ── */
+        #forest-canvas {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             z-index: 0;
-            opacity: 0.03;
-            background-image: 
-                linear-gradient(var(--electric-cyan) 1px, transparent 1px),
-                linear-gradient(90deg, var(--electric-cyan) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: gridMove 20s linear infinite;
+            pointer-events: none;
         }
 
-        @keyframes gridMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
-        }
+        .layer { position: relative; z-index: 1; }
 
-        /* Floating Orbs */
-        .orb {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.15;
-            z-index: 0;
-            animation: float 20s infinite ease-in-out;
-        }
-
-        .orb1 { 
-            width: 400px; 
-            height: 400px; 
-            background: var(--electric-cyan); 
-            top: 10%; 
-            left: -10%;
-            animation-delay: 0s;
-        }
-
-        .orb2 { 
-            width: 300px; 
-            height: 300px; 
-            background: var(--neon-pink); 
-            top: 50%; 
-            right: -5%;
-            animation-delay: 5s;
-        }
-
-        .orb3 { 
-            width: 350px; 
-            height: 350px; 
-            background: var(--cyber-purple); 
-            bottom: 10%; 
-            left: 40%;
-            animation-delay: 10s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(50px, -50px) scale(1.1); }
-            66% { transform: translate(-50px, 50px) scale(0.9); }
-        }
-
-        /* Container */
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Navigation */
+        /* ── Nav ── */
         nav {
             position: fixed;
-            top: 0;
-            left: 0;
+            top: 0; left: 0;
             width: 100%;
-            padding: 1.5rem 0;
-            background: rgba(10, 10, 15, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0, 240, 255, 0.1);
-            z-index: 1000;
-            animation: slideDown 0.6s ease-out;
+            z-index: 100;
+            background: linear-gradient(180deg, rgba(13,26,15,0.97) 0%, rgba(13,26,15,0.0) 100%);
+            padding: 1rem 2rem;
         }
 
-        @keyframes slideDown {
-            from { transform: translateY(-100%); }
-            to { transform: translateY(0); }
-        }
-
-        .nav-content {
-            max-width: 1400px;
+        .nav-inner {
+            max-width: 1300px;
             margin: 0 auto;
-            padding: 0 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 900;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .nav-logo {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.75rem;
+            color: var(--gold);
+            text-shadow: 0 0 15px rgba(232,197,71,0.6);
             letter-spacing: 2px;
         }
+
+        .nav-logo span { color: var(--bright-leaf); }
 
         .nav-links {
             display: flex;
@@ -153,1087 +85,1712 @@
         }
 
         .nav-links a {
-            color: var(--text-secondary);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: var(--text-dim);
             text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
             position: relative;
-            padding: 0.5rem 0;
+            padding: 0.3rem 0;
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gradient-1);
-            transition: width 0.3s ease;
+        .nav-links a::before {
+            content: '▶ ';
+            opacity: 0;
+            transition: opacity 0.3s;
+            color: var(--gold);
         }
 
-        .nav-links a:hover {
-            color: var(--electric-cyan);
+        .nav-links a:hover { color: var(--gold); }
+        .nav-links a:hover::before { opacity: 1; }
+
+        /* ── Dog Companion ── */
+        #dog-companion {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 200;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+            filter: drop-shadow(0 0 10px rgba(232,197,71,0.4));
+            animation: dog-idle 2s ease-in-out infinite;
         }
 
-        .nav-links a:hover::after {
-            width: 100%;
+        #dog-companion:hover { transform: scale(1.3) rotate(-10deg); }
+
+        @keyframes dog-idle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
         }
 
-        /* Hero Section */
+        #dog-speech {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            background: var(--parchment);
+            color: var(--bark);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            padding: 0.7rem 1rem;
+            border-radius: 12px 12px 4px 12px;
+            border: 2px solid var(--amber);
+            max-width: 220px;
+            z-index: 200;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        #dog-speech.show {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* ── Hero / Title Screen ── */
         .hero {
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            padding-top: 80px;
-        }
-
-        .hero-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .hero-text h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 4.5rem;
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        .hero-text .subtitle {
-            font-size: 1.8rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            font-family: 'Fira Code', monospace;
-            animation: fadeInUp 0.8s ease-out 0.2s backwards;
-        }
-
-        .hero-text p {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            margin-bottom: 2.5rem;
-            line-height: 1.8;
-            animation: fadeInUp 0.8s ease-out 0.4s backwards;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            animation: fadeInUp 0.8s ease-out 0.6s backwards;
-        }
-
-        .btn {
-            padding: 1rem 2.5rem;
-            border: none;
-            border-radius: 8px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            font-family: 'Manrope', sans-serif;
-        }
-
-        .btn-primary {
-            background: var(--gradient-1);
-            color: white;
-            box-shadow: 0 10px 30px rgba(0, 240, 255, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(0, 240, 255, 0.5);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--electric-cyan);
-            border: 2px solid var(--electric-cyan);
-        }
-
-        .btn-secondary:hover {
-            background: var(--electric-cyan);
-            color: var(--dark-bg);
-            transform: translateY(-3px);
-        }
-
-        /* Stats Cards */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            animation: fadeInUp 0.8s ease-out 0.8s backwards;
-        }
-
-        .stat-card {
-            background: rgba(31, 31, 46, 0.5);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid rgba(0, 240, 255, 0.2);
+            justify-content: center;
             text-align: center;
-            transition: all 0.3s ease;
+            padding: 80px 2rem 2rem;
+            position: relative;
         }
 
-        .stat-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--electric-cyan);
-            box-shadow: 0 15px 40px rgba(0, 240, 255, 0.2);
-        }
-
-        .stat-number {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
+        .game-title {
+            font-family: 'Cinzel', serif;
             font-weight: 900;
-            background: var(--gradient-1);
+            font-size: clamp(2.5rem, 7vw, 5rem);
+            background: linear-gradient(135deg, var(--gold) 0%, var(--amber) 50%, var(--gold) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-shadow: none;
             margin-bottom: 0.5rem;
+            filter: drop-shadow(0 0 30px rgba(232,197,71,0.4));
+            animation: title-glow 3s ease-in-out infinite;
+            letter-spacing: 3px;
         }
 
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
+        @keyframes title-glow {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(232,197,71,0.3)); }
+            50% { filter: drop-shadow(0 0 40px rgba(232,197,71,0.7)); }
         }
 
-        /* Section Styling */
-        section {
-            padding: 8rem 0;
+        .hero-subtitle {
+            font-family: 'Press Start 2P', monospace;
+            font-size: clamp(0.5rem, 1.5vw, 0.8rem);
+            color: var(--bright-leaf);
+            letter-spacing: 4px;
+            margin-bottom: 3rem;
+            animation: blink-soft 2s ease-in-out infinite;
         }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 5rem;
+        @keyframes blink-soft {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
         }
 
-        .section-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3.5rem;
+        /* Character Card in Hero */
+        .char-card {
+            display: inline-flex;
+            gap: 3rem;
+            align-items: flex-start;
+            background: rgba(26,46,28,0.7);
+            backdrop-filter: blur(12px);
+            border: 2px solid var(--moss);
+            border-radius: 8px;
+            padding: 2rem 3rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+            max-width: 750px;
+            text-align: left;
+            box-shadow: 0 0 40px rgba(74,158,82,0.15), inset 0 0 80px rgba(0,0,0,0.3);
+        }
+
+        .char-card::before {
+            content: '';
+            position: absolute;
+            inset: 4px;
+            border: 1px solid rgba(232,197,71,0.2);
+            border-radius: 5px;
+            pointer-events: none;
+        }
+
+        /* Corner ornaments */
+        .char-card::after {
+            content: '✦';
+            position: absolute;
+            top: -12px; left: -12px;
+            color: var(--gold);
+            font-size: 1.4rem;
+            background: var(--forest-dark);
+            padding: 0 4px;
+        }
+
+        .corner { position: absolute; color: var(--gold); font-size: 1.2rem; background: var(--forest-dark); padding: 0 4px; }
+        .corner-tr { top: -10px; right: -10px; }
+        .corner-bl { bottom: -10px; left: -10px; }
+        .corner-br { bottom: -10px; right: -10px; }
+
+        .char-avatar {
+            font-size: 5rem;
+            line-height: 1;
+            filter: drop-shadow(0 0 15px rgba(74,158,82,0.5));
+            animation: avatar-pulse 3s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes avatar-pulse {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(74,158,82,0.3)); }
+            50% { filter: drop-shadow(0 0 25px rgba(74,158,82,0.7)); }
+        }
+
+        .char-info { flex: 1; }
+
+        .char-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.6rem;
             font-weight: 900;
-            margin-bottom: 1rem;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--gold);
+            margin-bottom: 0.2rem;
         }
 
-        .section-subtitle {
-            color: var(--text-secondary);
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto;
+        .char-class {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: var(--bright-leaf);
+            margin-bottom: 1.2rem;
+            letter-spacing: 2px;
         }
 
-        /* Skills Section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
+        .stat-bars { display: flex; flex-direction: column; gap: 0.6rem; }
 
-        .skill-category {
-            background: var(--dark-card);
-            border-radius: 20px;
-            padding: 2.5rem;
-            border: 1px solid rgba(0, 240, 255, 0.1);
-            transition: all 0.4s ease;
-        }
-
-        .skill-category:hover {
-            transform: translateY(-10px);
-            border-color: var(--electric-cyan);
-            box-shadow: 0 20px 60px rgba(0, 240, 255, 0.2);
-        }
-
-        .skill-category h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--electric-cyan);
-        }
-
-        .skill-tags {
+        .stat-row {
             display: flex;
-            flex-wrap: wrap;
+            align-items: center;
             gap: 0.8rem;
         }
 
-        .skill-tag {
-            background: rgba(0, 240, 255, 0.1);
-            color: var(--electric-cyan);
-            padding: 0.6rem 1.2rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            transition: all 0.3s ease;
+        .stat-label {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            width: 60px;
+            flex-shrink: 0;
         }
 
-        .skill-tag:hover {
-            background: var(--electric-cyan);
-            color: var(--dark-bg);
-            transform: translateY(-2px);
+        .stat-bar-bg {
+            flex: 1;
+            height: 8px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 4px;
+            border: 1px solid rgba(255,255,255,0.08);
+            overflow: hidden;
         }
 
-        /* Experience Timeline */
-        .timeline {
+        .stat-bar-fill {
+            height: 100%;
+            border-radius: 4px;
             position: relative;
-            max-width: 900px;
-            margin: 0 auto;
+            transition: width 1.5s ease-out;
         }
 
-        .timeline::before {
+        .stat-bar-fill.green { background: linear-gradient(90deg, var(--leaf-green), var(--bright-leaf)); box-shadow: 0 0 8px rgba(109,191,110,0.5); }
+        .stat-bar-fill.gold { background: linear-gradient(90deg, var(--amber), var(--gold)); box-shadow: 0 0 8px rgba(232,197,71,0.5); }
+        .stat-bar-fill.blue { background: linear-gradient(90deg, #4477cc, var(--xp-blue)); box-shadow: 0 0 8px rgba(85,136,232,0.5); }
+        .stat-bar-fill.purple { background: linear-gradient(90deg, #8855cc, var(--dusk)); box-shadow: 0 0 8px rgba(155,126,212,0.5); }
+
+        .stat-val {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.55rem;
+            color: var(--text-light);
+            width: 45px;
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .char-badges {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .badge {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.65rem;
+            background: rgba(74,158,82,0.15);
+            color: var(--bright-leaf);
+            border: 1px solid rgba(74,158,82,0.4);
+            padding: 0.25rem 0.7rem;
+            border-radius: 20px;
+        }
+
+        .badge.gold { background: rgba(232,197,71,0.1); color: var(--gold); border-color: rgba(232,197,71,0.4); }
+
+        .hero-cta { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+
+        .rpg-btn {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.65rem;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.25s;
+            letter-spacing: 1px;
+        }
+
+        .rpg-btn-primary {
+            background: linear-gradient(135deg, var(--moss), var(--leaf-green));
+            color: var(--forest-dark);
+            box-shadow: 0 4px 0 var(--bark), 0 0 20px rgba(74,158,82,0.3);
+        }
+
+        .rpg-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 var(--bark), 0 0 30px rgba(74,158,82,0.5);
+        }
+
+        .rpg-btn-primary:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--bark); }
+
+        .rpg-btn-secondary {
+            background: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            box-shadow: 0 4px 0 var(--bark);
+        }
+
+        .rpg-btn-secondary:hover {
+            background: rgba(232,197,71,0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 var(--bark), 0 0 20px rgba(232,197,71,0.3);
+        }
+
+        /* ── Section Wrappers ── */
+        section { padding: 6rem 0; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ── Section Headers ── */
+        .section-header { text-align: center; margin-bottom: 4rem; }
+
+        .section-tag {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            color: var(--bright-leaf);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-weight: 900;
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            color: var(--gold);
+            text-shadow: 0 0 30px rgba(232,197,71,0.3);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
             content: '';
             position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 2px;
-            height: 100%;
-            background: linear-gradient(180deg, var(--electric-cyan), var(--cyber-purple));
+            bottom: -8px;
+            left: 10%;
+            width: 80%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
         }
 
-        .timeline-item {
+        .section-desc {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-top: 1rem;
+        }
+
+        /* ── RPG Panel / Card ── */
+        .rpg-panel {
+            background: rgba(26,46,28,0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--moss);
+            border-radius: 6px;
+            padding: 2rem;
             position: relative;
-            margin-bottom: 4rem;
+            transition: all 0.35s;
+        }
+
+        .rpg-panel:hover {
+            border-color: var(--leaf-green);
+            box-shadow: 0 0 30px rgba(74,158,82,0.15);
+        }
+
+        .rpg-panel-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            color: var(--gold);
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .rpg-panel-title .icon { font-size: 1.3rem; }
+
+        /* ── About / Character Sheet ── */
+        .about-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            grid-template-columns: 1fr 1.8fr;
+            gap: 2.5rem;
+            align-items: start;
         }
 
-        .timeline-item:nth-child(even) .timeline-content {
-            grid-column: 1;
-            grid-row: 1;
+        .about-left { display: flex; flex-direction: column; gap: 1.5rem; }
+
+        .char-portrait {
+            background: rgba(13,26,15,0.8);
+            border: 2px solid var(--moss);
+            border-radius: 8px;
+            padding: 2.5rem 2rem;
+            text-align: center;
         }
 
-        .timeline-item:nth-child(even) .timeline-date {
-            grid-column: 2;
+        .portrait-emoji { font-size: 5rem; display: block; margin-bottom: 1rem; }
+
+        .portrait-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--gold);
+            margin-bottom: 0.3rem;
+        }
+
+        .portrait-title {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            color: var(--bright-leaf);
+            letter-spacing: 2px;
+        }
+
+        .portrait-hp {
+            margin-top: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .hp-label {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.65rem;
+            color: var(--text-dim);
             text-align: left;
         }
 
-        .timeline-content {
-            background: var(--dark-card);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 1px solid rgba(0, 240, 255, 0.2);
-            transition: all 0.3s ease;
+        .hp-bar {
+            width: 100%;
+            height: 10px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 5px;
+            overflow: hidden;
         }
 
-        .timeline-content:hover {
-            transform: translateY(-5px);
-            border-color: var(--electric-cyan);
-            box-shadow: 0 15px 40px rgba(0, 240, 255, 0.2);
+        .hp-fill {
+            height: 100%;
+            border-radius: 5px;
+            background: linear-gradient(90deg, var(--hp-red), #ff8888);
+            width: 95%;
         }
 
-        .timeline-content h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.5rem;
-            color: var(--electric-cyan);
-            margin-bottom: 0.5rem;
+        .xp-fill {
+            height: 100%;
+            border-radius: 5px;
+            background: linear-gradient(90deg, var(--xp-blue), #88aaff);
+            width: 70%;
         }
 
-        .timeline-content h4 {
-            color: var(--neon-pink);
+        .traits-box {
+            background: rgba(13,26,15,0.8);
+            border: 1px solid var(--moss);
+            border-radius: 6px;
+            padding: 1.5rem;
+        }
+
+        .trait-title {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            color: var(--amber);
             margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .timeline-date {
             display: flex;
             align-items: center;
-            justify-content: flex-end;
-            font-family: 'Fira Code', monospace;
-            color: var(--text-secondary);
+            gap: 0.5rem;
+        }
+
+        .trait-list { list-style: none; }
+
+        .trait-list li {
             font-size: 0.95rem;
+            color: var(--text-light);
+            padding: 0.4rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
         }
 
-        .timeline-dot {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 20px;
-            height: 20px;
-            background: var(--electric-cyan);
-            border-radius: 50%;
-            border: 4px solid var(--dark-bg);
-            box-shadow: 0 0 20px var(--electric-cyan);
-            z-index: 2;
+        .trait-list li:last-child { border-bottom: none; }
+        .trait-list li::before { content: '🐾'; font-size: 0.8rem; }
+
+        .about-right { display: flex; flex-direction: column; gap: 1.5rem; }
+
+        .about-lore {
+            background: rgba(26,46,28,0.5);
+            border: 1px solid rgba(232,197,71,0.2);
+            border-radius: 6px;
+            padding: 2rem;
+            font-size: 1.1rem;
+            color: var(--text-light);
+            line-height: 1.9;
+            font-style: italic;
         }
 
-        /* Projects Grid */
-        .projects-grid {
+        .about-lore p { margin-bottom: 1rem; }
+        .about-lore p:last-child { margin-bottom: 0; }
+        .about-lore strong { color: var(--gold); font-style: normal; }
+
+        .perks-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
         }
 
-        .project-card {
-            background: var(--dark-card);
-            border-radius: 20px;
+        .perk-card {
+            background: rgba(13,26,15,0.7);
+            border: 1px solid var(--moss);
+            border-radius: 6px;
+            padding: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .perk-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        .perk-icon { font-size: 1.8rem; margin-bottom: 0.5rem; display: block; }
+
+        .perk-name {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            color: var(--gold);
+            margin-bottom: 0.3rem;
+        }
+
+        .perk-desc { font-size: 0.85rem; color: var(--text-dim); }
+
+        /* ── Experience / Quest Log ── */
+        .quest-log { display: flex; flex-direction: column; gap: 2rem; }
+
+        .quest-item {
+            background: rgba(26,46,28,0.6);
+            border: 1px solid var(--moss);
+            border-radius: 6px;
             overflow: hidden;
-            border: 1px solid rgba(0, 240, 255, 0.1);
-            transition: all 0.4s ease;
+            transition: all 0.35s;
+            position: relative;
+        }
+
+        .quest-item:hover { border-color: var(--leaf-green); box-shadow: 0 0 25px rgba(74,158,82,0.12); }
+
+        .quest-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem 2rem;
+            background: rgba(13,26,15,0.5);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .quest-icon { font-size: 2.5rem; flex-shrink: 0; }
+
+        .quest-meta { flex: 1; }
+
+        .quest-org {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--gold);
+        }
+
+        .quest-role {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            color: var(--bright-leaf);
+            letter-spacing: 2px;
+            margin-top: 0.2rem;
+        }
+
+        .quest-period {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            background: rgba(255,255,255,0.05);
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            border: 1px solid rgba(255,255,255,0.08);
+            white-space: nowrap;
+        }
+
+        .quest-status {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.5rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .quest-status.active {
+            background: rgba(74,158,82,0.2);
+            color: var(--bright-leaf);
+            border: 1px solid var(--leaf-green);
+            animation: status-pulse 2s ease-in-out infinite;
+        }
+
+        .quest-status.done {
+            background: rgba(232,197,71,0.1);
+            color: var(--gold);
+            border: 1px solid rgba(232,197,71,0.3);
+        }
+
+        @keyframes status-pulse {
+            0%, 100% { box-shadow: 0 0 5px rgba(74,158,82,0.3); }
+            50% { box-shadow: 0 0 15px rgba(74,158,82,0.6); }
+        }
+
+        .quest-body { padding: 1.5rem 2rem; }
+
+        .quest-objectives { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+
+        .quest-objectives li {
+            font-size: 1rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+
+        .quest-objectives li::before {
+            content: '◆';
+            color: var(--leaf-green);
+            font-size: 0.6rem;
+            margin-top: 0.4rem;
+            flex-shrink: 0;
+        }
+
+        .quest-rewards {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-top: 1.2rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .reward-tag {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.65rem;
+            background: rgba(232,197,71,0.08);
+            color: var(--amber);
+            border: 1px solid rgba(232,197,71,0.25);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+        }
+
+        /* ── Projects / Artifact Vault ── */
+        .artifacts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 2rem;
+        }
+
+        .artifact-card {
+            background: rgba(26,46,28,0.55);
+            border: 1px solid var(--moss);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.4s;
             cursor: pointer;
         }
 
-        .project-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--electric-cyan);
-            box-shadow: 0 25px 60px rgba(0, 240, 255, 0.3);
+        .artifact-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--gold);
+            box-shadow: 0 15px 40px rgba(232,197,71,0.15);
         }
 
-        .project-image {
-            width: 100%;
-            height: 250px;
-            background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(157, 0, 255, 0.2));
+        .artifact-header {
+            height: 160px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 4rem;
-            color: rgba(255, 255, 255, 0.1);
             position: relative;
             overflow: hidden;
         }
 
-        .project-image::after {
-            content: '';
+        .artifact-bg-1 { background: linear-gradient(135deg, rgba(45,90,50,0.8), rgba(13,26,15,0.9)); }
+        .artifact-bg-2 { background: linear-gradient(135deg, rgba(74,158,82,0.3), rgba(26,46,28,0.9)); }
+        .artifact-bg-3 { background: linear-gradient(135deg, rgba(155,126,212,0.3), rgba(13,26,15,0.9)); }
+        .artifact-bg-4 { background: linear-gradient(135deg, rgba(232,197,71,0.2), rgba(26,46,28,0.9)); }
+
+        .artifact-emoji { font-size: 4rem; filter: drop-shadow(0 0 20px rgba(232,197,71,0.4)); }
+
+        .artifact-rarity {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
-            transform: translateX(-100%);
-            transition: transform 0.6s ease;
+            top: 12px; right: 12px;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.45rem;
+            padding: 0.3rem 0.6rem;
+            border-radius: 3px;
         }
 
-        .project-card:hover .project-image::after {
-            transform: translateX(100%);
+        .rarity-epic { background: rgba(155,126,212,0.3); color: var(--dusk); border: 1px solid var(--dusk); }
+        .rarity-rare { background: rgba(85,136,232,0.2); color: #88aaff; border: 1px solid #88aaff; }
+        .rarity-uncommon { background: rgba(74,158,82,0.2); color: var(--bright-leaf); border: 1px solid var(--leaf-green); }
+
+        .artifact-body { padding: 1.5rem; }
+
+        .artifact-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.05rem;
+            color: var(--gold);
+            margin-bottom: 0.7rem;
         }
 
-        .project-content {
-            padding: 2rem;
-        }
-
-        .project-content h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.4rem;
-            color: var(--electric-cyan);
+        .artifact-desc {
+            font-size: 0.95rem;
+            color: var(--text-dim);
+            line-height: 1.7;
             margin-bottom: 1rem;
         }
 
-        .project-content p {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
+        .artifact-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+
+        .artifact-tag {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.6rem;
+            background: rgba(74,158,82,0.1);
+            color: var(--bright-leaf);
+            border: 1px solid rgba(74,158,82,0.3);
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
         }
 
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .project-tag {
-            background: rgba(255, 0, 128, 0.1);
-            color: var(--neon-pink);
-            padding: 0.4rem 0.9rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            border: 1px solid rgba(255, 0, 128, 0.3);
-        }
-
-        .project-link {
-            color: var(--electric-cyan);
+        .artifact-link {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            color: var(--gold);
             text-decoration: none;
-            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.3s;
+        }
+
+        .artifact-link:hover { color: var(--bright-leaf); gap: 0.8rem; }
+
+        /* ── Skills / Skill Tree ── */
+        .skill-tree-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-branch {
+            background: rgba(26,46,28,0.55);
+            border: 1px solid var(--moss);
+            border-radius: 6px;
+            padding: 1.8rem;
+            transition: all 0.3s;
+        }
+
+        .skill-branch:hover { border-color: var(--leaf-green); }
+
+        .branch-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: var(--gold);
+            margin-bottom: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .branch-name .icon { font-size: 1.3rem; }
+
+        .skill-nodes { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+
+        .skill-node {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: 1px solid;
+            transition: all 0.3s;
+            cursor: default;
+        }
+
+        .skill-node.mastered {
+            background: rgba(232,197,71,0.12);
+            color: var(--gold);
+            border-color: rgba(232,197,71,0.4);
+        }
+
+        .skill-node.mastered:hover {
+            background: rgba(232,197,71,0.2);
+            box-shadow: 0 0 12px rgba(232,197,71,0.3);
+        }
+
+        .skill-node.proficient {
+            background: rgba(74,158,82,0.1);
+            color: var(--bright-leaf);
+            border-color: rgba(74,158,82,0.35);
+        }
+
+        .skill-node.proficient:hover {
+            background: rgba(74,158,82,0.2);
+            box-shadow: 0 0 12px rgba(74,158,82,0.3);
+        }
+
+        .skill-node.learning {
+            background: rgba(155,126,212,0.08);
+            color: var(--dusk);
+            border-color: rgba(155,126,212,0.3);
+        }
+
+        /* ── Contact / Campfire ── */
+        .campfire-section {
+            background: rgba(26,46,28,0.5);
+            border: 1px solid var(--moss);
+            border-radius: 8px;
+            padding: 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .campfire-emoji {
+            font-size: 5rem;
+            display: block;
+            margin-bottom: 1rem;
+            animation: fire-dance 1.5s ease-in-out infinite;
+        }
+
+        @keyframes fire-dance {
+            0%, 100% { transform: scale(1) rotate(-3deg); }
+            33% { transform: scale(1.05) rotate(3deg); }
+            66% { transform: scale(0.97) rotate(-1deg); }
+        }
+
+        .campfire-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .campfire-desc {
+            color: var(--text-dim);
+            font-style: italic;
+            font-size: 1.1rem;
+            max-width: 550px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: rgba(13,26,15,0.7);
+            border: 1px solid var(--moss);
+            border-radius: 6px;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            color: var(--text-light);
+        }
+
+        .contact-link:hover {
+            border-color: var(--gold);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(232,197,71,0.15);
+            color: var(--gold);
+        }
+
+        .contact-link-icon { font-size: 1.5rem; }
+
+        .contact-link-label {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            display: block;
+        }
+
+        .contact-link-val {
+            font-family: 'Crimson Text', serif;
+            font-size: 1rem;
+            color: inherit;
+        }
+
+        .location-badge {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .project-link:hover {
-            gap: 1rem;
-            color: var(--neon-pink);
-        }
-
-        /* Contact Section */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .contact-info h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            color: var(--electric-cyan);
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            padding: 1rem;
-            background: rgba(31, 31, 46, 0.5);
-            border-radius: 10px;
-            border: 1px solid rgba(0, 240, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .contact-item:hover {
-            border-color: var(--electric-cyan);
-            transform: translateX(10px);
-        }
-
-        .contact-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--gradient-1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .social-link {
-            width: 50px;
-            height: 50px;
-            background: rgba(0, 240, 255, 0.1);
-            border: 2px solid var(--electric-cyan);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--electric-cyan);
-            text-decoration: none;
-            font-size: 1.3rem;
-            transition: all 0.3s ease;
-        }
-
-        .social-link:hover {
-            background: var(--electric-cyan);
-            color: var(--dark-bg);
-            transform: translateY(-5px) rotate(360deg);
-        }
-
-        /* Form Styling */
-        .contact-form {
-            background: var(--dark-card);
-            padding: 2.5rem;
+            background: rgba(74,158,82,0.1);
+            border: 1px solid rgba(74,158,82,0.3);
+            color: var(--bright-leaf);
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            padding: 0.5rem 1.2rem;
             border-radius: 20px;
-            border: 1px solid rgba(0, 240, 255, 0.2);
         }
 
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-secondary);
-            font-weight: 600;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            background: rgba(31, 31, 46, 0.8);
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            border-radius: 8px;
-            color: white;
-            font-family: 'Manrope', sans-serif;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--electric-cyan);
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
-        }
-
-        .form-group textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-
-        /* Footer */
+        /* ── Footer ── */
         footer {
-            background: var(--dark-card);
-            padding: 3rem 0;
+            background: rgba(13,26,15,0.9);
+            border-top: 1px solid rgba(74,158,82,0.2);
+            padding: 2rem;
             text-align: center;
-            border-top: 1px solid rgba(0, 240, 255, 0.1);
         }
 
-        footer p {
-            color: var(--text-secondary);
+        .footer-row {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .footer-logo {
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.6rem;
+            color: var(--gold);
         }
 
-        /* Mobile Menu */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--electric-cyan);
-            font-size: 1.5rem;
-            cursor: pointer;
+        .footer-text {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.7rem;
+            color: var(--text-dim);
         }
 
-        /* Responsive */
-        @media (max-width: 968px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
+        .footer-text span { color: var(--hp-red); }
 
-            .hero-text h1 {
-                font-size: 3rem;
-            }
-
-            .stats {
-                grid-template-columns: 1fr;
-            }
-
-            .timeline::before {
-                left: 0;
-            }
-
-            .timeline-item {
-                grid-template-columns: 1fr;
-            }
-
-            .timeline-item:nth-child(even) .timeline-content,
-            .timeline-item:nth-child(even) .timeline-date {
-                grid-column: 1;
-            }
-
-            .timeline-date {
-                justify-content: flex-start;
-                margin-bottom: 1rem;
-            }
-
-            .timeline-dot {
-                left: 0;
-                transform: translateX(0);
-            }
-
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-            }
+        .paw-trail {
+            display: flex;
+            gap: 0.5rem;
+            font-size: 0.8rem;
+            opacity: 0.4;
         }
 
-        /* Scroll Progress Bar */
-        .scroll-progress {
+        /* ── Divider ── */
+        .nature-divider {
+            text-align: center;
+            margin: 2rem 0;
+            color: var(--moss);
+            font-size: 1.2rem;
+            letter-spacing: 10px;
+        }
+
+        /* ── Scroll Progress ── */
+        #scroll-progress {
             position: fixed;
-            top: 0;
-            left: 0;
+            top: 0; left: 0;
             width: 0%;
             height: 3px;
-            background: var(--gradient-1);
+            background: linear-gradient(90deg, var(--leaf-green), var(--gold), var(--amber));
             z-index: 9999;
-            transition: width 0.1s ease;
+            transition: width 0.1s;
         }
 
-        /* Resume Viewer */
-        .resume-section {
-            background: var(--dark-card);
-            padding: 3rem;
-            border-radius: 20px;
-            border: 1px solid rgba(0, 240, 255, 0.2);
-            margin-bottom: 3rem;
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+            .char-card { flex-direction: column; text-align: center; padding: 2rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .perks-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .quest-header { flex-wrap: wrap; }
         }
 
-        .resume-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+        @media (max-width: 600px) {
+            .char-card { gap: 1.5rem; }
+            .stat-label { width: 45px; font-size: 0.55rem; }
+            .campfire-section { padding: 2rem 1rem; }
         }
 
-        .resume-item {
-            background: rgba(31, 31, 46, 0.5);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border-left: 4px solid var(--electric-cyan);
+        /* ── Floating leaves ── */
+        .leaf {
+            position: fixed;
+            font-size: 1.2rem;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0;
+            animation: leaf-fall linear forwards;
         }
 
-        .resume-item h4 {
-            color: var(--electric-cyan);
-            margin-bottom: 0.5rem;
+        @keyframes leaf-fall {
+            0% { opacity: 0.7; transform: translateY(-20px) rotate(0deg); }
+            100% { opacity: 0; transform: translateY(100vh) rotate(720deg); }
         }
 
-        .resume-item p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
+        /* ── Tooltip on hover ── */
+        [data-tip] { position: relative; cursor: help; }
+        [data-tip]:hover::after {
+            content: attr(data-tip);
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--forest-dark);
+            color: var(--text-light);
+            border: 1px solid var(--moss);
+            border-radius: 4px;
+            padding: 0.4rem 0.8rem;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.65rem;
+            white-space: nowrap;
+            z-index: 500;
         }
+
+        /* ── Pixel cursor ── */
+        body { cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpolygon points='0,0 0,14 4,10 7,17 9,16 6,9 10,9' fill='%23e8c547' stroke='%230d1a0f' stroke-width='1'/%3E%3C/svg%3E"), auto; }
+
+        /* ── Typewriter ── */
+        .typewriter { overflow: hidden; white-space: nowrap; border-right: 2px solid var(--gold); animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite; }
+        @keyframes typing { from { width: 0; } to { width: 100%; } }
+        @keyframes blink-caret { from, to { border-color: transparent; } 50% { border-color: var(--gold); } }
+
+        /* ── XP Notification ── */
+        #xp-notif {
+            position: fixed;
+            top: 80px; right: 20px;
+            background: rgba(26,46,28,0.95);
+            border: 1px solid var(--gold);
+            border-radius: 6px;
+            padding: 0.8rem 1.2rem;
+            font-family: 'Press Start 2P', monospace;
+            font-size: 0.55rem;
+            color: var(--gold);
+            z-index: 300;
+            transform: translateX(200px);
+            transition: transform 0.4s ease;
+        }
+
+        #xp-notif.show { transform: translateX(0); }
     </style>
 </head>
 <body>
-    <!-- Scroll Progress -->
-    <div class="scroll-progress" id="scrollProgress"></div>
 
-    <!-- Background Elements -->
-    <div class="bg-grid"></div>
-    <div class="orb orb1"></div>
-    <div class="orb orb2"></div>
-    <div class="orb orb3"></div>
+<!-- Scroll Progress -->
+<div id="scroll-progress"></div>
 
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-content">
-            <div class="logo">GIFTLIN.DK</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <button class="mobile-menu-btn">☰</button>
-        </div>
-    </nav>
+<!-- Forest Canvas -->
+<canvas id="forest-canvas"></canvas>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1>Giftlin Devapriya K</h1>
-                    <div class="subtitle">&lt;Project Engineer /&gt;</div>
-                    <p>Electronics & Software Engineer specializing in LabVIEW, Test Automation, and Semiconductor Solutions. Bridging hardware and software to create innovative testing frameworks for industry leaders.</p>
-                    <div class="cta-buttons">
-                        <a href="#contact" class="btn btn-primary">Get In Touch</a>
-                        <a href="#projects" class="btn btn-secondary">View Projects</a>
-                    </div>
+<!-- XP Notification -->
+<div id="xp-notif">+50 XP GAINED!</div>
+
+<!-- Dog Companion -->
+<div id="dog-companion" title="Click me!">🐕</div>
+<div id="dog-speech"></div>
+
+<!-- Navigation -->
+<nav>
+    <div class="nav-inner">
+        <div class="nav-logo">GIFT<span>.</span>DK</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">Character</a></li>
+            <li><a href="#experience">Quests</a></li>
+            <li><a href="#projects">Artifacts</a></li>
+            <li><a href="#skills">Skill Tree</a></li>
+            <li><a href="#contact">Campfire</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- ══════════════════════════════ HERO ══════════════════════════════ -->
+<section class="hero layer" id="home">
+    <div class="hero-subtitle">✦ EXPLORER'S PORTFOLIO ✦</div>
+
+    <h1 class="game-title">Giftlin Devapriya K</h1>
+
+    <div class="nature-divider">🌿 ⚙️ 🐾 ⚙️ 🌿</div>
+
+    <div class="char-card" style="margin: 1.5rem 0 2.5rem;">
+        <span class="corner corner-tr">✦</span>
+        <span class="corner corner-bl">✦</span>
+        <span class="corner corner-br">✦</span>
+
+        <div class="char-avatar">🧭</div>
+
+        <div class="char-info">
+            <div class="char-name">Giftlin DK</div>
+            <div class="char-class">⚔ PROJECT ENGINEER · NATURE EXPLORER · DOG COMPANION</div>
+
+            <div class="stat-bars">
+                <div class="stat-row">
+                    <span class="stat-label">CGPA</span>
+                    <div class="stat-bar-bg"><div class="stat-bar-fill gold" style="width:95.7%"></div></div>
+                    <span class="stat-val">9.57/10</span>
                 </div>
-                <div class="stats">
-                    <div class="stat-card">
-                        <div class="stat-number">9.57</div>
-                        <div class="stat-label">CGPA</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">2+</div>
-                        <div class="stat-label">IEEE Publications</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">4+</div>
-                        <div class="stat-label">Academic Awards</div>
-                    </div>
+                <div class="stat-row">
+                    <span class="stat-label">LabVIEW</span>
+                    <div class="stat-bar-bg"><div class="stat-bar-fill green" style="width:92%"></div></div>
+                    <span class="stat-val">Expert</span>
                 </div>
+                <div class="stat-row">
+                    <span class="stat-label">Python</span>
+                    <div class="stat-bar-bg"><div class="stat-bar-fill blue" style="width:80%"></div></div>
+                    <span class="stat-val">Adv.</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Explore</span>
+                    <div class="stat-bar-bg"><div class="stat-bar-fill purple" style="width:99%"></div></div>
+                    <span class="stat-val">MAX</span>
+                </div>
+            </div>
+
+            <div class="char-badges">
+                <span class="badge">🏆 4× Academic Excellence</span>
+                <span class="badge">📡 IEEE Published</span>
+                <span class="badge gold">✨ Hackathon Winner</span>
+                <span class="badge">🐕 Dog Lover</span>
+                <span class="badge">🌿 Nature Seeker</span>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">About Me</h2>
-                <p class="section-subtitle">Passionate about leveraging electronics and software to drive innovation in semiconductor technology</p>
-            </div>
+    <div class="hero-cta">
+        <a href="#contact" class="rpg-btn rpg-btn-primary">[ SEND RAVEN ]</a>
+        <a href="#projects" class="rpg-btn rpg-btn-secondary">[ VIEW ARTIFACTS ]</a>
+        <a href="https://www.linkedin.com/in/giftlin27/" target="_blank" class="rpg-btn rpg-btn-secondary">[ LINKEDIN ]</a>
+    </div>
+</section>
 
-            <div class="resume-section">
-                <h3 style="font-family: 'Orbitron', sans-serif; color: var(--electric-cyan); margin-bottom: 2rem;">Professional Profile</h3>
-                <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 2rem;">
-                    I am a passionate software engineer with a unique blend of knowledge in electronics and software development. Currently working at Soliton Technologies, I develop highly scalable and efficient Test and Automation Software solutions for leading semiconductor manufacturers. My expertise spans LabVIEW programming, TestStand, Python, and CI/CD automation, with a focus on reliability testing applications.
-                </p>
-                
-                <div class="resume-grid">
-                    <div class="resume-item">
-                        <h4>🎓 Education</h4>
-                        <p><strong>Bachelor's in ECE</strong></p>
-                        <p>Kumaraguru College of Technology</p>
-                        <p>CGPA: 9.57/10 (2020-2024)</p>
-                    </div>
-                    <div class="resume-item">
-                        <h4>🏆 Achievements</h4>
-                        <p>• Academic Excellence Award (4 years)</p>
-                        <p>• Department Achiever Award</p>
-                        <p>• Winner RiGathon'2021 Hackathon</p>
-                    </div>
-                    <div class="resume-item">
-                        <h4>📚 Certifications</h4>
-                        <p>• GitHub Professional</p>
-                        <p>• Agile Project Management</p>
-                        <p>• ChatGPT Prompt Engineering</p>
-                    </div>
-                    <div class="resume-item">
-                        <h4>💼 Leadership</h4>
-                        <p>• Secretary – Qubate of Kumaraguru</p>
-                        <p>• Treasurer – IEEE KCT Student Branch</p>
-                        <p>• Project Manager – Research Cell</p>
-                    </div>
-                </div>
-            </div>
+<!-- ══════════════════════════════ ABOUT ══════════════════════════════ -->
+<section id="about" class="layer">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">// CHARACTER SHEET</span>
+            <h2 class="section-title">About the Explorer</h2>
+            <p class="section-desc">Every adventurer has a story. Here's mine.</p>
         </div>
-    </section>
 
-    <!-- Experience Section -->
-    <section id="experience">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Experience</h2>
-                <p class="section-subtitle">Building cutting-edge solutions for semiconductor testing</p>
-            </div>
-
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Soliton Technologies</h3>
-                        <h4>Project Engineer</h4>
-                        <p>• Software Engineer, building software solutions for semiconductor reliability testing for a Reliability Lab.</p>
-                        <p>• Developed Data Logging for Reliability Testing Software</p>
-                        <p>• CI/CD Deployment and Testing operations</p>
-                        <p>• Created comprehensive User Manuals and Technical Documentation</p>
-                        <p>• Building scalable Test & Automation solutions using LabVIEW, TestStand, and Python</p>
+        <div class="about-grid">
+            <div class="about-left">
+                <div class="char-portrait">
+                    <span class="portrait-emoji">🧭</span>
+                    <div class="portrait-name">Giftlin DK</div>
+                    <div class="portrait-title">PROJECT ENGINEER · LVL 22</div>
+                    <div class="portrait-hp">
+                        <div class="hp-label">❤ HP: PASSION &amp; DRIVE</div>
+                        <div class="hp-bar"><div class="hp-fill"></div></div>
+                        <div class="hp-label">✦ XP: 2+ YEARS IN THE FIELD</div>
+                        <div class="hp-bar"><div class="xp-fill"></div></div>
                     </div>
-                    <div class="timeline-date">Jan 2024 - Present</div>
                 </div>
 
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>Soliton Technologies</h3>
-                        <h4>Intern</h4>
-                        <p>• Received technical training in LabVIEW programming</p>
-                        <p>• Collaborated with project teams on software development</p>
-                        <p>• Contributed to pipeline development and automation</p>
-                        <p>• Performed debugging, bug fixes, and feature testing</p>
-                        <p>• Automated data validations for testing frameworks</p>
-                    </div>
-                    <div class="timeline-date">Jul 2023 - Dec 2023</div>
+                <div class="traits-box">
+                    <div class="trait-title">🏅 Character Traits</div>
+                    <ul class="trait-list">
+                        <li>Dog Whisperer &amp; Lifelong Companion</li>
+                        <li>Explorer of Trails &amp; Hidden Places</li>
+                        <li>Nature Guardian &amp; Green Advocate</li>
+                        <li>Semiconductor &amp; LabVIEW Specialist</li>
+                        <li>IEEE-Published Researcher</li>
+                        <li>Language Learner (Tamil, English, Japanese, German)</li>
+                    </ul>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Projects Section -->
-    <section id="projects">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Featured Projects</h2>
-                <p class="section-subtitle">Research and innovation in electronics and software</p>
-            </div>
-
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">📡</div>
-                    <div class="project-content">
-                        <h3>SAR-ADC for Low Power Circuits</h3>
-                        <p>An 8-bit Asynchronous SAR-ADC designed in Cadence Virtuoso using 18nm FinFET technology, achieving ultra-low power consumption in the microwatt range with moderate resolution and swift operation.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">Cadence Virtuoso</span>
-                            <span class="project-tag">18nm FinFET</span>
-                            <span class="project-tag">Low Power Design</span>
-                            <span class="project-tag">IEEE Published</span>
-                        </div>
-                        <a href="https://ieeexplore.ieee.org/document/10625464" target="_blank" class="project-link">View Publication →</a>
-                    </div>
+            <div class="about-right">
+                <div class="about-lore">
+                    <p>Born a curious mind in the forests of <strong>Tamil Nadu</strong>, Giftlin walks two worlds — the <strong>digital realm</strong> of circuits and code, and the <strong>wild expanse</strong> of nature trails and starlit skies. Every bug fixed is a small mountain conquered; every new tech learned is a new territory mapped.</p>
+                    <p>By day, she architects <strong>test & automation software</strong> for semiconductor reliability labs at <strong>Soliton Technologies</strong>, wielding LabVIEW like an ancient staff and TestStand like a trusted compass.</p>
+                    <p>By evening, she's on a trail with her dog, finding <strong>peace in the rustling leaves</strong>, reminding herself that the best algorithms exist in nature itself. She believes the world is best explored — forests, codebases, and all the wild spaces in between.</p>
                 </div>
 
-                <div class="project-card">
-                    <div class="project-image">🔋</div>
-                    <div class="project-content">
-                        <h3>Battery Management System</h3>
-                        <p>Design and validation of Analog Front End (AFE) for current measurement in the development of Indigenous Battery Management System with precision monitoring capabilities.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">AFE Design</span>
-                            <span class="project-tag">Current Sensing</span>
-                            <span class="project-tag">PCB Design</span>
-                            <span class="project-tag">Validation</span>
-                        </div>
-                        <a href="#" class="project-link">Learn More →</a>
+                <div class="perks-grid">
+                    <div class="perk-card">
+                        <span class="perk-icon">🎓</span>
+                        <div class="perk-name">Scholar's Path</div>
+                        <div class="perk-desc">B.E. ECE — Kumaraguru College of Technology. CGPA 9.57 · 2020–2024</div>
                     </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">🌿</div>
-                    <div class="project-content">
-                        <h3>Graphene Nanocomposite Synthesis</h3>
-                        <p>Innovative research on synthesizing graphene-based nanocomposites from captured industrial carbon through thermal reduction process using CO2 and magnesium.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">Nanotechnology</span>
-                            <span class="project-tag">Graphene</span>
-                            <span class="project-tag">Sustainability</span>
-                            <span class="project-tag">Springer Published</span>
-                        </div>
-                        <a href="https://link.springer.com/chapter/10.1007/978-981-16-8599-6_6" target="_blank" class="project-link">View Publication →</a>
+                    <div class="perk-card">
+                        <span class="perk-icon">🏆</span>
+                        <div class="perk-name">Hall of Fame</div>
+                        <div class="perk-desc">Academic Excellence (4×) · Dept Achiever · RiGathon'21 Winner</div>
                     </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">🎥</div>
-                    <div class="project-content">
-                        <h3>Video Dehazing for Automobiles</h3>
-                        <p>Real-time video dehazing solution using PYNQ FPGA to address image clarity challenges in automotive applications, advancing state-of-the-art dehazing techniques.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">FPGA</span>
-                            <span class="project-tag">Computer Vision</span>
-                            <span class="project-tag">PYNQ</span>
-                            <span class="project-tag">Real-time Processing</span>
-                        </div>
-                        <a href="#" class="project-link">Learn More →</a>
+                    <div class="perk-card">
+                        <span class="perk-icon">📜</span>
+                        <div class="perk-name">Scroll Collection</div>
+                        <div class="perk-desc">GitHub Pro · Agile PM · ChatGPT Prompt Engineering</div>
+                    </div>
+                    <div class="perk-card">
+                        <span class="perk-icon">⚔️</span>
+                        <div class="perk-name">Guild Leadership</div>
+                        <div class="perk-desc">Secretary Qubate · IEEE Treasurer · Research Cell PM</div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Skills Section -->
-    <section id="skills">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Technical Skills</h2>
-                <p class="section-subtitle">Comprehensive expertise across hardware and software domains</p>
+<!-- ══════════════════════════════ EXPERIENCE ══════════════════════════════ -->
+<section id="experience" class="layer">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">// QUEST LOG</span>
+            <h2 class="section-title">Completed & Active Quests</h2>
+            <p class="section-desc">Adventures undertaken in the realm of semiconductor engineering</p>
+        </div>
+
+        <div class="quest-log">
+            <div class="quest-item">
+                <div class="quest-header">
+                    <div class="quest-icon">🏰</div>
+                    <div class="quest-meta">
+                        <div class="quest-org">Soliton Technologies</div>
+                        <div class="quest-role">PROJECT ENGINEER</div>
+                    </div>
+                    <div class="quest-period">Jan 2024 – Present</div>
+                    <div class="quest-status active">● ACTIVE</div>
+                </div>
+                <div class="quest-body">
+                    <ul class="quest-objectives">
+                        <li>Build scalable Test &amp; Automation Software solutions for semiconductor reliability labs</li>
+                        <li>Developed comprehensive Data Logging systems for Reliability Testing Software</li>
+                        <li>Implemented CI/CD deployment and automated testing pipelines</li>
+                        <li>Authored User Manuals and Technical Documentation for complex systems</li>
+                        <li>Created testing frameworks using LabVIEW, TestStand, and Python</li>
+                    </ul>
+                    <div class="quest-rewards">
+                        <span class="reward-tag">⚗ LabVIEW</span>
+                        <span class="reward-tag">⚗ TestStand</span>
+                        <span class="reward-tag">⚗ Python</span>
+                        <span class="reward-tag">⚗ CI/CD</span>
+                        <span class="reward-tag">⚗ PostgreSQL</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Programming Languages</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">LabVIEW (Expert)</span>
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">C++</span>
-                        <span class="skill-tag">TestStand</span>
-                        <span class="skill-tag">PostgreSQL</span>
+            <div class="quest-item">
+                <div class="quest-header">
+                    <div class="quest-icon">🗺️</div>
+                    <div class="quest-meta">
+                        <div class="quest-org">Soliton Technologies</div>
+                        <div class="quest-role">INTERN EXPLORER</div>
                     </div>
+                    <div class="quest-period">Jul 2023 – Dec 2023</div>
+                    <div class="quest-status done">✓ COMPLETE</div>
                 </div>
-
-                <div class="skill-category">
-                    <h3>Frameworks & Architecture</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Plugin Architecture</span>
-                        <span class="skill-tag">MVC Pattern</span>
-                        <span class="skill-tag">LVOOPs</span>
-                        <span class="skill-tag">State Machines</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Tools & Technologies</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Git</span>
-                        <span class="skill-tag">JIRA</span>
-                        <span class="skill-tag">Confluence</span>
-                        <span class="skill-tag">Tableau</span>
-                        <span class="skill-tag">Altium Designer</span>
-                        <span class="skill-tag">KICAD</span>
-                        <span class="skill-tag">Cadence</span>
-                        <span class="skill-tag">Proteus</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Methodologies</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Clean Code Practices</span>
-                        <span class="skill-tag">CI/CD Automation</span>
-                        <span class="skill-tag">Agile</span>
-                        <span class="skill-tag">Scrum</span>
-                        <span class="skill-tag">Kanban</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Languages</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Tamil (Native)</span>
-                        <span class="skill-tag">English (Professional)</span>
-                        <span class="skill-tag">Japanese (Basic)</span>
-                        <span class="skill-tag">German (Basic)</span>
-                    </div>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Other Skills</h3>
-                    <div class="skill-tags">
-                        <span class="skill-tag">Technical Documentation</span>
-                        <span class="skill-tag">Content Writing</span>
-                        <span class="skill-tag">PCB Design</span>
-                        <span class="skill-tag">Video Editing</span>
+                <div class="quest-body">
+                    <ul class="quest-objectives">
+                        <li>Received intensive training in LabVIEW programming fundamentals</li>
+                        <li>Collaborated with seasoned engineers on live software development</li>
+                        <li>Built pipeline tools and automation scripts</li>
+                        <li>Performed debugging, feature testing &amp; automated data validations</li>
+                    </ul>
+                    <div class="quest-rewards">
+                        <span class="reward-tag">⚗ LabVIEW Basics</span>
+                        <span class="reward-tag">⚗ Debugging</span>
+                        <span class="reward-tag">⚗ Automation</span>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Contact Section -->
-    <section id="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Get In Touch</h2>
-                <p class="section-subtitle">Let's connect and build something amazing together</p>
+<!-- ══════════════════════════════ PROJECTS ══════════════════════════════ -->
+<section id="projects" class="layer">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">// ARTIFACT VAULT</span>
+            <h2 class="section-title">Discovered Artifacts</h2>
+            <p class="section-desc">Research relics and engineering wonders unearthed on past expeditions</p>
+        </div>
+
+        <div class="artifacts-grid">
+            <div class="artifact-card">
+                <div class="artifact-header artifact-bg-1">
+                    <span class="artifact-emoji">📡</span>
+                    <span class="artifact-rarity rarity-epic">EPIC</span>
+                </div>
+                <div class="artifact-body">
+                    <div class="artifact-name">SAR-ADC for Low Power Circuits</div>
+                    <div class="artifact-desc">8-bit Asynchronous SAR-ADC in Cadence Virtuoso using 18nm FinFET technology — ultra-low power in the microwatt range. IEEE Published.</div>
+                    <div class="artifact-tags">
+                        <span class="artifact-tag">Cadence Virtuoso</span>
+                        <span class="artifact-tag">18nm FinFET</span>
+                        <span class="artifact-tag">Low Power</span>
+                        <span class="artifact-tag">IEEE</span>
+                    </div>
+                    <a href="https://ieeexplore.ieee.org/document/10625464" target="_blank" class="artifact-link">📖 View Publication →</a>
+                </div>
             </div>
 
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <h3>Contact Information</h3>
-                    
-                    <div class="contact-item">
-                        <div class="contact-icon">📧</div>
-                        <div>
-                            <strong>Email</strong><br>
-                            <a href="mailto:kgiftlindevapriya2708@gmail.com" style="color: var(--text-secondary);">kgiftlindevapriya2708@gmail.com</a>
-                        </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <div class="contact-icon">📱</div>
-                        <div>
-                            <strong>Phone</strong><br>
-                            <span style="color: var(--text-secondary);">+91 xxxxxx1173</span>
-                        </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <div class="contact-icon">📍</div>
-                        <div>
-                            <strong>Location</strong><br>
-                            <span style="color: var(--text-secondary);">Tirunelveli, Tamil Nadu, India</span>
-                        </div>
-                    </div>
-
-                    <div class="social-links">
-                        <a href="https://github.com/Giftlin27" target="_blank" class="social-link" title="GitHub">G</a>
-                        <a href="https://www.linkedin.com/in/giftlin-devapriya-k-60a656229/" target="_blank" class="social-link" title="LinkedIn">in</a>
-                        <a href="https://leetcode.com/u/kgiftlindevapriya2708/" target="_blank" class="social-link" title="LeetCode">LC</a>
-                    </div>
+            <div class="artifact-card">
+                <div class="artifact-header artifact-bg-2">
+                    <span class="artifact-emoji">🔋</span>
+                    <span class="artifact-rarity rarity-rare">RARE</span>
                 </div>
+                <div class="artifact-body">
+                    <div class="artifact-name">Battery Management System</div>
+                    <div class="artifact-desc">Design and validation of Analog Front End (AFE) for current measurement in an Indigenous BMS, featuring precision monitoring capabilities.</div>
+                    <div class="artifact-tags">
+                        <span class="artifact-tag">AFE Design</span>
+                        <span class="artifact-tag">Current Sensing</span>
+                        <span class="artifact-tag">PCB Design</span>
+                        <span class="artifact-tag">Validation</span>
+                    </div>
+                    <a href="#" class="artifact-link">🗺 Explore →</a>
+                </div>
+            </div>
 
-                <div class="contact-form">
-                    <form>
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" placeholder="Your name" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" placeholder="your.email@example.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Message</label>
-                            <textarea placeholder="Your message here..." required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
-                    </form>
+            <div class="artifact-card">
+                <div class="artifact-header artifact-bg-3">
+                    <span class="artifact-emoji">🌿</span>
+                    <span class="artifact-rarity rarity-epic">EPIC</span>
+                </div>
+                <div class="artifact-body">
+                    <div class="artifact-name">Graphene Nanocomposite Synthesis</div>
+                    <div class="artifact-desc">Synthesizing graphene nanocomposites from captured industrial carbon via CO₂ thermal reduction. A bridge between nature's chemistry and engineering. Springer Published.</div>
+                    <div class="artifact-tags">
+                        <span class="artifact-tag">Nanotechnology</span>
+                        <span class="artifact-tag">Graphene</span>
+                        <span class="artifact-tag">Sustainability</span>
+                        <span class="artifact-tag">Springer</span>
+                    </div>
+                    <a href="https://link.springer.com/chapter/10.1007/978-981-16-8599-6_6" target="_blank" class="artifact-link">📖 View Publication →</a>
+                </div>
+            </div>
+
+            <div class="artifact-card">
+                <div class="artifact-header artifact-bg-4">
+                    <span class="artifact-emoji">🎥</span>
+                    <span class="artifact-rarity rarity-uncommon">UNCOMMON</span>
+                </div>
+                <div class="artifact-body">
+                    <div class="artifact-name">Video Dehazing for Automobiles</div>
+                    <div class="artifact-desc">Real-time video dehazing via PYNQ FPGA — cutting through the fog (literally) for automotive vision systems.</div>
+                    <div class="artifact-tags">
+                        <span class="artifact-tag">FPGA</span>
+                        <span class="artifact-tag">Computer Vision</span>
+                        <span class="artifact-tag">PYNQ</span>
+                        <span class="artifact-tag">Real-time</span>
+                    </div>
+                    <a href="#" class="artifact-link">🗺 Explore →</a>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Giftlin D K. All rights reserved.</p>
-            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Built with passion for innovation and excellence</p>
+<!-- ══════════════════════════════ SKILLS ══════════════════════════════ -->
+<section id="skills" class="layer">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">// SKILL TREE</span>
+            <h2 class="section-title">Unlocked Abilities</h2>
+            <p class="section-desc">Powers accumulated across hardware, software, and the wilderness</p>
         </div>
-    </footer>
 
-    <script>
-        // Scroll Progress Bar
-        window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById('scrollProgress').style.width = scrolled + '%';
+        <div class="skill-tree-grid">
+            <div class="skill-branch">
+                <div class="branch-name"><span class="icon">⚡</span> Programming</div>
+                <div class="skill-nodes">
+                    <span class="skill-node mastered" data-tip="Expert Level">LabVIEW ★★★</span>
+                    <span class="skill-node mastered" data-tip="Expert Level">TestStand ★★★</span>
+                    <span class="skill-node proficient" data-tip="Proficient">Python ★★</span>
+                    <span class="skill-node proficient" data-tip="Proficient">C++ ★★</span>
+                    <span class="skill-node proficient" data-tip="Proficient">PostgreSQL ★★</span>
+                </div>
+            </div>
+
+            <div class="skill-branch">
+                <div class="branch-name"><span class="icon">🏗</span> Architecture</div>
+                <div class="skill-nodes">
+                    <span class="skill-node mastered">Plugin Architecture</span>
+                    <span class="skill-node mastered">State Machines</span>
+                    <span class="skill-node proficient">MVC Pattern</span>
+                    <span class="skill-node proficient">LVOOPs</span>
+                    <span class="skill-node proficient">CI/CD</span>
+                </div>
+            </div>
+
+            <div class="skill-branch">
+                <div class="branch-name"><span class="icon">🔧</span> Tools & EDA</div>
+                <div class="skill-nodes">
+                    <span class="skill-node mastered">Git</span>
+                    <span class="skill-node mastered">JIRA</span>
+                    <span class="skill-node proficient">Cadence Virtuoso</span>
+                    <span class="skill-node proficient">Altium Designer</span>
+                    <span class="skill-node proficient">KICAD</span>
+                    <span class="skill-node proficient">Tableau</span>
+                    <span class="skill-node proficient">Confluence</span>
+                </div>
+            </div>
+
+            <div class="skill-branch">
+                <div class="branch-name"><span class="icon">🌍</span> Languages</div>
+                <div class="skill-nodes">
+                    <span class="skill-node mastered">Tamil (Native)</span>
+                    <span class="skill-node mastered">English (Pro)</span>
+                    <span class="skill-node learning">Japanese (Learner)</span>
+                    <span class="skill-node learning">German (Learner)</span>
+                </div>
+            </div>
+
+            <div class="skill-branch">
+                <div class="branch-name"><span class="icon">📋</span> Methodology</div>
+                <div class="skill-nodes">
+                    <span class="skill-node mastered">Agile / Scrum</span>
+                    <span class="skill-node mastered">Kanban</span>
+                    <span class="skill-node mastered">Clean Code</span>
+                    <span class="skill-node proficient">Technical Writing</span>
+                </div>
+            </div>
+
+            <div class="skill-branch">
+                <div class="branch-name"><span class="icon">🐾</span> Explorer Traits</div>
+                <div class="skill-nodes">
+                    <span class="skill-node mastered">Nature Navigation</span>
+                    <span class="skill-node mastered">Dog Bonding</span>
+                    <span class="skill-node mastered">Trail Blazing</span>
+                    <span class="skill-node mastered">Video Editing</span>
+                    <span class="skill-node mastered">Content Writing</span>
+                    <span class="skill-node proficient">PCB Design</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════ CONTACT ══════════════════════════════ -->
+<section id="contact" class="layer">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">// THE CAMPFIRE</span>
+            <h2 class="section-title">Rest &amp; Connect</h2>
+            <p class="section-desc">Every great adventure starts with a conversation</p>
+        </div>
+
+        <div class="campfire-section">
+            <span class="campfire-emoji">🔥</span>
+            <div class="campfire-title">Pull up a log, fellow traveller.</div>
+            <p class="campfire-desc">Whether you have a quest, a collaboration, or simply want to share tales from the trail — the fire's always warm.</p>
+
+            <div class="contact-links">
+                <a href="mailto:kgiftlindevapriya2708@gmail.com" class="contact-link">
+                    <span class="contact-link-icon">📧</span>
+                    <div>
+                        <span class="contact-link-label">RAVEN MAIL</span>
+                        <span class="contact-link-val">kgiftlindevapriya2708@gmail.com</span>
+                    </div>
+                </a>
+                <a href="https://www.linkedin.com/in/giftlin27/" target="_blank" class="contact-link">
+                    <span class="contact-link-icon">🗺️</span>
+                    <div>
+                        <span class="contact-link-label">GUILD NETWORK</span>
+                        <span class="contact-link-val">linkedin.com/in/giftlin27</span>
+                    </div>
+                </a>
+                <a href="https://github.com/Giftlin27" target="_blank" class="contact-link">
+                    <span class="contact-link-icon">📦</span>
+                    <div>
+                        <span class="contact-link-label">ARTIFACT REPOSITORY</span>
+                        <span class="contact-link-val">github.com/Giftlin27</span>
+                    </div>
+                </a>
+                <a href="https://leetcode.com/u/kgiftlindevapriya2708/" target="_blank" class="contact-link">
+                    <span class="contact-link-icon">⚔️</span>
+                    <div>
+                        <span class="contact-link-label">BATTLE ARENA</span>
+                        <span class="contact-link-val">LeetCode Profile</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="location-badge">📍 Tirunelveli, Tamil Nadu, India</div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════════════════ FOOTER ══════════════════════════════ -->
+<footer>
+    <div class="footer-row">
+        <div class="footer-logo">GIFTLIN.DK</div>
+        <div class="footer-text">Forged with <span>♥</span> for dogs, trails &amp; good code · © 2025</div>
+        <div class="paw-trail">🐾🐾🐾🐾</div>
+    </div>
+</footer>
+
+<!-- ══════════════════════════════ SCRIPTS ══════════════════════════════ -->
+<script>
+// ── Scroll Progress ──
+window.addEventListener('scroll', () => {
+    const s = document.documentElement.scrollTop;
+    const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    document.getElementById('scroll-progress').style.width = (s / h * 100) + '%';
+});
+
+// ── Forest Canvas: fireflies + stars ──
+(function() {
+    const canvas = document.getElementById('forest-canvas');
+    const ctx = canvas.getContext('2d');
+    let W, H, fireflies = [], stars = [];
+
+    function resize() {
+        W = canvas.width = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+    }
+
+    function initStars() {
+        stars = Array.from({length: 120}, () => ({
+            x: Math.random() * W,
+            y: Math.random() * H * 0.6,
+            r: Math.random() * 1.5 + 0.3,
+            alpha: Math.random() * 0.6 + 0.1,
+            twinkle: Math.random() * 0.02 + 0.005,
+            dir: 1
+        }));
+    }
+
+    function initFireflies() {
+        fireflies = Array.from({length: 55}, () => ({
+            x: Math.random() * W,
+            y: Math.random() * H,
+            vx: (Math.random() - 0.5) * 0.8,
+            vy: (Math.random() - 0.5) * 0.8,
+            alpha: Math.random(),
+            alphaDir: Math.random() > 0.5 ? 1 : -1,
+            size: Math.random() * 2.5 + 1,
+            hue: Math.random() * 40 + 70  // yellow-green range
+        }));
+    }
+
+    function drawForestBase() {
+        // Sky gradient
+        const sky = ctx.createLinearGradient(0, 0, 0, H * 0.7);
+        sky.addColorStop(0, '#040a05');
+        sky.addColorStop(0.7, '#0d1a0f');
+        ctx.fillStyle = sky;
+        ctx.fillRect(0, 0, W, H);
+
+        // Tree silhouettes
+        ctx.fillStyle = '#060e08';
+        const trees = [
+            {x: 0,    w: 120, h: H * 0.45, type: 'pine'},
+            {x: 80,   w: 90,  h: H * 0.38, type: 'pine'},
+            {x: W-150,w: 130, h: H * 0.5,  type: 'pine'},
+            {x: W-80, w: 100, h: H * 0.42, type: 'pine'},
+            {x: W*0.3,w: 80,  h: H * 0.35, type: 'pine'},
+            {x: W*0.65,w: 110,h: H * 0.47, type: 'pine'},
+        ];
+
+        trees.forEach(t => {
+            ctx.beginPath();
+            ctx.moveTo(t.x + t.w/2, H - t.h);
+            ctx.lineTo(t.x + t.w, H);
+            ctx.lineTo(t.x, H);
+            ctx.closePath();
+            ctx.fill();
+
+            // Second tier
+            ctx.beginPath();
+            ctx.moveTo(t.x + t.w/2, H - t.h * 0.65);
+            ctx.lineTo(t.x + t.w * 0.85, H - t.h * 0.25);
+            ctx.lineTo(t.x + t.w * 0.15, H - t.h * 0.25);
+            ctx.closePath();
+            ctx.fill();
         });
 
-        // Smooth Scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
+        // Ground fog
+        const fog = ctx.createLinearGradient(0, H * 0.8, 0, H);
+        fog.addColorStop(0, 'rgba(13,26,15,0)');
+        fog.addColorStop(1, 'rgba(13,26,15,0.8)');
+        ctx.fillStyle = fog;
+        ctx.fillRect(0, H * 0.8, W, H * 0.2);
+    }
+
+    function loop() {
+        ctx.clearRect(0, 0, W, H);
+        drawForestBase();
+
+        // Stars
+        stars.forEach(s => {
+            s.alpha += s.twinkle * s.dir;
+            if (s.alpha > 0.8 || s.alpha < 0.05) s.dir *= -1;
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, 255, 220, ${s.alpha})`;
+            ctx.fill();
         });
 
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
+        // Fireflies
+        fireflies.forEach(f => {
+            f.x += f.vx;
+            f.y += f.vy;
+            f.alpha += 0.025 * f.alphaDir;
+            if (f.alpha > 1 || f.alpha < 0) f.alphaDir *= -1;
+            if (f.x < 0 || f.x > W) f.vx *= -1;
+            if (f.y < 0 || f.y > H) f.vy *= -1;
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
+            const grd = ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.size * 4);
+            grd.addColorStop(0, `hsla(${f.hue}, 100%, 75%, ${f.alpha})`);
+            grd.addColorStop(1, `hsla(${f.hue}, 100%, 75%, 0)`);
+            ctx.beginPath();
+            ctx.arc(f.x, f.y, f.size * 4, 0, Math.PI * 2);
+            ctx.fillStyle = grd;
+            ctx.fill();
 
-        document.querySelectorAll('.skill-category, .project-card, .timeline-item').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.6s ease-out';
-            observer.observe(el);
+            ctx.beginPath();
+            ctx.arc(f.x, f.y, f.size, 0, Math.PI * 2);
+            ctx.fillStyle = `hsla(${f.hue}, 100%, 90%, ${f.alpha})`;
+            ctx.fill();
         });
 
-        // Form submission (you can connect this to a backend)
-        document.querySelector('form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Thank you for your message! I will get back to you soon.');
-            e.target.reset();
-        });
-    </script>
+        requestAnimationFrame(loop);
+    }
+
+    resize();
+    initStars();
+    initFireflies();
+    loop();
+    window.addEventListener('resize', () => { resize(); initStars(); initFireflies(); });
+})();
+
+// ── Falling Leaves ──
+const leafEmojis = ['🍃','🍂','🌿','🍁'];
+function spawnLeaf() {
+    const leaf = document.createElement('div');
+    leaf.className = 'leaf';
+    leaf.textContent = leafEmojis[Math.floor(Math.random() * leafEmojis.length)];
+    leaf.style.left = Math.random() * 100 + 'vw';
+    leaf.style.top = '-30px';
+    const dur = Math.random() * 6 + 6;
+    leaf.style.animationDuration = dur + 's';
+    leaf.style.fontSize = (Math.random() * 0.8 + 0.7) + 'rem';
+    document.body.appendChild(leaf);
+    setTimeout(() => leaf.remove(), dur * 1000);
+}
+setInterval(spawnLeaf, 2200);
+
+// ── Dog Companion ──
+const dogEl = document.getElementById('dog-companion');
+const speechEl = document.getElementById('dog-speech');
+const dogLines = [
+    'Woof! Great portfolio, right?',
+    'I sniffed out your GitHub! 🐕',
+    'Let\'s explore some code together!',
+    'Nature is the best bug tracker 🌿',
+    '*tail wagging intensifies*',
+    'Have you tried the campfire? 🔥',
+    'I approve this engineer! ✓',
+    'Sniff sniff... smells like clean code!'
+];
+let speechTimeout;
+
+dogEl.addEventListener('click', () => {
+    const line = dogLines[Math.floor(Math.random() * dogLines.length)];
+    speechEl.textContent = line;
+    speechEl.classList.add('show');
+    clearTimeout(speechTimeout);
+    speechTimeout = setTimeout(() => speechEl.classList.remove('show'), 3500);
+    showXP();
+});
+
+// ── XP Notification ──
+const xpEl = document.getElementById('xp-notif');
+let xpTimeout;
+const xpMessages = ['+50 XP GAINED!', '+25 XP — CURIOUS!', '+100 XP — EXPLORER!', '+10 XP — NICE CLICK!'];
+function showXP() {
+    xpEl.textContent = xpMessages[Math.floor(Math.random() * xpMessages.length)];
+    xpEl.classList.add('show');
+    clearTimeout(xpTimeout);
+    xpTimeout = setTimeout(() => xpEl.classList.remove('show'), 2000);
+}
+
+// XP on section enter
+const sections = document.querySelectorAll('section');
+const secObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) showXP(); });
+}, { threshold: 0.3 });
+sections.forEach(s => secObs.observe(s));
+
+// ── Scroll-reveal ──
+const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            e.target.style.opacity = '1';
+            e.target.style.transform = 'translateY(0)';
+        }
+    });
+}, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+
+document.querySelectorAll('.artifact-card, .skill-branch, .quest-item, .perk-card, .char-portrait, .traits-box, .about-lore').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    revealObs.observe(el);
+});
+
+// ── Smooth scroll ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+        e.preventDefault();
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+});
+
+// ── Konami Code easter egg ──
+let konamiSeq = [];
+const konami = [38,38,40,40,37,39,37,39,66,65];
+document.addEventListener('keydown', e => {
+    konamiSeq.push(e.keyCode);
+    if (konamiSeq.length > 10) konamiSeq.shift();
+    if (konamiSeq.join(',') === konami.join(',')) {
+        dogEl.textContent = '🦴';
+        speechEl.textContent = '🎉 KONAMI CODE UNLOCKED! Secret Explorer Mode ON!';
+        speechEl.classList.add('show');
+        // Burst leaves
+        for (let i = 0; i < 20; i++) setTimeout(spawnLeaf, i * 100);
+        setTimeout(() => { dogEl.textContent = '🐕'; }, 5000);
+    }
+});
+</script>
 </body>
 </html>
