@@ -3,1329 +3,1090 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giftlin DK — The Explorer's Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Cinzel:wght@400;600;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet">
+    <title>Giftlin Devapriya K — Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --forest-dark: #0d1a0f;
-            --forest-mid: #1a2e1c;
-            --forest-light: #243d27;
-            --moss: #2d5a32;
-            --leaf-green: #4a9e52;
-            --bright-leaf: #6dbf6e;
-            --gold: #e8c547;
-            --amber: #d4882a;
-            --earth: #8b5e3c;
-            --bark: #5c3d1e;
-            --sky: #7ecce8;
-            --dusk: #9b7ed4;
-            --firefly: #d4f542;
-            --text-light: #e8e0c8;
-            --text-dim: #9e9478;
-            --parchment: #f5e8c0;
-            --hp-red: #e85555;
-            --xp-blue: #5588e8;
+            --forest:    #1b2e1e;
+            --deep:      #111a12;
+            --moss:      #2e4a2f;
+            --sage:      #5a8a5c;
+            --mint:      #a8c8a0;
+            --cream:     #f4efe4;
+            --parchment: #ede5d0;
+            --gold:      #c4922a;
+            --gold-lt:   #e0b86a;
+            --amber:     #d4a853;
+            --bark:      #6b4c2a;
+            --text-dk:   #1a1a14;
+            --text-md:   #4a4a3a;
+            --text-lt:   #8a8a78;
+            --white:     #ffffff;
+            --card-bg:   rgba(255,255,255,0.03);
+            --border:    rgba(90,138,92,0.18);
+            --ease:      cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Crimson Text', serif;
-            background: var(--forest-dark);
-            color: var(--text-light);
+            font-family: 'DM Sans', sans-serif;
+            background: var(--deep);
+            color: var(--cream);
             overflow-x: hidden;
             line-height: 1.7;
         }
 
-        /* ── Forest Background ── */
-        #forest-canvas {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 0;
-            pointer-events: none;
+        /* ── Scrollbar ── */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--deep); }
+        ::-webkit-scrollbar-thumb { background: var(--sage); border-radius: 10px; }
+
+        /* ── Scroll Progress ── */
+        #progress {
+            position: fixed; top: 0; left: 0;
+            height: 2px; width: 0;
+            background: linear-gradient(90deg, var(--sage), var(--gold));
+            z-index: 9999;
+            transition: width 0.1s linear;
         }
 
-        .layer { position: relative; z-index: 1; }
+        /* ── Background ── */
+        .bg-layer {
+            position: fixed; inset: 0; z-index: 0;
+            background: radial-gradient(ellipse 80% 60% at 20% 10%, rgba(42,74,44,0.25) 0%, transparent 60%),
+                        radial-gradient(ellipse 60% 50% at 80% 80%, rgba(196,146,42,0.08) 0%, transparent 60%),
+                        var(--deep);
+            pointer-events: none;
+        }
 
         /* ── Nav ── */
         nav {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%;
+            position: fixed; top: 0; left: 0; width: 100%;
             z-index: 100;
-            background: linear-gradient(180deg, rgba(13,26,15,0.97) 0%, rgba(13,26,15,0.0) 100%);
-            padding: 1rem 2rem;
+            padding: 1.4rem 2.5rem;
+            display: flex; justify-content: space-between; align-items: center;
+            transition: background 0.4s var(--ease), backdrop-filter 0.4s var(--ease);
         }
 
-        .nav-inner {
-            max-width: 1300px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        nav.scrolled {
+            background: rgba(17,26,18,0.88);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid var(--border);
         }
 
-        .nav-logo {
-            font-family: 'Press Start 2P', monospace;
-            font-size: 0.75rem;
-            color: var(--gold);
-            text-shadow: 0 0 15px rgba(232,197,71,0.6);
-            letter-spacing: 2px;
+        .nav-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--cream);
+            letter-spacing: 0.5px;
         }
 
-        .nav-logo span { color: var(--bright-leaf); }
+        .nav-brand em { color: var(--gold); font-style: italic; }
 
         .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
+            display: flex; gap: 2.5rem; list-style: none;
         }
 
         .nav-links a {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.8rem;
-            color: var(--text-dim);
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--mint);
             text-decoration: none;
-            transition: all 0.3s;
-            position: relative;
-            padding: 0.3rem 0;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+            opacity: 0.75;
         }
 
-        .nav-links a::before {
-            content: '▶ ';
-            opacity: 0;
-            transition: opacity 0.3s;
-            color: var(--gold);
+        .nav-links a:hover { color: var(--gold-lt); opacity: 1; }
+
+        .nav-menu-btn {
+            display: none;
+            background: none; border: none;
+            color: var(--mint); font-size: 1.4rem; cursor: pointer;
         }
 
-        .nav-links a:hover { color: var(--gold); }
-        .nav-links a:hover::before { opacity: 1; }
+        /* ── Container ── */
+        .container { max-width: 1180px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
 
-        /* ── Dog Companion ── */
-        #dog-companion {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 200;
-            font-size: 2.5rem;
-            cursor: pointer;
-            transition: transform 0.3s;
-            filter: drop-shadow(0 0 10px rgba(232,197,71,0.4));
-            animation: dog-idle 2s ease-in-out infinite;
-        }
-
-        #dog-companion:hover { transform: scale(1.3) rotate(-10deg); }
-
-        @keyframes dog-idle {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-
-        #dog-speech {
-            position: fixed;
-            bottom: 90px;
-            right: 20px;
-            background: var(--parchment);
-            color: var(--bark);
-            font-family: 'Fira Code', monospace;
-            font-size: 0.7rem;
-            padding: 0.7rem 1rem;
-            border-radius: 12px 12px 4px 12px;
-            border: 2px solid var(--amber);
-            max-width: 220px;
-            z-index: 200;
-            opacity: 0;
-            transform: scale(0.8);
-            transition: all 0.3s ease;
-            pointer-events: none;
-        }
-
-        #dog-speech.show {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        /* ── Hero / Title Screen ── */
+        /* ── Hero ── */
         .hero {
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 80px 2rem 2rem;
-            position: relative;
+            display: flex; align-items: center;
+            padding: 120px 0 80px;
         }
 
-        .game-title {
-            font-family: 'Cinzel', serif;
-            font-weight: 900;
-            font-size: clamp(2.5rem, 7vw, 5rem);
-            background: linear-gradient(135deg, var(--gold) 0%, var(--amber) 50%, var(--gold) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: none;
-            margin-bottom: 0.5rem;
-            filter: drop-shadow(0 0 30px rgba(232,197,71,0.4));
-            animation: title-glow 3s ease-in-out infinite;
-            letter-spacing: 3px;
-        }
-
-        @keyframes title-glow {
-            0%, 100% { filter: drop-shadow(0 0 20px rgba(232,197,71,0.3)); }
-            50% { filter: drop-shadow(0 0 40px rgba(232,197,71,0.7)); }
-        }
-
-        .hero-subtitle {
-            font-family: 'Press Start 2P', monospace;
-            font-size: clamp(0.5rem, 1.5vw, 0.8rem);
-            color: var(--bright-leaf);
-            letter-spacing: 4px;
-            margin-bottom: 3rem;
-            animation: blink-soft 2s ease-in-out infinite;
-        }
-
-        @keyframes blink-soft {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
-        }
-
-        /* Character Card in Hero */
-        .char-card {
-            display: inline-flex;
-            gap: 3rem;
-            align-items: flex-start;
-            background: rgba(26,46,28,0.7);
-            backdrop-filter: blur(12px);
-            border: 2px solid var(--moss);
-            border-radius: 8px;
-            padding: 2rem 3rem;
-            margin-bottom: 2.5rem;
-            position: relative;
-            max-width: 750px;
-            text-align: left;
-            box-shadow: 0 0 40px rgba(74,158,82,0.15), inset 0 0 80px rgba(0,0,0,0.3);
-        }
-
-        .char-card::before {
-            content: '';
-            position: absolute;
-            inset: 4px;
-            border: 1px solid rgba(232,197,71,0.2);
-            border-radius: 5px;
-            pointer-events: none;
-        }
-
-        /* Corner ornaments */
-        .char-card::after {
-            content: '✦';
-            position: absolute;
-            top: -12px; left: -12px;
-            color: var(--gold);
-            font-size: 1.4rem;
-            background: var(--forest-dark);
-            padding: 0 4px;
-        }
-
-        .corner { position: absolute; color: var(--gold); font-size: 1.2rem; background: var(--forest-dark); padding: 0 4px; }
-        .corner-tr { top: -10px; right: -10px; }
-        .corner-bl { bottom: -10px; left: -10px; }
-        .corner-br { bottom: -10px; right: -10px; }
-
-        .char-avatar {
-            font-size: 5rem;
-            line-height: 1;
-            filter: drop-shadow(0 0 15px rgba(74,158,82,0.5));
-            animation: avatar-pulse 3s ease-in-out infinite;
-            flex-shrink: 0;
-        }
-
-        @keyframes avatar-pulse {
-            0%, 100% { filter: drop-shadow(0 0 10px rgba(74,158,82,0.3)); }
-            50% { filter: drop-shadow(0 0 25px rgba(74,158,82,0.7)); }
-        }
-
-        .char-info { flex: 1; }
-
-        .char-name {
-            font-family: 'Cinzel', serif;
-            font-size: 1.6rem;
-            font-weight: 900;
-            color: var(--gold);
-            margin-bottom: 0.2rem;
-        }
-
-        .char-class {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.8rem;
-            color: var(--bright-leaf);
-            margin-bottom: 1.2rem;
-            letter-spacing: 2px;
-        }
-
-        .stat-bars { display: flex; flex-direction: column; gap: 0.6rem; }
-
-        .stat-row {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
-
-        .stat-label {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.65rem;
-            color: var(--text-dim);
-            width: 60px;
-            flex-shrink: 0;
-        }
-
-        .stat-bar-bg {
-            flex: 1;
-            height: 8px;
-            background: rgba(255,255,255,0.06);
-            border-radius: 4px;
-            border: 1px solid rgba(255,255,255,0.08);
-            overflow: hidden;
-        }
-
-        .stat-bar-fill {
-            height: 100%;
-            border-radius: 4px;
-            position: relative;
-            transition: width 1.5s ease-out;
-        }
-
-        .stat-bar-fill.green { background: linear-gradient(90deg, var(--leaf-green), var(--bright-leaf)); box-shadow: 0 0 8px rgba(109,191,110,0.5); }
-        .stat-bar-fill.gold { background: linear-gradient(90deg, var(--amber), var(--gold)); box-shadow: 0 0 8px rgba(232,197,71,0.5); }
-        .stat-bar-fill.blue { background: linear-gradient(90deg, #4477cc, var(--xp-blue)); box-shadow: 0 0 8px rgba(85,136,232,0.5); }
-        .stat-bar-fill.purple { background: linear-gradient(90deg, #8855cc, var(--dusk)); box-shadow: 0 0 8px rgba(155,126,212,0.5); }
-
-        .stat-val {
-            font-family: 'Press Start 2P', monospace;
-            font-size: 0.55rem;
-            color: var(--text-light);
-            width: 45px;
-            text-align: right;
-            flex-shrink: 0;
-        }
-
-        .char-badges {
-            display: flex;
-            gap: 0.6rem;
-            flex-wrap: wrap;
-            margin-top: 1rem;
-        }
-
-        .badge {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.65rem;
-            background: rgba(74,158,82,0.15);
-            color: var(--bright-leaf);
-            border: 1px solid rgba(74,158,82,0.4);
-            padding: 0.25rem 0.7rem;
-            border-radius: 20px;
-        }
-
-        .badge.gold { background: rgba(232,197,71,0.1); color: var(--gold); border-color: rgba(232,197,71,0.4); }
-
-        .hero-cta { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
-
-        .rpg-btn {
-            font-family: 'Press Start 2P', monospace;
-            font-size: 0.65rem;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.25s;
-            letter-spacing: 1px;
-        }
-
-        .rpg-btn-primary {
-            background: linear-gradient(135deg, var(--moss), var(--leaf-green));
-            color: var(--forest-dark);
-            box-shadow: 0 4px 0 var(--bark), 0 0 20px rgba(74,158,82,0.3);
-        }
-
-        .rpg-btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 0 var(--bark), 0 0 30px rgba(74,158,82,0.5);
-        }
-
-        .rpg-btn-primary:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--bark); }
-
-        .rpg-btn-secondary {
-            background: transparent;
-            color: var(--gold);
-            border: 2px solid var(--gold);
-            box-shadow: 0 4px 0 var(--bark);
-        }
-
-        .rpg-btn-secondary:hover {
-            background: rgba(232,197,71,0.1);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 0 var(--bark), 0 0 20px rgba(232,197,71,0.3);
-        }
-
-        /* ── Section Wrappers ── */
-        section { padding: 6rem 0; }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* ── Section Headers ── */
-        .section-header { text-align: center; margin-bottom: 4rem; }
-
-        .section-tag {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.75rem;
-            color: var(--bright-leaf);
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            margin-bottom: 0.8rem;
-            display: block;
-        }
-
-        .section-title {
-            font-family: 'Cinzel', serif;
-            font-weight: 900;
-            font-size: clamp(1.8rem, 4vw, 3rem);
-            color: var(--gold);
-            text-shadow: 0 0 30px rgba(232,197,71,0.3);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 10%;
-            width: 80%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--gold), transparent);
-        }
-
-        .section-desc {
-            color: var(--text-dim);
-            font-size: 1.1rem;
-            font-style: italic;
-            margin-top: 1rem;
-        }
-
-        /* ── RPG Panel / Card ── */
-        .rpg-panel {
-            background: rgba(26,46,28,0.6);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--moss);
-            border-radius: 6px;
-            padding: 2rem;
-            position: relative;
-            transition: all 0.35s;
-        }
-
-        .rpg-panel:hover {
-            border-color: var(--leaf-green);
-            box-shadow: 0 0 30px rgba(74,158,82,0.15);
-        }
-
-        .rpg-panel-title {
-            font-family: 'Cinzel', serif;
-            font-size: 1.1rem;
-            color: var(--gold);
-            margin-bottom: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-        }
-
-        .rpg-panel-title .icon { font-size: 1.3rem; }
-
-        /* ── About / Character Sheet ── */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.8fr;
-            gap: 2.5rem;
-            align-items: start;
-        }
-
-        .about-left { display: flex; flex-direction: column; gap: 1.5rem; }
-
-        .char-portrait {
-            background: rgba(13,26,15,0.8);
-            border: 2px solid var(--moss);
-            border-radius: 8px;
-            padding: 2.5rem 2rem;
-            text-align: center;
-        }
-
-        .portrait-emoji { font-size: 5rem; display: block; margin-bottom: 1rem; }
-
-        .portrait-name {
-            font-family: 'Cinzel', serif;
-            font-size: 1.2rem;
-            color: var(--gold);
-            margin-bottom: 0.3rem;
-        }
-
-        .portrait-title {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.7rem;
-            color: var(--bright-leaf);
-            letter-spacing: 2px;
-        }
-
-        .portrait-hp {
-            margin-top: 1.2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .hp-label {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.65rem;
-            color: var(--text-dim);
-            text-align: left;
-        }
-
-        .hp-bar {
-            width: 100%;
-            height: 10px;
-            background: rgba(255,255,255,0.06);
-            border-radius: 5px;
-            overflow: hidden;
-        }
-
-        .hp-fill {
-            height: 100%;
-            border-radius: 5px;
-            background: linear-gradient(90deg, var(--hp-red), #ff8888);
-            width: 95%;
-        }
-
-        .xp-fill {
-            height: 100%;
-            border-radius: 5px;
-            background: linear-gradient(90deg, var(--xp-blue), #88aaff);
-            width: 70%;
-        }
-
-        .traits-box {
-            background: rgba(13,26,15,0.8);
-            border: 1px solid var(--moss);
-            border-radius: 6px;
-            padding: 1.5rem;
-        }
-
-        .trait-title {
-            font-family: 'Cinzel', serif;
-            font-size: 0.9rem;
-            color: var(--amber);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .trait-list { list-style: none; }
-
-        .trait-list li {
-            font-size: 0.95rem;
-            color: var(--text-light);
-            padding: 0.4rem 0;
-            border-bottom: 1px solid rgba(255,255,255,0.04);
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-        }
-
-        .trait-list li:last-child { border-bottom: none; }
-        .trait-list li::before { content: '🐾'; font-size: 0.8rem; }
-
-        .about-right { display: flex; flex-direction: column; gap: 1.5rem; }
-
-        .about-lore {
-            background: rgba(26,46,28,0.5);
-            border: 1px solid rgba(232,197,71,0.2);
-            border-radius: 6px;
-            padding: 2rem;
-            font-size: 1.1rem;
-            color: var(--text-light);
-            line-height: 1.9;
-            font-style: italic;
-        }
-
-        .about-lore p { margin-bottom: 1rem; }
-        .about-lore p:last-child { margin-bottom: 0; }
-        .about-lore strong { color: var(--gold); font-style: normal; }
-
-        .perks-grid {
+        .hero-inner {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        .perk-card {
-            background: rgba(13,26,15,0.7);
-            border: 1px solid var(--moss);
-            border-radius: 6px;
-            padding: 1.2rem;
-            transition: all 0.3s;
-        }
-
-        .perk-card:hover {
-            border-color: var(--gold);
-            transform: translateY(-3px);
-        }
-
-        .perk-icon { font-size: 1.8rem; margin-bottom: 0.5rem; display: block; }
-
-        .perk-name {
-            font-family: 'Cinzel', serif;
-            font-size: 0.85rem;
-            color: var(--gold);
-            margin-bottom: 0.3rem;
-        }
-
-        .perk-desc { font-size: 0.85rem; color: var(--text-dim); }
-
-        /* ── Experience / Quest Log ── */
-        .quest-log { display: flex; flex-direction: column; gap: 2rem; }
-
-        .quest-item {
-            background: rgba(26,46,28,0.6);
-            border: 1px solid var(--moss);
-            border-radius: 6px;
-            overflow: hidden;
-            transition: all 0.35s;
-            position: relative;
-        }
-
-        .quest-item:hover { border-color: var(--leaf-green); box-shadow: 0 0 25px rgba(74,158,82,0.12); }
-
-        .quest-header {
-            display: flex;
+            gap: 5rem;
             align-items: center;
-            gap: 1.5rem;
-            padding: 1.5rem 2rem;
-            background: rgba(13,26,15,0.5);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        .quest-icon { font-size: 2.5rem; flex-shrink: 0; }
-
-        .quest-meta { flex: 1; }
-
-        .quest-org {
-            font-family: 'Cinzel', serif;
-            font-size: 1.2rem;
-            color: var(--gold);
-        }
-
-        .quest-role {
-            font-family: 'Fira Code', monospace;
+        .hero-eyebrow {
+            font-family: 'DM Mono', monospace;
             font-size: 0.75rem;
-            color: var(--bright-leaf);
+            color: var(--sage);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            display: flex; align-items: center; gap: 0.8rem;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            display: inline-block;
+            width: 30px; height: 1px;
+            background: var(--sage);
+        }
+
+        .hero-name {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 5vw, 4.2rem);
+            font-weight: 900;
+            line-height: 1.1;
+            color: var(--cream);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-name span { color: var(--gold); }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.3rem;
+            color: var(--mint);
+            margin-bottom: 1.8rem;
+            opacity: 0.8;
+        }
+
+        .hero-bio {
+            font-size: 1rem;
+            color: var(--mint);
+            opacity: 0.7;
+            line-height: 1.85;
+            margin-bottom: 2.5rem;
+            max-width: 480px;
+        }
+
+        .hero-tags {
+            display: flex; flex-wrap: wrap; gap: 0.6rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .tag {
+            font-size: 0.78rem;
+            font-weight: 500;
+            padding: 0.35rem 1rem;
+            border-radius: 50px;
+            border: 1px solid;
+            transition: all 0.3s var(--ease);
+        }
+
+        .tag-green { color: var(--mint); border-color: rgba(168,200,160,0.3); background: rgba(90,138,92,0.1); }
+        .tag-gold  { color: var(--gold-lt); border-color: rgba(196,146,42,0.3); background: rgba(196,146,42,0.08); }
+        .tag-sage  { color: var(--sage); border-color: rgba(90,138,92,0.25); background: rgba(46,74,47,0.2); }
+
+        .hero-cta { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+
+        .btn {
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            padding: 0.85rem 2rem;
+            border-radius: 6px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-decoration: none;
+            letter-spacing: 0.3px;
+            transition: all 0.3s var(--ease);
+            cursor: pointer; border: none;
+        }
+
+        .btn-primary {
+            background: var(--sage);
+            color: var(--deep);
+        }
+
+        .btn-primary:hover {
+            background: var(--mint);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(90,138,92,0.35);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--mint);
+            border: 1px solid rgba(168,200,160,0.35);
+        }
+
+        .btn-outline:hover {
+            background: rgba(90,138,92,0.12);
+            border-color: var(--mint);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Visual */
+        .hero-visual {
+            display: flex; flex-direction: column; gap: 1.2rem;
+            align-items: flex-end;
+        }
+
+        .hero-card {
+            background: rgba(27,46,30,0.55);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.6rem 2rem;
+            width: 100%;
+            max-width: 380px;
+            transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+        }
+
+        .hero-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.25);
+        }
+
+        .hero-card-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--sage);
             letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+        }
+
+        .hero-card-val {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--gold-lt);
+        }
+
+        .hero-card-sub {
+            font-size: 0.82rem;
+            color: var(--mint);
+            opacity: 0.6;
             margin-top: 0.2rem;
         }
 
-        .quest-period {
-            font-family: 'Fira Code', monospace;
+        .hero-cards-row { display: flex; gap: 1rem; width: 100%; max-width: 380px; }
+        .hero-cards-row .hero-card { max-width: none; flex: 1; padding: 1.3rem 1.4rem; }
+        .hero-cards-row .hero-card-val { font-size: 1.4rem; }
+
+        /* ── Section Base ── */
+        section { padding: 7rem 0; }
+
+        .sec-label {
+            font-family: 'DM Mono', monospace;
             font-size: 0.7rem;
-            color: var(--text-dim);
-            background: rgba(255,255,255,0.05);
-            padding: 0.4rem 0.8rem;
-            border-radius: 4px;
-            border: 1px solid rgba(255,255,255,0.08);
-            white-space: nowrap;
+            color: var(--sage);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            display: flex; align-items: center; gap: 0.8rem;
         }
 
-        .quest-status {
-            font-family: 'Press Start 2P', monospace;
-            font-size: 0.5rem;
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            white-space: nowrap;
+        .sec-label::before {
+            content: '';
+            display: inline-block;
+            width: 24px; height: 1px;
+            background: var(--sage);
         }
 
-        .quest-status.active {
-            background: rgba(74,158,82,0.2);
-            color: var(--bright-leaf);
-            border: 1px solid var(--leaf-green);
-            animation: status-pulse 2s ease-in-out infinite;
+        .sec-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 3.5vw, 2.8rem);
+            font-weight: 700;
+            color: var(--cream);
+            margin-bottom: 1rem;
+            line-height: 1.2;
         }
 
-        .quest-status.done {
-            background: rgba(232,197,71,0.1);
-            color: var(--gold);
-            border: 1px solid rgba(232,197,71,0.3);
-        }
+        .sec-title em { color: var(--gold); font-style: italic; }
 
-        @keyframes status-pulse {
-            0%, 100% { box-shadow: 0 0 5px rgba(74,158,82,0.3); }
-            50% { box-shadow: 0 0 15px rgba(74,158,82,0.6); }
-        }
-
-        .quest-body { padding: 1.5rem 2rem; }
-
-        .quest-objectives { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
-
-        .quest-objectives li {
+        .sec-desc {
             font-size: 1rem;
-            color: var(--text-light);
-            display: flex;
-            align-items: flex-start;
-            gap: 0.8rem;
+            color: var(--mint);
+            opacity: 0.65;
+            max-width: 520px;
+            line-height: 1.8;
         }
 
-        .quest-objectives li::before {
-            content: '◆';
-            color: var(--leaf-green);
-            font-size: 0.6rem;
-            margin-top: 0.4rem;
+        .sec-head { margin-bottom: 4rem; }
+
+        /* Divider */
+        .leaf-divider {
+            text-align: center;
+            margin: 0.5rem 0 3rem;
+            color: var(--moss);
+            font-size: 0.9rem;
+            letter-spacing: 12px;
+            opacity: 0.6;
+        }
+
+        /* ── About ── */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .about-body {
+            font-size: 1.05rem;
+            color: var(--mint);
+            opacity: 0.8;
+            line-height: 1.9;
+        }
+
+        .about-body p { margin-bottom: 1.2rem; }
+        .about-body p:last-child { margin-bottom: 0; }
+        .about-body strong { color: var(--cream); font-weight: 600; opacity: 1; }
+
+        .about-quote {
+            border-left: 2px solid var(--sage);
+            padding: 0.8rem 1.5rem;
+            margin: 2rem 0;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--gold-lt);
+            opacity: 0.85;
+        }
+
+        .about-right { display: flex; flex-direction: column; gap: 1.2rem; }
+
+        .info-card {
+            background: rgba(27,46,30,0.4);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.6rem;
+            transition: all 0.35s var(--ease);
+        }
+
+        .info-card:hover {
+            border-color: rgba(90,138,92,0.4);
+            background: rgba(27,46,30,0.6);
+            transform: translateX(6px);
+        }
+
+        .info-card-head {
+            display: flex; align-items: center; gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-card-icon { font-size: 1.3rem; }
+
+        .info-card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--gold-lt);
+        }
+
+        .info-list { list-style: none; }
+
+        .info-list li {
+            font-size: 0.9rem;
+            color: var(--mint);
+            opacity: 0.75;
+            padding: 0.3rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            display: flex; align-items: center; gap: 0.6rem;
+        }
+
+        .info-list li:last-child { border-bottom: none; }
+
+        .info-list li::before {
+            content: '–';
+            color: var(--sage);
             flex-shrink: 0;
         }
 
-        .quest-rewards {
-            display: flex;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-            margin-top: 1.2rem;
-            padding-top: 1.2rem;
-            border-top: 1px solid rgba(255,255,255,0.06);
+        /* Education box */
+        .edu-card {
+            background: rgba(27,46,30,0.4);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.8rem;
         }
 
-        .reward-tag {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.65rem;
-            background: rgba(232,197,71,0.08);
-            color: var(--amber);
-            border: 1px solid rgba(232,197,71,0.25);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
+        .edu-inst {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--cream);
+            margin-bottom: 0.3rem;
         }
 
-        /* ── Projects / Artifact Vault ── */
-        .artifacts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 2rem;
+        .edu-degree {
+            font-size: 0.9rem;
+            color: var(--mint);
+            opacity: 0.7;
+            margin-bottom: 0.8rem;
         }
 
-        .artifact-card {
-            background: rgba(26,46,28,0.55);
-            border: 1px solid var(--moss);
-            border-radius: 8px;
+        .edu-meta {
+            display: flex; flex-wrap: wrap; gap: 0.6rem;
+        }
+
+        .edu-pill {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7rem;
+            padding: 0.3rem 0.9rem;
+            border-radius: 50px;
+        }
+
+        .edu-pill-gold { background: rgba(196,146,42,0.12); color: var(--gold-lt); border: 1px solid rgba(196,146,42,0.3); }
+        .edu-pill-green { background: rgba(90,138,92,0.12); color: var(--mint); border: 1px solid rgba(90,138,92,0.3); }
+
+        /* ── Experience ── */
+        .exp-list { display: flex; flex-direction: column; gap: 1.5rem; }
+
+        .exp-card {
+            background: rgba(27,46,30,0.35);
+            border: 1px solid var(--border);
+            border-radius: 14px;
             overflow: hidden;
-            transition: all 0.4s;
-            cursor: pointer;
+            transition: all 0.35s var(--ease);
         }
 
-        .artifact-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--gold);
-            box-shadow: 0 15px 40px rgba(232,197,71,0.15);
+        .exp-card:hover {
+            border-color: rgba(90,138,92,0.4);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
         }
 
-        .artifact-header {
-            height: 160px;
+        .exp-top {
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 1.5rem;
+            padding: 1.8rem 2rem;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .exp-icon-wrap {
+            width: 48px; height: 48px;
+            background: rgba(46,74,47,0.6);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem;
+            flex-shrink: 0;
+        }
+
+        .exp-company {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--cream);
+        }
+
+        .exp-role {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--sage);
+            letter-spacing: 1px;
+            margin-top: 0.2rem;
+        }
+
+        .exp-period {
+            margin-left: auto;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--text-lt);
+            background: rgba(255,255,255,0.05);
+            padding: 0.35rem 0.9rem;
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.07);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .exp-status {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            flex-shrink: 0;
+        }
+
+        .exp-status.live {
+            background: rgba(90,138,92,0.15);
+            color: var(--mint);
+            border: 1px solid rgba(90,138,92,0.4);
+        }
+
+        .exp-status.live::before { content: '● '; }
+
+        .exp-status.done {
+            background: rgba(196,146,42,0.1);
+            color: var(--amber);
+            border: 1px solid rgba(196,146,42,0.25);
+        }
+
+        .exp-body { padding: 1.5rem 2rem; }
+
+        .exp-points {
+            list-style: none;
+            display: flex; flex-direction: column; gap: 0.6rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .exp-points li {
+            font-size: 0.95rem;
+            color: var(--mint);
+            opacity: 0.75;
+            display: flex; align-items: flex-start; gap: 0.8rem;
+        }
+
+        .exp-points li::before {
+            content: '→';
+            color: var(--sage);
+            flex-shrink: 0;
+            margin-top: 0.05rem;
+        }
+
+        .exp-skills {
+            display: flex; flex-wrap: wrap; gap: 0.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .skill-chip {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7rem;
+            background: rgba(46,74,47,0.35);
+            color: var(--mint);
+            border: 1px solid rgba(90,138,92,0.25);
+            padding: 0.25rem 0.8rem;
+            border-radius: 50px;
+        }
+
+        /* ── Projects ── */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .proj-card {
+            background: rgba(27,46,30,0.38);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            transition: all 0.4s var(--ease);
+        }
+
+        .proj-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(196,146,42,0.35);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.22);
+        }
+
+        .proj-banner {
+            height: 130px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 3.5rem;
             position: relative;
             overflow: hidden;
         }
 
-        .artifact-bg-1 { background: linear-gradient(135deg, rgba(45,90,50,0.8), rgba(13,26,15,0.9)); }
-        .artifact-bg-2 { background: linear-gradient(135deg, rgba(74,158,82,0.3), rgba(26,46,28,0.9)); }
-        .artifact-bg-3 { background: linear-gradient(135deg, rgba(155,126,212,0.3), rgba(13,26,15,0.9)); }
-        .artifact-bg-4 { background: linear-gradient(135deg, rgba(232,197,71,0.2), rgba(26,46,28,0.9)); }
+        .proj-b1 { background: linear-gradient(135deg, rgba(46,74,47,0.9), rgba(17,26,18,0.95)); }
+        .proj-b2 { background: linear-gradient(135deg, rgba(90,138,92,0.25), rgba(17,26,18,0.95)); }
+        .proj-b3 { background: linear-gradient(135deg, rgba(196,146,42,0.18), rgba(27,46,30,0.95)); }
+        .proj-b4 { background: linear-gradient(135deg, rgba(107,76,42,0.3), rgba(17,26,18,0.95)); }
 
-        .artifact-emoji { font-size: 4rem; filter: drop-shadow(0 0 20px rgba(232,197,71,0.4)); }
-
-        .artifact-rarity {
+        .proj-badge {
             position: absolute;
-            top: 12px; right: 12px;
-            font-family: 'Press Start 2P', monospace;
-            font-size: 0.45rem;
-            padding: 0.3rem 0.6rem;
-            border-radius: 3px;
+            top: 10px; right: 12px;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.6rem;
+            padding: 0.25rem 0.65rem;
+            border-radius: 50px;
         }
 
-        .rarity-epic { background: rgba(155,126,212,0.3); color: var(--dusk); border: 1px solid var(--dusk); }
-        .rarity-rare { background: rgba(85,136,232,0.2); color: #88aaff; border: 1px solid #88aaff; }
-        .rarity-uncommon { background: rgba(74,158,82,0.2); color: var(--bright-leaf); border: 1px solid var(--leaf-green); }
+        .badge-pub { background: rgba(196,146,42,0.2); color: var(--gold-lt); border: 1px solid rgba(196,146,42,0.4); }
+        .badge-res { background: rgba(90,138,92,0.15); color: var(--mint); border: 1px solid rgba(90,138,92,0.35); }
 
-        .artifact-body { padding: 1.5rem; }
+        .proj-body { padding: 1.5rem; }
 
-        .artifact-name {
-            font-family: 'Cinzel', serif;
+        .proj-title {
+            font-family: 'Playfair Display', serif;
             font-size: 1.05rem;
-            color: var(--gold);
-            margin-bottom: 0.7rem;
+            font-weight: 700;
+            color: var(--cream);
+            margin-bottom: 0.6rem;
         }
 
-        .artifact-desc {
-            font-size: 0.95rem;
-            color: var(--text-dim);
-            line-height: 1.7;
+        .proj-desc {
+            font-size: 0.9rem;
+            color: var(--mint);
+            opacity: 0.65;
+            line-height: 1.75;
             margin-bottom: 1rem;
         }
 
-        .artifact-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+        .proj-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
 
-        .artifact-tag {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.6rem;
-            background: rgba(74,158,82,0.1);
-            color: var(--bright-leaf);
-            border: 1px solid rgba(74,158,82,0.3);
-            padding: 0.2rem 0.6rem;
-            border-radius: 20px;
+        .proj-tag {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            background: rgba(27,46,30,0.6);
+            color: var(--sage);
+            border: 1px solid rgba(90,138,92,0.2);
+            padding: 0.2rem 0.7rem;
+            border-radius: 50px;
         }
 
-        .artifact-link {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.75rem;
+        .proj-link {
+            font-size: 0.83rem;
+            font-weight: 600;
             color: var(--gold);
             text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            transition: all 0.3s;
+            display: inline-flex; align-items: center; gap: 0.4rem;
+            transition: all 0.25s;
         }
 
-        .artifact-link:hover { color: var(--bright-leaf); gap: 0.8rem; }
+        .proj-link:hover { color: var(--gold-lt); gap: 0.7rem; }
 
-        /* ── Skills / Skill Tree ── */
-        .skill-tree-grid {
+        /* ── Skills ── */
+        .skills-layout {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 1.4rem;
         }
 
-        .skill-branch {
-            background: rgba(26,46,28,0.55);
-            border: 1px solid var(--moss);
-            border-radius: 6px;
-            padding: 1.8rem;
-            transition: all 0.3s;
+        .skill-group {
+            background: rgba(27,46,30,0.38);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.6rem;
+            transition: all 0.3s var(--ease);
         }
 
-        .skill-branch:hover { border-color: var(--leaf-green); }
+        .skill-group:hover { border-color: rgba(90,138,92,0.38); }
 
-        .branch-name {
-            font-family: 'Cinzel', serif;
-            font-size: 1rem;
-            color: var(--gold);
-            margin-bottom: 1.3rem;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
+        .skill-group-head {
+            display: flex; align-items: center; gap: 0.7rem;
+            margin-bottom: 1.2rem;
         }
 
-        .branch-name .icon { font-size: 1.3rem; }
+        .skill-group-icon { font-size: 1.2rem; }
 
-        .skill-nodes { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+        .skill-group-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--gold-lt);
+        }
 
-        .skill-node {
-            font-family: 'Fira Code', monospace;
+        .skill-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+        .s-pill {
+            font-family: 'DM Mono', monospace;
             font-size: 0.7rem;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
+            padding: 0.35rem 0.85rem;
+            border-radius: 50px;
             border: 1px solid;
-            transition: all 0.3s;
-            cursor: default;
+            transition: all 0.25s;
         }
 
-        .skill-node.mastered {
-            background: rgba(232,197,71,0.12);
-            color: var(--gold);
-            border-color: rgba(232,197,71,0.4);
+        .s-pill:hover { transform: translateY(-1px); }
+
+        .s-pill.hi  { color: var(--cream);   border-color: rgba(196,146,42,0.45); background: rgba(196,146,42,0.1); }
+        .s-pill.mid { color: var(--mint);     border-color: rgba(90,138,92,0.35);  background: rgba(90,138,92,0.08); }
+        .s-pill.lo  { color: var(--text-lt);  border-color: rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); }
+
+        /* ── Contact ── */
+        .contact-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
         }
 
-        .skill-node.mastered:hover {
-            background: rgba(232,197,71,0.2);
-            box-shadow: 0 0 12px rgba(232,197,71,0.3);
+        .contact-left {}
+
+        .contact-links { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
+
+        .contact-item {
+            display: flex; align-items: center; gap: 1.2rem;
+            background: rgba(27,46,30,0.38);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.1rem 1.4rem;
+            text-decoration: none;
+            color: var(--cream);
+            transition: all 0.3s var(--ease);
         }
 
-        .skill-node.proficient {
-            background: rgba(74,158,82,0.1);
-            color: var(--bright-leaf);
-            border-color: rgba(74,158,82,0.35);
+        .contact-item:hover {
+            border-color: rgba(90,138,92,0.4);
+            transform: translateX(6px);
+            background: rgba(27,46,30,0.55);
         }
 
-        .skill-node.proficient:hover {
-            background: rgba(74,158,82,0.2);
-            box-shadow: 0 0 12px rgba(74,158,82,0.3);
-        }
-
-        .skill-node.learning {
-            background: rgba(155,126,212,0.08);
-            color: var(--dusk);
-            border-color: rgba(155,126,212,0.3);
-        }
-
-        /* ── Contact / Campfire ── */
-        .campfire-section {
-            background: rgba(26,46,28,0.5);
-            border: 1px solid var(--moss);
+        .contact-item-icon {
+            width: 40px; height: 40px;
+            background: rgba(46,74,47,0.5);
             border-radius: 8px;
-            padding: 3rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .campfire-emoji {
-            font-size: 5rem;
-            display: block;
-            margin-bottom: 1rem;
-            animation: fire-dance 1.5s ease-in-out infinite;
-        }
-
-        @keyframes fire-dance {
-            0%, 100% { transform: scale(1) rotate(-3deg); }
-            33% { transform: scale(1.05) rotate(3deg); }
-            66% { transform: scale(0.97) rotate(-1deg); }
-        }
-
-        .campfire-title {
-            font-family: 'Cinzel', serif;
-            font-size: 2rem;
-            color: var(--gold);
-            margin-bottom: 1rem;
-        }
-
-        .campfire-desc {
-            color: var(--text-dim);
-            font-style: italic;
+            display: flex; align-items: center; justify-content: center;
             font-size: 1.1rem;
-            max-width: 550px;
-            margin: 0 auto 2.5rem;
+            flex-shrink: 0;
         }
 
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
+        .contact-item-lbl {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--sage);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .contact-item-val {
+            font-size: 0.9rem;
+            color: var(--mint);
+            margin-top: 0.1rem;
+        }
+
+        .contact-right {}
+
+        .contact-tagline {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--cream);
+            line-height: 1.35;
+            margin-bottom: 1.2rem;
+        }
+
+        .contact-tagline em { color: var(--gold); font-style: italic; }
+
+        .contact-note {
+            font-size: 1rem;
+            color: var(--mint);
+            opacity: 0.65;
+            line-height: 1.8;
             margin-bottom: 2rem;
         }
 
-        .contact-link {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            background: rgba(13,26,15,0.7);
-            border: 1px solid var(--moss);
-            border-radius: 6px;
-            padding: 1rem 1.5rem;
+        .socials { display: flex; gap: 1rem; }
+
+        .social-btn {
+            width: 46px; height: 46px;
+            background: rgba(27,46,30,0.5);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--mint);
+            font-weight: 700;
+            font-size: 0.85rem;
             text-decoration: none;
-            transition: all 0.3s;
-            color: var(--text-light);
+            transition: all 0.3s var(--ease);
         }
 
-        .contact-link:hover {
-            border-color: var(--gold);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(232,197,71,0.15);
-            color: var(--gold);
-        }
-
-        .contact-link-icon { font-size: 1.5rem; }
-
-        .contact-link-label {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.7rem;
-            color: var(--text-dim);
-            display: block;
-        }
-
-        .contact-link-val {
-            font-family: 'Crimson Text', serif;
-            font-size: 1rem;
-            color: inherit;
-        }
-
-        .location-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(74,158,82,0.1);
-            border: 1px solid rgba(74,158,82,0.3);
-            color: var(--bright-leaf);
-            font-family: 'Fira Code', monospace;
-            font-size: 0.7rem;
-            padding: 0.5rem 1.2rem;
-            border-radius: 20px;
+        .social-btn:hover {
+            background: rgba(90,138,92,0.2);
+            border-color: var(--sage);
+            color: var(--cream);
+            transform: translateY(-3px);
         }
 
         /* ── Footer ── */
         footer {
-            background: rgba(13,26,15,0.9);
-            border-top: 1px solid rgba(74,158,82,0.2);
-            padding: 2rem;
-            text-align: center;
+            border-top: 1px solid var(--border);
+            padding: 2.5rem 0;
         }
 
-        .footer-row {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
+        .footer-inner {
+            max-width: 1180px; margin: 0 auto; padding: 0 2rem;
+            display: flex; flex-direction: column; align-items: center;
+            gap: 1rem; text-align: center;
         }
 
-        .footer-logo {
-            font-family: 'Press Start 2P', monospace;
-            font-size: 0.6rem;
-            color: var(--gold);
+        .footer-verse {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1rem;
+            color: var(--gold-lt);
+            opacity: 0.75;
+            max-width: 520px;
+            line-height: 1.7;
         }
 
-        .footer-text {
-            font-family: 'Fira Code', monospace;
+        .footer-verse cite {
+            display: block;
+            font-family: 'DM Mono', monospace;
+            font-style: normal;
+            font-size: 0.68rem;
+            color: var(--sage);
+            letter-spacing: 1.5px;
+            margin-top: 0.4rem;
+        }
+
+        .footer-copy {
+            font-family: 'DM Mono', monospace;
             font-size: 0.7rem;
-            color: var(--text-dim);
+            color: var(--text-lt);
+            opacity: 0.5;
         }
 
-        .footer-text span { color: var(--hp-red); }
+        .footer-dots { color: var(--moss); letter-spacing: 6px; font-size: 0.7rem; opacity: 0.5; }
 
-        .paw-trail {
-            display: flex;
-            gap: 0.5rem;
-            font-size: 0.8rem;
-            opacity: 0.4;
+        /* ── Animations / Reveal ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
         }
 
-        /* ── Divider ── */
-        .nature-divider {
-            text-align: center;
-            margin: 2rem 0;
-            color: var(--moss);
-            font-size: 1.2rem;
-            letter-spacing: 10px;
-        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        /* ── Scroll Progress ── */
-        #scroll-progress {
-            position: fixed;
-            top: 0; left: 0;
-            width: 0%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--leaf-green), var(--gold), var(--amber));
-            z-index: 9999;
-            transition: width 0.1s;
-        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
 
         /* ── Responsive ── */
         @media (max-width: 900px) {
-            .char-card { flex-direction: column; text-align: center; padding: 2rem; }
-            .about-grid { grid-template-columns: 1fr; }
-            .perks-grid { grid-template-columns: 1fr; }
+            .hero-inner, .about-grid, .contact-wrap { grid-template-columns: 1fr; gap: 3rem; }
+            .hero-visual { align-items: stretch; }
+            .hero-cards-row .hero-card { flex: none; }
             .nav-links { display: none; }
-            .quest-header { flex-wrap: wrap; }
+            .nav-menu-btn { display: block; }
         }
 
         @media (max-width: 600px) {
-            .char-card { gap: 1.5rem; }
-            .stat-label { width: 45px; font-size: 0.55rem; }
-            .campfire-section { padding: 2rem 1rem; }
+            .hero { padding: 100px 0 60px; }
+            .hero-cta { flex-direction: column; }
+            section { padding: 5rem 0; }
+            .exp-top { flex-wrap: wrap; }
         }
-
-        /* ── Floating leaves ── */
-        .leaf {
-            position: fixed;
-            font-size: 1.2rem;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0;
-            animation: leaf-fall linear forwards;
-        }
-
-        @keyframes leaf-fall {
-            0% { opacity: 0.7; transform: translateY(-20px) rotate(0deg); }
-            100% { opacity: 0; transform: translateY(100vh) rotate(720deg); }
-        }
-
-        /* ── Tooltip on hover ── */
-        [data-tip] { position: relative; cursor: help; }
-        [data-tip]:hover::after {
-            content: attr(data-tip);
-            position: absolute;
-            bottom: 125%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--forest-dark);
-            color: var(--text-light);
-            border: 1px solid var(--moss);
-            border-radius: 4px;
-            padding: 0.4rem 0.8rem;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.65rem;
-            white-space: nowrap;
-            z-index: 500;
-        }
-
-        /* ── Pixel cursor ── */
-        body { cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpolygon points='0,0 0,14 4,10 7,17 9,16 6,9 10,9' fill='%23e8c547' stroke='%230d1a0f' stroke-width='1'/%3E%3C/svg%3E"), auto; }
-
-        /* ── Typewriter ── */
-        .typewriter { overflow: hidden; white-space: nowrap; border-right: 2px solid var(--gold); animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite; }
-        @keyframes typing { from { width: 0; } to { width: 100%; } }
-        @keyframes blink-caret { from, to { border-color: transparent; } 50% { border-color: var(--gold); } }
-
-        /* ── XP Notification ── */
-        #xp-notif {
-            position: fixed;
-            top: 80px; right: 20px;
-            background: rgba(26,46,28,0.95);
-            border: 1px solid var(--gold);
-            border-radius: 6px;
-            padding: 0.8rem 1.2rem;
-            font-family: 'Press Start 2P', monospace;
-            font-size: 0.55rem;
-            color: var(--gold);
-            z-index: 300;
-            transform: translateX(200px);
-            transition: transform 0.4s ease;
-        }
-
-        #xp-notif.show { transform: translateX(0); }
     </style>
 </head>
 <body>
 
-<!-- Scroll Progress -->
-<div id="scroll-progress"></div>
+<div id="progress"></div>
+<div class="bg-layer"></div>
 
-<!-- Forest Canvas -->
-<canvas id="forest-canvas"></canvas>
-
-<!-- XP Notification -->
-<div id="xp-notif">+50 XP GAINED!</div>
-
-<!-- Dog Companion -->
-<div id="dog-companion" title="Click me!">🐕</div>
-<div id="dog-speech"></div>
-
-<!-- Navigation -->
-<nav>
-    <div class="nav-inner">
-        <div class="nav-logo">GIFT<span>.</span>DK</div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">Character</a></li>
-            <li><a href="#experience">Quests</a></li>
-            <li><a href="#projects">Artifacts</a></li>
-            <li><a href="#skills">Skill Tree</a></li>
-            <li><a href="#contact">Campfire</a></li>
-        </ul>
-    </div>
+<!-- ── Navigation ── -->
+<nav id="nav">
+    <div class="nav-brand">Giftlin <em>DK</em></div>
+    <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-menu-btn" id="menuBtn">☰</button>
 </nav>
 
-<!-- ══════════════════════════════ HERO ══════════════════════════════ -->
-<section class="hero layer" id="home">
-    <div class="hero-subtitle">✦ EXPLORER'S PORTFOLIO ✦</div>
+<!-- ── Hero ── -->
+<section id="home">
+    <div class="container">
+        <div class="hero-inner">
 
-    <h1 class="game-title">Giftlin Devapriya K</h1>
-
-    <div class="nature-divider">🌿 ⚙️ 🐾 ⚙️ 🌿</div>
-
-    <div class="char-card" style="margin: 1.5rem 0 2.5rem;">
-        <span class="corner corner-tr">✦</span>
-        <span class="corner corner-bl">✦</span>
-        <span class="corner corner-br">✦</span>
-
-        <div class="char-avatar">🧭</div>
-
-        <div class="char-info">
-            <div class="char-name">Giftlin DK</div>
-            <div class="char-class">⚔ PROJECT ENGINEER · NATURE EXPLORER · DOG COMPANION</div>
-
-            <div class="stat-bars">
-                <div class="stat-row">
-                    <span class="stat-label">CGPA</span>
-                    <div class="stat-bar-bg"><div class="stat-bar-fill gold" style="width:95.7%"></div></div>
-                    <span class="stat-val">9.57/10</span>
+            <div class="hero-left">
+                <div class="hero-eyebrow">Electronics &amp; Software Engineer</div>
+                <h1 class="hero-name">Giftlin <span>Devapriya</span> K</h1>
+                <div class="hero-title">Project Engineer · Nature Explorer · Dog Lover</div>
+                <p class="hero-bio">
+                    Building scalable test &amp; automation software for semiconductor reliability labs —
+                    then stepping outside to find stillness on a forest trail with my dog.
+                </p>
+                <div class="hero-tags">
+                    <span class="tag tag-green">🌿 Nature Lover</span>
+                    <span class="tag tag-gold">🐕 Dog Person</span>
+                    <span class="tag tag-sage">🧭 Explorer</span>
+                    <span class="tag tag-green">⚡ LabVIEW Expert</span>
+                    <span class="tag tag-gold">📡 IEEE Published</span>
                 </div>
-                <div class="stat-row">
-                    <span class="stat-label">LabVIEW</span>
-                    <div class="stat-bar-bg"><div class="stat-bar-fill green" style="width:92%"></div></div>
-                    <span class="stat-val">Expert</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">Python</span>
-                    <div class="stat-bar-bg"><div class="stat-bar-fill blue" style="width:80%"></div></div>
-                    <span class="stat-val">Adv.</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">Explore</span>
-                    <div class="stat-bar-bg"><div class="stat-bar-fill purple" style="width:99%"></div></div>
-                    <span class="stat-val">MAX</span>
+                <div class="hero-cta">
+                    <a href="#contact" class="btn btn-primary">Get in Touch</a>
+                    <a href="#projects" class="btn btn-outline">View Projects →</a>
+                    <a href="https://www.linkedin.com/in/giftlin27/" target="_blank" class="btn btn-outline">LinkedIn</a>
                 </div>
             </div>
 
-            <div class="char-badges">
-                <span class="badge">🏆 4× Academic Excellence</span>
-                <span class="badge">📡 IEEE Published</span>
-                <span class="badge gold">✨ Hackathon Winner</span>
-                <span class="badge">🐕 Dog Lover</span>
-                <span class="badge">🌿 Nature Seeker</span>
+            <div class="hero-visual">
+                <div class="hero-card reveal">
+                    <div class="hero-card-label">Current Role</div>
+                    <div class="hero-card-val">Project Engineer</div>
+                    <div class="hero-card-sub">Soliton Technologies · Jan 2024 – Present</div>
+                </div>
+                <div class="hero-cards-row">
+                    <div class="hero-card reveal reveal-delay-1">
+                        <div class="hero-card-label">Publications</div>
+                        <div class="hero-card-val">2+</div>
+                        <div class="hero-card-sub">IEEE &amp; Springer</div>
+                    </div>
+                    <div class="hero-card reveal reveal-delay-2">
+                        <div class="hero-card-label">Awards</div>
+                        <div class="hero-card-val">4+</div>
+                        <div class="hero-card-sub">Academic Excellence</div>
+                    </div>
+                </div>
+                <div class="hero-card reveal reveal-delay-3" style="max-width:380px;width:100%;">
+                    <div class="hero-card-label">Specialty</div>
+                    <div class="hero-card-val" style="font-size:1.2rem;">Test &amp; Automation</div>
+                    <div class="hero-card-sub">LabVIEW · TestStand · Python · CI/CD</div>
+                </div>
             </div>
+
         </div>
-    </div>
-
-    <div class="hero-cta">
-        <a href="#contact" class="rpg-btn rpg-btn-primary">[ SEND RAVEN ]</a>
-        <a href="#projects" class="rpg-btn rpg-btn-secondary">[ VIEW ARTIFACTS ]</a>
-        <a href="https://www.linkedin.com/in/giftlin27/" target="_blank" class="rpg-btn rpg-btn-secondary">[ LINKEDIN ]</a>
     </div>
 </section>
 
-<!-- ══════════════════════════════ ABOUT ══════════════════════════════ -->
-<section id="about" class="layer">
+<!-- ── About ── -->
+<section id="about">
     <div class="container">
-        <div class="section-header">
-            <span class="section-tag">// CHARACTER SHEET</span>
-            <h2 class="section-title">About the Explorer</h2>
-            <p class="section-desc">Every adventurer has a story. Here's mine.</p>
+        <div class="sec-head reveal">
+            <div class="sec-label">About</div>
+            <h2 class="sec-title">Bridging <em>hardware</em> &amp; software</h2>
+            <p class="sec-desc">A curious mind at the intersection of electronics, code, and the natural world.</p>
         </div>
 
         <div class="about-grid">
-            <div class="about-left">
-                <div class="char-portrait">
-                    <span class="portrait-emoji">🧭</span>
-                    <div class="portrait-name">Giftlin DK</div>
-                    <div class="portrait-title">PROJECT ENGINEER · LVL 22</div>
-                    <div class="portrait-hp">
-                        <div class="hp-label">❤ HP: PASSION &amp; DRIVE</div>
-                        <div class="hp-bar"><div class="hp-fill"></div></div>
-                        <div class="hp-label">✦ XP: 2+ YEARS IN THE FIELD</div>
-                        <div class="hp-bar"><div class="xp-fill"></div></div>
-                    </div>
+            <div class="about-body reveal">
+                <p>
+                    I'm a <strong>software engineer with an electronics foundation</strong>, currently at
+                    <strong>Soliton Technologies</strong> where I design highly scalable Test &amp; Automation
+                    solutions for semiconductor reliability labs used by global industry leaders.
+                </p>
+                <p>
+                    My toolkit spans <strong>LabVIEW, TestStand, Python</strong>, and CI/CD pipelines — but
+                    what drives me is the intersection of precision engineering and real-world impact.
+                    I've authored <strong>2+ IEEE &amp; Springer publications</strong> and led teams as
+                    Secretary of Qubate, IEEE Treasurer, and Research Cell Project Manager.
+                </p>
+                <div class="about-quote">
+                    "The best algorithms are in nature — I just try to borrow from them."
                 </div>
-
-                <div class="traits-box">
-                    <div class="trait-title">🏅 Character Traits</div>
-                    <ul class="trait-list">
-                        <li>Dog Whisperer &amp; Lifelong Companion</li>
-                        <li>Explorer of Trails &amp; Hidden Places</li>
-                        <li>Nature Guardian &amp; Green Advocate</li>
-                        <li>Semiconductor &amp; LabVIEW Specialist</li>
-                        <li>IEEE-Published Researcher</li>
-                        <li>Language Learner (Tamil, English, Japanese, German)</li>
-                    </ul>
-                </div>
+                <p>
+                    Beyond the screen, I'm a <strong>trail explorer</strong> who finds clarity on forest paths,
+                    a <strong>dog lover</strong> who believes every problem looks smaller with a dog by your side,
+                    and a quiet collector of <strong>languages</strong> — Tamil, English, Japanese, and German.
+                </p>
             </div>
 
             <div class="about-right">
-                <div class="about-lore">
-                    <p>Born a curious mind in the forests of <strong>Tamil Nadu</strong>, Giftlin walks two worlds — the <strong>digital realm</strong> of circuits and code, and the <strong>wild expanse</strong> of nature trails and starlit skies. Every bug fixed is a small mountain conquered; every new tech learned is a new territory mapped.</p>
-                    <p>By day, she architects <strong>test & automation software</strong> for semiconductor reliability labs at <strong>Soliton Technologies</strong>, wielding LabVIEW like an ancient staff and TestStand like a trusted compass.</p>
-                    <p>By evening, she's on a trail with her dog, finding <strong>peace in the rustling leaves</strong>, reminding herself that the best algorithms exist in nature itself. She believes the world is best explored — forests, codebases, and all the wild spaces in between.</p>
+                <div class="edu-card reveal">
+                    <div class="info-card-head">
+                        <span class="info-card-icon">🎓</span>
+                        <span class="info-card-title" style="font-family:'Playfair Display',serif;color:var(--gold-lt);">Education</span>
+                    </div>
+                    <div class="edu-inst">Kumaraguru College of Technology</div>
+                    <div class="edu-degree">B.E. Electronics &amp; Communication Engineering · 2020 – 2024</div>
+                    <div class="edu-meta">
+                        <span class="edu-pill edu-pill-gold">CGPA 9.57 / 10</span>
+                        <span class="edu-pill edu-pill-green">Academic Excellence ×4</span>
+                        <span class="edu-pill edu-pill-green">Dept. Achiever</span>
+                    </div>
                 </div>
 
-                <div class="perks-grid">
-                    <div class="perk-card">
-                        <span class="perk-icon">🎓</span>
-                        <div class="perk-name">Scholar's Path</div>
-                        <div class="perk-desc">B.E. ECE — Kumaraguru College of Technology. CGPA 9.57 · 2020–2024</div>
+                <div class="info-card reveal reveal-delay-1">
+                    <div class="info-card-head">
+                        <span class="info-card-icon">🏆</span>
+                        <span class="info-card-title">Achievements</span>
                     </div>
-                    <div class="perk-card">
-                        <span class="perk-icon">🏆</span>
-                        <div class="perk-name">Hall of Fame</div>
-                        <div class="perk-desc">Academic Excellence (4×) · Dept Achiever · RiGathon'21 Winner</div>
+                    <ul class="info-list">
+                        <li>Academic Excellence Award — 4 consecutive years</li>
+                        <li>Department Achiever Award</li>
+                        <li>Winner — RiGathon 2021 Hackathon</li>
+                        <li>2+ IEEE &amp; Springer published research papers</li>
+                    </ul>
+                </div>
+
+                <div class="info-card reveal reveal-delay-2">
+                    <div class="info-card-head">
+                        <span class="info-card-icon">🌍</span>
+                        <span class="info-card-title">Languages &amp; Certifications</span>
                     </div>
-                    <div class="perk-card">
-                        <span class="perk-icon">📜</span>
-                        <div class="perk-name">Scroll Collection</div>
-                        <div class="perk-desc">GitHub Pro · Agile PM · ChatGPT Prompt Engineering</div>
+                    <ul class="info-list">
+                        <li>Tamil (Native) · English (Professional)</li>
+                        <li>Japanese (Learning) · German (Learning)</li>
+                        <li>GitHub Professional · Agile PM · ChatGPT Prompt Eng.</li>
+                    </ul>
+                </div>
+
+                <div class="info-card reveal reveal-delay-3">
+                    <div class="info-card-head">
+                        <span class="info-card-icon">⚔️</span>
+                        <span class="info-card-title">Leadership</span>
                     </div>
-                    <div class="perk-card">
-                        <span class="perk-icon">⚔️</span>
-                        <div class="perk-name">Guild Leadership</div>
-                        <div class="perk-desc">Secretary Qubate · IEEE Treasurer · Research Cell PM</div>
-                    </div>
+                    <ul class="info-list">
+                        <li>Secretary — Qubate of Kumaraguru</li>
+                        <li>Treasurer — IEEE KCT Student Branch</li>
+                        <li>Project Manager — Research Cell</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ══════════════════════════════ EXPERIENCE ══════════════════════════════ -->
-<section id="experience" class="layer">
+<!-- ── Experience ── -->
+<section id="experience">
     <div class="container">
-        <div class="section-header">
-            <span class="section-tag">// QUEST LOG</span>
-            <h2 class="section-title">Completed & Active Quests</h2>
-            <p class="section-desc">Adventures undertaken in the realm of semiconductor engineering</p>
+        <div class="sec-head reveal">
+            <div class="sec-label">Experience</div>
+            <h2 class="sec-title">Where I've <em>worked</em></h2>
+            <p class="sec-desc">Building semiconductor testing solutions that matter.</p>
         </div>
 
-        <div class="quest-log">
-            <div class="quest-item">
-                <div class="quest-header">
-                    <div class="quest-icon">🏰</div>
-                    <div class="quest-meta">
-                        <div class="quest-org">Soliton Technologies</div>
-                        <div class="quest-role">PROJECT ENGINEER</div>
+        <div class="exp-list">
+            <div class="exp-card reveal">
+                <div class="exp-top">
+                    <div class="exp-icon-wrap">🏭</div>
+                    <div>
+                        <div class="exp-company">Soliton Technologies</div>
+                        <div class="exp-role">PROJECT ENGINEER</div>
                     </div>
-                    <div class="quest-period">Jan 2024 – Present</div>
-                    <div class="quest-status active">● ACTIVE</div>
+                    <div class="exp-period">Jan 2024 – Present</div>
+                    <div class="exp-status live">Active</div>
                 </div>
-                <div class="quest-body">
-                    <ul class="quest-objectives">
-                        <li>Build scalable Test &amp; Automation Software solutions for semiconductor reliability labs</li>
+                <div class="exp-body">
+                    <ul class="exp-points">
+                        <li>Build scalable Test &amp; Automation Software for semiconductor reliability labs</li>
                         <li>Developed comprehensive Data Logging systems for Reliability Testing Software</li>
-                        <li>Implemented CI/CD deployment and automated testing pipelines</li>
+                        <li>Implemented CI/CD deployment pipelines and automated testing operations</li>
                         <li>Authored User Manuals and Technical Documentation for complex systems</li>
-                        <li>Created testing frameworks using LabVIEW, TestStand, and Python</li>
                     </ul>
-                    <div class="quest-rewards">
-                        <span class="reward-tag">⚗ LabVIEW</span>
-                        <span class="reward-tag">⚗ TestStand</span>
-                        <span class="reward-tag">⚗ Python</span>
-                        <span class="reward-tag">⚗ CI/CD</span>
-                        <span class="reward-tag">⚗ PostgreSQL</span>
+                    <div class="exp-skills">
+                        <span class="skill-chip">LabVIEW</span>
+                        <span class="skill-chip">TestStand</span>
+                        <span class="skill-chip">Python</span>
+                        <span class="skill-chip">CI/CD</span>
+                        <span class="skill-chip">PostgreSQL</span>
                     </div>
                 </div>
             </div>
 
-            <div class="quest-item">
-                <div class="quest-header">
-                    <div class="quest-icon">🗺️</div>
-                    <div class="quest-meta">
-                        <div class="quest-org">Soliton Technologies</div>
-                        <div class="quest-role">INTERN EXPLORER</div>
+            <div class="exp-card reveal reveal-delay-1">
+                <div class="exp-top">
+                    <div class="exp-icon-wrap">🌱</div>
+                    <div>
+                        <div class="exp-company">Soliton Technologies</div>
+                        <div class="exp-role">INTERN</div>
                     </div>
-                    <div class="quest-period">Jul 2023 – Dec 2023</div>
-                    <div class="quest-status done">✓ COMPLETE</div>
+                    <div class="exp-period">Jul 2023 – Dec 2023</div>
+                    <div class="exp-status done">Completed</div>
                 </div>
-                <div class="quest-body">
-                    <ul class="quest-objectives">
-                        <li>Received intensive training in LabVIEW programming fundamentals</li>
-                        <li>Collaborated with seasoned engineers on live software development</li>
-                        <li>Built pipeline tools and automation scripts</li>
+                <div class="exp-body">
+                    <ul class="exp-points">
+                        <li>Intensive technical training in LabVIEW programming</li>
+                        <li>Contributed to live pipeline development and automation</li>
                         <li>Performed debugging, feature testing &amp; automated data validations</li>
                     </ul>
-                    <div class="quest-rewards">
-                        <span class="reward-tag">⚗ LabVIEW Basics</span>
-                        <span class="reward-tag">⚗ Debugging</span>
-                        <span class="reward-tag">⚗ Automation</span>
+                    <div class="exp-skills">
+                        <span class="skill-chip">LabVIEW</span>
+                        <span class="skill-chip">Debugging</span>
+                        <span class="skill-chip">Automation</span>
                     </div>
                 </div>
             </div>
@@ -1333,464 +1094,291 @@
     </div>
 </section>
 
-<!-- ══════════════════════════════ PROJECTS ══════════════════════════════ -->
-<section id="projects" class="layer">
+<!-- ── Projects ── -->
+<section id="projects">
     <div class="container">
-        <div class="section-header">
-            <span class="section-tag">// ARTIFACT VAULT</span>
-            <h2 class="section-title">Discovered Artifacts</h2>
-            <p class="section-desc">Research relics and engineering wonders unearthed on past expeditions</p>
+        <div class="sec-head reveal">
+            <div class="sec-label">Projects &amp; Research</div>
+            <h2 class="sec-title">Things I've <em>built &amp; published</em></h2>
+            <p class="sec-desc">From low-power chip design to sustainable nanotechnology.</p>
         </div>
 
-        <div class="artifacts-grid">
-            <div class="artifact-card">
-                <div class="artifact-header artifact-bg-1">
-                    <span class="artifact-emoji">📡</span>
-                    <span class="artifact-rarity rarity-epic">EPIC</span>
+        <div class="projects-grid">
+            <div class="proj-card reveal">
+                <div class="proj-banner proj-b1">
+                    <span>📡</span>
+                    <span class="proj-badge badge-pub">IEEE Published</span>
                 </div>
-                <div class="artifact-body">
-                    <div class="artifact-name">SAR-ADC for Low Power Circuits</div>
-                    <div class="artifact-desc">8-bit Asynchronous SAR-ADC in Cadence Virtuoso using 18nm FinFET technology — ultra-low power in the microwatt range. IEEE Published.</div>
-                    <div class="artifact-tags">
-                        <span class="artifact-tag">Cadence Virtuoso</span>
-                        <span class="artifact-tag">18nm FinFET</span>
-                        <span class="artifact-tag">Low Power</span>
-                        <span class="artifact-tag">IEEE</span>
+                <div class="proj-body">
+                    <div class="proj-title">SAR-ADC for Low Power Circuits</div>
+                    <p class="proj-desc">8-bit Asynchronous SAR-ADC in Cadence Virtuoso using 18nm FinFET — ultra-low power in the microwatt range with swift operation.</p>
+                    <div class="proj-tags">
+                        <span class="proj-tag">Cadence Virtuoso</span>
+                        <span class="proj-tag">18nm FinFET</span>
+                        <span class="proj-tag">Low Power</span>
                     </div>
-                    <a href="https://ieeexplore.ieee.org/document/10625464" target="_blank" class="artifact-link">📖 View Publication →</a>
+                    <a href="https://ieeexplore.ieee.org/document/10625464" target="_blank" class="proj-link">View Publication →</a>
                 </div>
             </div>
 
-            <div class="artifact-card">
-                <div class="artifact-header artifact-bg-2">
-                    <span class="artifact-emoji">🔋</span>
-                    <span class="artifact-rarity rarity-rare">RARE</span>
+            <div class="proj-card reveal reveal-delay-1">
+                <div class="proj-banner proj-b2">
+                    <span>🔋</span>
+                    <span class="proj-badge badge-res">Research</span>
                 </div>
-                <div class="artifact-body">
-                    <div class="artifact-name">Battery Management System</div>
-                    <div class="artifact-desc">Design and validation of Analog Front End (AFE) for current measurement in an Indigenous BMS, featuring precision monitoring capabilities.</div>
-                    <div class="artifact-tags">
-                        <span class="artifact-tag">AFE Design</span>
-                        <span class="artifact-tag">Current Sensing</span>
-                        <span class="artifact-tag">PCB Design</span>
-                        <span class="artifact-tag">Validation</span>
+                <div class="proj-body">
+                    <div class="proj-title">Battery Management System</div>
+                    <p class="proj-desc">Design and validation of Analog Front End (AFE) for current measurement in an Indigenous BMS with precision monitoring.</p>
+                    <div class="proj-tags">
+                        <span class="proj-tag">AFE Design</span>
+                        <span class="proj-tag">PCB Design</span>
+                        <span class="proj-tag">Current Sensing</span>
                     </div>
-                    <a href="#" class="artifact-link">🗺 Explore →</a>
+                    <a href="#" class="proj-link">Learn More →</a>
                 </div>
             </div>
 
-            <div class="artifact-card">
-                <div class="artifact-header artifact-bg-3">
-                    <span class="artifact-emoji">🌿</span>
-                    <span class="artifact-rarity rarity-epic">EPIC</span>
+            <div class="proj-card reveal reveal-delay-2">
+                <div class="proj-banner proj-b3">
+                    <span>🌿</span>
+                    <span class="proj-badge badge-pub">Springer Published</span>
                 </div>
-                <div class="artifact-body">
-                    <div class="artifact-name">Graphene Nanocomposite Synthesis</div>
-                    <div class="artifact-desc">Synthesizing graphene nanocomposites from captured industrial carbon via CO₂ thermal reduction. A bridge between nature's chemistry and engineering. Springer Published.</div>
-                    <div class="artifact-tags">
-                        <span class="artifact-tag">Nanotechnology</span>
-                        <span class="artifact-tag">Graphene</span>
-                        <span class="artifact-tag">Sustainability</span>
-                        <span class="artifact-tag">Springer</span>
+                <div class="proj-body">
+                    <div class="proj-title">Graphene Nanocomposite Synthesis</div>
+                    <p class="proj-desc">Synthesizing graphene nanocomposites from captured industrial carbon via CO₂ thermal reduction — sustainability meets nanotechnology.</p>
+                    <div class="proj-tags">
+                        <span class="proj-tag">Nanotechnology</span>
+                        <span class="proj-tag">Graphene</span>
+                        <span class="proj-tag">Sustainability</span>
                     </div>
-                    <a href="https://link.springer.com/chapter/10.1007/978-981-16-8599-6_6" target="_blank" class="artifact-link">📖 View Publication →</a>
+                    <a href="https://link.springer.com/chapter/10.1007/978-981-16-8599-6_6" target="_blank" class="proj-link">View Publication →</a>
                 </div>
             </div>
 
-            <div class="artifact-card">
-                <div class="artifact-header artifact-bg-4">
-                    <span class="artifact-emoji">🎥</span>
-                    <span class="artifact-rarity rarity-uncommon">UNCOMMON</span>
+            <div class="proj-card reveal reveal-delay-3">
+                <div class="proj-banner proj-b4">
+                    <span>🎥</span>
+                    <span class="proj-badge badge-res">Research</span>
                 </div>
-                <div class="artifact-body">
-                    <div class="artifact-name">Video Dehazing for Automobiles</div>
-                    <div class="artifact-desc">Real-time video dehazing via PYNQ FPGA — cutting through the fog (literally) for automotive vision systems.</div>
-                    <div class="artifact-tags">
-                        <span class="artifact-tag">FPGA</span>
-                        <span class="artifact-tag">Computer Vision</span>
-                        <span class="artifact-tag">PYNQ</span>
-                        <span class="artifact-tag">Real-time</span>
+                <div class="proj-body">
+                    <div class="proj-title">Video Dehazing for Automobiles</div>
+                    <p class="proj-desc">Real-time video dehazing via PYNQ FPGA for improved automotive vision — cutting through the fog, literally.</p>
+                    <div class="proj-tags">
+                        <span class="proj-tag">FPGA</span>
+                        <span class="proj-tag">Computer Vision</span>
+                        <span class="proj-tag">PYNQ</span>
                     </div>
-                    <a href="#" class="artifact-link">🗺 Explore →</a>
+                    <a href="#" class="proj-link">Learn More →</a>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ══════════════════════════════ SKILLS ══════════════════════════════ -->
-<section id="skills" class="layer">
+<!-- ── Skills ── -->
+<section id="skills">
     <div class="container">
-        <div class="section-header">
-            <span class="section-tag">// SKILL TREE</span>
-            <h2 class="section-title">Unlocked Abilities</h2>
-            <p class="section-desc">Powers accumulated across hardware, software, and the wilderness</p>
+        <div class="sec-head reveal">
+            <div class="sec-label">Skills</div>
+            <h2 class="sec-title">Tools of the <em>trade</em></h2>
+            <p class="sec-desc">Across hardware, software, and the spaces in between.</p>
         </div>
 
-        <div class="skill-tree-grid">
-            <div class="skill-branch">
-                <div class="branch-name"><span class="icon">⚡</span> Programming</div>
-                <div class="skill-nodes">
-                    <span class="skill-node mastered" data-tip="Expert Level">LabVIEW ★★★</span>
-                    <span class="skill-node mastered" data-tip="Expert Level">TestStand ★★★</span>
-                    <span class="skill-node proficient" data-tip="Proficient">Python ★★</span>
-                    <span class="skill-node proficient" data-tip="Proficient">C++ ★★</span>
-                    <span class="skill-node proficient" data-tip="Proficient">PostgreSQL ★★</span>
+        <div class="skills-layout">
+            <div class="skill-group reveal">
+                <div class="skill-group-head">
+                    <span class="skill-group-icon">⚡</span>
+                    <span class="skill-group-name">Programming</span>
+                </div>
+                <div class="skill-pills">
+                    <span class="s-pill hi">LabVIEW</span>
+                    <span class="s-pill hi">TestStand</span>
+                    <span class="s-pill mid">Python</span>
+                    <span class="s-pill mid">C++</span>
+                    <span class="s-pill mid">PostgreSQL</span>
                 </div>
             </div>
 
-            <div class="skill-branch">
-                <div class="branch-name"><span class="icon">🏗</span> Architecture</div>
-                <div class="skill-nodes">
-                    <span class="skill-node mastered">Plugin Architecture</span>
-                    <span class="skill-node mastered">State Machines</span>
-                    <span class="skill-node proficient">MVC Pattern</span>
-                    <span class="skill-node proficient">LVOOPs</span>
-                    <span class="skill-node proficient">CI/CD</span>
+            <div class="skill-group reveal reveal-delay-1">
+                <div class="skill-group-head">
+                    <span class="skill-group-icon">🏗</span>
+                    <span class="skill-group-name">Architecture</span>
+                </div>
+                <div class="skill-pills">
+                    <span class="s-pill hi">Plugin Architecture</span>
+                    <span class="s-pill hi">State Machines</span>
+                    <span class="s-pill mid">MVC Pattern</span>
+                    <span class="s-pill mid">LVOOPs</span>
+                    <span class="s-pill mid">CI/CD</span>
                 </div>
             </div>
 
-            <div class="skill-branch">
-                <div class="branch-name"><span class="icon">🔧</span> Tools & EDA</div>
-                <div class="skill-nodes">
-                    <span class="skill-node mastered">Git</span>
-                    <span class="skill-node mastered">JIRA</span>
-                    <span class="skill-node proficient">Cadence Virtuoso</span>
-                    <span class="skill-node proficient">Altium Designer</span>
-                    <span class="skill-node proficient">KICAD</span>
-                    <span class="skill-node proficient">Tableau</span>
-                    <span class="skill-node proficient">Confluence</span>
+            <div class="skill-group reveal reveal-delay-2">
+                <div class="skill-group-head">
+                    <span class="skill-group-icon">🔧</span>
+                    <span class="skill-group-name">Tools &amp; EDA</span>
+                </div>
+                <div class="skill-pills">
+                    <span class="s-pill hi">Git</span>
+                    <span class="s-pill hi">JIRA</span>
+                    <span class="s-pill mid">Cadence Virtuoso</span>
+                    <span class="s-pill mid">Altium Designer</span>
+                    <span class="s-pill mid">KICAD</span>
+                    <span class="s-pill mid">Tableau</span>
+                    <span class="s-pill lo">Confluence</span>
                 </div>
             </div>
 
-            <div class="skill-branch">
-                <div class="branch-name"><span class="icon">🌍</span> Languages</div>
-                <div class="skill-nodes">
-                    <span class="skill-node mastered">Tamil (Native)</span>
-                    <span class="skill-node mastered">English (Pro)</span>
-                    <span class="skill-node learning">Japanese (Learner)</span>
-                    <span class="skill-node learning">German (Learner)</span>
+            <div class="skill-group reveal reveal-delay-3">
+                <div class="skill-group-head">
+                    <span class="skill-group-icon">📋</span>
+                    <span class="skill-group-name">Methodology</span>
+                </div>
+                <div class="skill-pills">
+                    <span class="s-pill hi">Agile / Scrum</span>
+                    <span class="s-pill hi">Kanban</span>
+                    <span class="s-pill mid">Clean Code</span>
+                    <span class="s-pill mid">Technical Writing</span>
                 </div>
             </div>
 
-            <div class="skill-branch">
-                <div class="branch-name"><span class="icon">📋</span> Methodology</div>
-                <div class="skill-nodes">
-                    <span class="skill-node mastered">Agile / Scrum</span>
-                    <span class="skill-node mastered">Kanban</span>
-                    <span class="skill-node mastered">Clean Code</span>
-                    <span class="skill-node proficient">Technical Writing</span>
+            <div class="skill-group reveal">
+                <div class="skill-group-head">
+                    <span class="skill-group-icon">🌍</span>
+                    <span class="skill-group-name">Languages</span>
+                </div>
+                <div class="skill-pills">
+                    <span class="s-pill hi">Tamil</span>
+                    <span class="s-pill hi">English</span>
+                    <span class="s-pill lo">Japanese</span>
+                    <span class="s-pill lo">German</span>
                 </div>
             </div>
 
-            <div class="skill-branch">
-                <div class="branch-name"><span class="icon">🐾</span> Explorer Traits</div>
-                <div class="skill-nodes">
-                    <span class="skill-node mastered">Nature Navigation</span>
-                    <span class="skill-node mastered">Dog Bonding</span>
-                    <span class="skill-node mastered">Trail Blazing</span>
-                    <span class="skill-node mastered">Video Editing</span>
-                    <span class="skill-node mastered">Content Writing</span>
-                    <span class="skill-node proficient">PCB Design</span>
+            <div class="skill-group reveal reveal-delay-1">
+                <div class="skill-group-head">
+                    <span class="skill-group-icon">🎨</span>
+                    <span class="skill-group-name">Other</span>
+                </div>
+                <div class="skill-pills">
+                    <span class="s-pill mid">PCB Design</span>
+                    <span class="s-pill mid">Video Editing</span>
+                    <span class="s-pill mid">Content Writing</span>
+                    <span class="s-pill mid">Documentation</span>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- ══════════════════════════════ CONTACT ══════════════════════════════ -->
-<section id="contact" class="layer">
+<!-- ── Contact ── -->
+<section id="contact">
     <div class="container">
-        <div class="section-header">
-            <span class="section-tag">// THE CAMPFIRE</span>
-            <h2 class="section-title">Rest &amp; Connect</h2>
-            <p class="section-desc">Every great adventure starts with a conversation</p>
-        </div>
-
-        <div class="campfire-section">
-            <span class="campfire-emoji">🔥</span>
-            <div class="campfire-title">Pull up a log, fellow traveller.</div>
-            <p class="campfire-desc">Whether you have a quest, a collaboration, or simply want to share tales from the trail — the fire's always warm.</p>
-
-            <div class="contact-links">
-                <a href="mailto:kgiftlindevapriya2708@gmail.com" class="contact-link">
-                    <span class="contact-link-icon">📧</span>
-                    <div>
-                        <span class="contact-link-label">RAVEN MAIL</span>
-                        <span class="contact-link-val">kgiftlindevapriya2708@gmail.com</span>
+        <div class="contact-wrap">
+            <div class="contact-left reveal">
+                <div class="sec-label">Contact</div>
+                <div class="contact-links">
+                    <a href="mailto:kgiftlindevapriya2708@gmail.com" class="contact-item">
+                        <div class="contact-item-icon">📧</div>
+                        <div>
+                            <div class="contact-item-lbl">Email</div>
+                            <div class="contact-item-val">kgiftlindevapriya2708@gmail.com</div>
+                        </div>
+                    </a>
+                    <a href="https://www.linkedin.com/in/giftlin27/" target="_blank" class="contact-item">
+                        <div class="contact-item-icon">💼</div>
+                        <div>
+                            <div class="contact-item-lbl">LinkedIn</div>
+                            <div class="contact-item-val">linkedin.com/in/giftlin27</div>
+                        </div>
+                    </a>
+                    <a href="https://github.com/Giftlin27" target="_blank" class="contact-item">
+                        <div class="contact-item-icon">🗂</div>
+                        <div>
+                            <div class="contact-item-lbl">GitHub</div>
+                            <div class="contact-item-val">github.com/Giftlin27</div>
+                        </div>
+                    </a>
+                    <div class="contact-item" style="cursor:default;">
+                        <div class="contact-item-icon">📍</div>
+                        <div>
+                            <div class="contact-item-lbl">Location</div>
+                            <div class="contact-item-val">Tirunelveli, Tamil Nadu, India</div>
+                        </div>
                     </div>
-                </a>
-                <a href="https://www.linkedin.com/in/giftlin27/" target="_blank" class="contact-link">
-                    <span class="contact-link-icon">🗺️</span>
-                    <div>
-                        <span class="contact-link-label">GUILD NETWORK</span>
-                        <span class="contact-link-val">linkedin.com/in/giftlin27</span>
-                    </div>
-                </a>
-                <a href="https://github.com/Giftlin27" target="_blank" class="contact-link">
-                    <span class="contact-link-icon">📦</span>
-                    <div>
-                        <span class="contact-link-label">ARTIFACT REPOSITORY</span>
-                        <span class="contact-link-val">github.com/Giftlin27</span>
-                    </div>
-                </a>
-                <a href="https://leetcode.com/u/kgiftlindevapriya2708/" target="_blank" class="contact-link">
-                    <span class="contact-link-icon">⚔️</span>
-                    <div>
-                        <span class="contact-link-label">BATTLE ARENA</span>
-                        <span class="contact-link-val">LeetCode Profile</span>
-                    </div>
-                </a>
+                </div>
             </div>
 
-            <div class="location-badge">📍 Tirunelveli, Tamil Nadu, India</div>
+            <div class="contact-right reveal reveal-delay-2">
+                <div class="contact-tagline">
+                    Let's build something <em>meaningful</em> together.
+                </div>
+                <p class="contact-note">
+                    Whether it's a collaboration, a project idea, or just a conversation about
+                    test automation, semiconductor engineering — or the best trails to explore —
+                    I'm always open to a good conversation.
+                </p>
+                <div class="socials">
+                    <a href="https://github.com/Giftlin27" target="_blank" class="social-btn">GH</a>
+                    <a href="https://www.linkedin.com/in/giftlin27/" target="_blank" class="social-btn">in</a>
+                    <a href="https://leetcode.com/u/kgiftlindevapriya2708/" target="_blank" class="social-btn">LC</a>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- ══════════════════════════════ FOOTER ══════════════════════════════ -->
+<!-- ── Footer ── -->
 <footer>
-    <div class="footer-row">
-        <div class="footer-logo">GIFTLIN.DK</div>
-        <div class="footer-text">Forged with <span>♥</span> for dogs, trails &amp; good code · © 2025</div>
-        <div class="paw-trail">🐾🐾🐾🐾</div>
+    <div class="footer-inner">
+        <div class="footer-dots">🌿 · · · 🐾 · · · 🌿</div>
+        <div class="footer-verse">
+            "Patient persuasion can break down the strongest resistance."
+            <cite>— Proverbs 25:15</cite>
+        </div>
+        <div class="footer-copy">© 2025 Giftlin Devapriya K · Built with care</div>
     </div>
 </footer>
 
-<!-- ══════════════════════════════ SCRIPTS ══════════════════════════════ -->
 <script>
-// ── Scroll Progress ──
-window.addEventListener('scroll', () => {
-    const s = document.documentElement.scrollTop;
-    const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    document.getElementById('scroll-progress').style.width = (s / h * 100) + '%';
-});
-
-// ── Forest Canvas: fireflies + stars ──
-(function() {
-    const canvas = document.getElementById('forest-canvas');
-    const ctx = canvas.getContext('2d');
-    let W, H, fireflies = [], stars = [];
-
-    function resize() {
-        W = canvas.width = window.innerWidth;
-        H = canvas.height = window.innerHeight;
-    }
-
-    function initStars() {
-        stars = Array.from({length: 120}, () => ({
-            x: Math.random() * W,
-            y: Math.random() * H * 0.6,
-            r: Math.random() * 1.5 + 0.3,
-            alpha: Math.random() * 0.6 + 0.1,
-            twinkle: Math.random() * 0.02 + 0.005,
-            dir: 1
-        }));
-    }
-
-    function initFireflies() {
-        fireflies = Array.from({length: 55}, () => ({
-            x: Math.random() * W,
-            y: Math.random() * H,
-            vx: (Math.random() - 0.5) * 0.8,
-            vy: (Math.random() - 0.5) * 0.8,
-            alpha: Math.random(),
-            alphaDir: Math.random() > 0.5 ? 1 : -1,
-            size: Math.random() * 2.5 + 1,
-            hue: Math.random() * 40 + 70  // yellow-green range
-        }));
-    }
-
-    function drawForestBase() {
-        // Sky gradient
-        const sky = ctx.createLinearGradient(0, 0, 0, H * 0.7);
-        sky.addColorStop(0, '#040a05');
-        sky.addColorStop(0.7, '#0d1a0f');
-        ctx.fillStyle = sky;
-        ctx.fillRect(0, 0, W, H);
-
-        // Tree silhouettes
-        ctx.fillStyle = '#060e08';
-        const trees = [
-            {x: 0,    w: 120, h: H * 0.45, type: 'pine'},
-            {x: 80,   w: 90,  h: H * 0.38, type: 'pine'},
-            {x: W-150,w: 130, h: H * 0.5,  type: 'pine'},
-            {x: W-80, w: 100, h: H * 0.42, type: 'pine'},
-            {x: W*0.3,w: 80,  h: H * 0.35, type: 'pine'},
-            {x: W*0.65,w: 110,h: H * 0.47, type: 'pine'},
-        ];
-
-        trees.forEach(t => {
-            ctx.beginPath();
-            ctx.moveTo(t.x + t.w/2, H - t.h);
-            ctx.lineTo(t.x + t.w, H);
-            ctx.lineTo(t.x, H);
-            ctx.closePath();
-            ctx.fill();
-
-            // Second tier
-            ctx.beginPath();
-            ctx.moveTo(t.x + t.w/2, H - t.h * 0.65);
-            ctx.lineTo(t.x + t.w * 0.85, H - t.h * 0.25);
-            ctx.lineTo(t.x + t.w * 0.15, H - t.h * 0.25);
-            ctx.closePath();
-            ctx.fill();
-        });
-
-        // Ground fog
-        const fog = ctx.createLinearGradient(0, H * 0.8, 0, H);
-        fog.addColorStop(0, 'rgba(13,26,15,0)');
-        fog.addColorStop(1, 'rgba(13,26,15,0.8)');
-        ctx.fillStyle = fog;
-        ctx.fillRect(0, H * 0.8, W, H * 0.2);
-    }
-
-    function loop() {
-        ctx.clearRect(0, 0, W, H);
-        drawForestBase();
-
-        // Stars
-        stars.forEach(s => {
-            s.alpha += s.twinkle * s.dir;
-            if (s.alpha > 0.8 || s.alpha < 0.05) s.dir *= -1;
-            ctx.beginPath();
-            ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(255, 255, 220, ${s.alpha})`;
-            ctx.fill();
-        });
-
-        // Fireflies
-        fireflies.forEach(f => {
-            f.x += f.vx;
-            f.y += f.vy;
-            f.alpha += 0.025 * f.alphaDir;
-            if (f.alpha > 1 || f.alpha < 0) f.alphaDir *= -1;
-            if (f.x < 0 || f.x > W) f.vx *= -1;
-            if (f.y < 0 || f.y > H) f.vy *= -1;
-
-            const grd = ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, f.size * 4);
-            grd.addColorStop(0, `hsla(${f.hue}, 100%, 75%, ${f.alpha})`);
-            grd.addColorStop(1, `hsla(${f.hue}, 100%, 75%, 0)`);
-            ctx.beginPath();
-            ctx.arc(f.x, f.y, f.size * 4, 0, Math.PI * 2);
-            ctx.fillStyle = grd;
-            ctx.fill();
-
-            ctx.beginPath();
-            ctx.arc(f.x, f.y, f.size, 0, Math.PI * 2);
-            ctx.fillStyle = `hsla(${f.hue}, 100%, 90%, ${f.alpha})`;
-            ctx.fill();
-        });
-
-        requestAnimationFrame(loop);
-    }
-
-    resize();
-    initStars();
-    initFireflies();
-    loop();
-    window.addEventListener('resize', () => { resize(); initStars(); initFireflies(); });
-})();
-
-// ── Falling Leaves ──
-const leafEmojis = ['🍃','🍂','🌿','🍁'];
-function spawnLeaf() {
-    const leaf = document.createElement('div');
-    leaf.className = 'leaf';
-    leaf.textContent = leafEmojis[Math.floor(Math.random() * leafEmojis.length)];
-    leaf.style.left = Math.random() * 100 + 'vw';
-    leaf.style.top = '-30px';
-    const dur = Math.random() * 6 + 6;
-    leaf.style.animationDuration = dur + 's';
-    leaf.style.fontSize = (Math.random() * 0.8 + 0.7) + 'rem';
-    document.body.appendChild(leaf);
-    setTimeout(() => leaf.remove(), dur * 1000);
-}
-setInterval(spawnLeaf, 2200);
-
-// ── Dog Companion ──
-const dogEl = document.getElementById('dog-companion');
-const speechEl = document.getElementById('dog-speech');
-const dogLines = [
-    'Woof! Great portfolio, right?',
-    'I sniffed out your GitHub! 🐕',
-    'Let\'s explore some code together!',
-    'Nature is the best bug tracker 🌿',
-    '*tail wagging intensifies*',
-    'Have you tried the campfire? 🔥',
-    'I approve this engineer! ✓',
-    'Sniff sniff... smells like clean code!'
-];
-let speechTimeout;
-
-dogEl.addEventListener('click', () => {
-    const line = dogLines[Math.floor(Math.random() * dogLines.length)];
-    speechEl.textContent = line;
-    speechEl.classList.add('show');
-    clearTimeout(speechTimeout);
-    speechTimeout = setTimeout(() => speechEl.classList.remove('show'), 3500);
-    showXP();
-});
-
-// ── XP Notification ──
-const xpEl = document.getElementById('xp-notif');
-let xpTimeout;
-const xpMessages = ['+50 XP GAINED!', '+25 XP — CURIOUS!', '+100 XP — EXPLORER!', '+10 XP — NICE CLICK!'];
-function showXP() {
-    xpEl.textContent = xpMessages[Math.floor(Math.random() * xpMessages.length)];
-    xpEl.classList.add('show');
-    clearTimeout(xpTimeout);
-    xpTimeout = setTimeout(() => xpEl.classList.remove('show'), 2000);
-}
-
-// XP on section enter
-const sections = document.querySelectorAll('section');
-const secObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) showXP(); });
-}, { threshold: 0.3 });
-sections.forEach(s => secObs.observe(s));
-
-// ── Scroll-reveal ──
-const revealObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-        if (e.isIntersecting) {
-            e.target.style.opacity = '1';
-            e.target.style.transform = 'translateY(0)';
-        }
+    // Scroll progress
+    window.addEventListener('scroll', () => {
+        const s = document.documentElement.scrollTop;
+        const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        document.getElementById('progress').style.width = (s / h * 100) + '%';
+        document.getElementById('nav').classList.toggle('scrolled', s > 60);
     });
-}, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
 
-document.querySelectorAll('.artifact-card, .skill-branch, .quest-item, .perk-card, .char-portrait, .traits-box, .about-lore').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    revealObs.observe(el);
-});
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a =>
+        a.addEventListener('click', e => {
+            e.preventDefault();
+            document.querySelector(a.getAttribute('href'))
+                ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        })
+    );
 
-// ── Smooth scroll ──
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-        e.preventDefault();
-        const t = document.querySelector(a.getAttribute('href'));
-        if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Reveal on scroll
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+    // Mobile menu toggle (basic)
+    document.getElementById('menuBtn')?.addEventListener('click', () => {
+        const nav = document.querySelector('.nav-links');
+        const open = nav.style.display === 'flex';
+        nav.style.display = open ? 'none' : 'flex';
+        nav.style.flexDirection = 'column';
+        nav.style.position = 'absolute';
+        nav.style.top = '70px'; nav.style.right = '2rem';
+        nav.style.background = 'rgba(17,26,18,0.97)';
+        nav.style.padding = '1.5rem';
+        nav.style.borderRadius = '10px';
+        nav.style.border = '1px solid var(--border)';
+        nav.style.gap = '1.5rem';
     });
-});
-
-// ── Konami Code easter egg ──
-let konamiSeq = [];
-const konami = [38,38,40,40,37,39,37,39,66,65];
-document.addEventListener('keydown', e => {
-    konamiSeq.push(e.keyCode);
-    if (konamiSeq.length > 10) konamiSeq.shift();
-    if (konamiSeq.join(',') === konami.join(',')) {
-        dogEl.textContent = '🦴';
-        speechEl.textContent = '🎉 KONAMI CODE UNLOCKED! Secret Explorer Mode ON!';
-        speechEl.classList.add('show');
-        // Burst leaves
-        for (let i = 0; i < 20; i++) setTimeout(spawnLeaf, i * 100);
-        setTimeout(() => { dogEl.textContent = '🐕'; }, 5000);
-    }
-});
 </script>
 </body>
 </html>
