@@ -799,6 +799,213 @@
             color: var(--dim);
         }
 
+        /* ─── Mouse spotlight ─── */
+        #spotlight {
+            position: fixed; inset: 0; z-index: 0;
+            pointer-events: none;
+            background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%),
+                        rgba(232,151,58,0.07) 0%, transparent 60%);
+            transition: background 0.15s ease-out;
+        }
+
+        /* ─── Stats strip ─── */
+        .stats-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-top: 3.5rem;
+        }
+
+        .stat {
+            background: var(--bg2);
+            border: 1px solid var(--bdr);
+            border-radius: 8px;
+            padding: 1.3rem 1rem;
+            text-align: center;
+            transition: border-color 0.3s, transform 0.3s var(--ease);
+        }
+
+        .stat:hover { border-color: var(--bdr2); transform: translateY(-3px); }
+
+        .stat-num {
+            font-family: 'Lora', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--amber);
+            line-height: 1;
+        }
+
+        .stat-num .suffix { color: var(--amber-lt); font-size: 1.3rem; }
+
+        .stat-lbl {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--muted);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-top: 0.6rem;
+        }
+
+        /* ─── Freelance / Consultation ─── */
+        .freelance-card {
+            position: relative;
+            background:
+                linear-gradient(135deg, rgba(232,151,58,0.08), rgba(196,98,42,0.04)),
+                var(--bg2);
+            border: 1px solid var(--bdr2);
+            border-radius: 14px;
+            padding: 3rem;
+            overflow: hidden;
+        }
+
+        .freelance-card::before {
+            content: '';
+            position: absolute; top: -40%; right: -10%;
+            width: 380px; height: 380px;
+            background: radial-gradient(circle, rgba(232,151,58,0.12), transparent 65%);
+            pointer-events: none;
+        }
+
+        .freelance-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 3rem; align-items: center;
+            position: relative; z-index: 1;
+        }
+
+        .freelance-status {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--term);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            display: inline-flex; align-items: center; gap: 0.5rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .freelance-status .dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--term);
+            box-shadow: 0 0 0 0 rgba(126,200,160,0.6);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%   { box-shadow: 0 0 0 0 rgba(126,200,160,0.55); }
+            70%  { box-shadow: 0 0 0 8px rgba(126,200,160,0); }
+            100% { box-shadow: 0 0 0 0 rgba(126,200,160,0); }
+        }
+
+        .freelance-title {
+            font-family: 'Lora', serif;
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 700;
+            color: var(--cream);
+            line-height: 1.25;
+            margin-bottom: 1rem;
+        }
+
+        .freelance-title em { color: var(--amber); font-style: italic; }
+
+        .freelance-body {
+            font-size: 0.97rem;
+            color: var(--muted);
+            line-height: 1.85;
+            margin-bottom: 1.8rem;
+            max-width: 480px;
+        }
+
+        .freelance-offer { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+
+        .freelance-offer li {
+            font-size: 0.92rem;
+            color: var(--warm-wht);
+            display: flex; align-items: flex-start; gap: 0.7rem;
+        }
+
+        .freelance-offer li::before {
+            content: '✓';
+            color: var(--term);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .freelance-cta { margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+
+        /* ─── Certifications ─── */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .cert-card {
+            background: var(--bg2);
+            border: 1px solid var(--bdr);
+            border-radius: 8px;
+            padding: 1.4rem;
+            display: flex; gap: 1rem; align-items: flex-start;
+            transition: border-color 0.3s, transform 0.3s var(--ease), box-shadow 0.3s;
+        }
+
+        .cert-card:hover {
+            border-color: var(--bdr2);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        }
+
+        .cert-icon {
+            width: 40px; height: 40px; flex-shrink: 0;
+            background: var(--bg4);
+            border: 1px solid var(--bdr);
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.15rem;
+        }
+
+        .cert-name {
+            font-family: 'Lora', serif;
+            font-size: 0.97rem;
+            font-weight: 600;
+            color: var(--cream);
+            line-height: 1.35;
+            margin-bottom: 0.25rem;
+        }
+
+        .cert-issuer {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--amber-dim);
+            letter-spacing: 0.5px;
+        }
+
+        .cert-year {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--dim);
+            margin-top: 0.4rem;
+        }
+
+        /* ─── Active nav ─── */
+        .nav-links a.active { color: var(--amber); }
+
+        /* ─── Back to top ─── */
+        #toTop {
+            position: fixed; bottom: 1.8rem; right: 1.8rem; z-index: 200;
+            width: 44px; height: 44px;
+            background: var(--amber);
+            color: var(--bg);
+            border: none; border-radius: 8px;
+            font-size: 1.1rem; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; transform: translateY(12px); pointer-events: none;
+            transition: all 0.3s var(--ease);
+            box-shadow: 0 8px 24px rgba(232,151,58,0.3);
+        }
+
+        #toTop.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+        #toTop:hover { background: var(--amber-lt); transform: translateY(-3px); }
+
         /* ─── Reveal ─── */
         .reveal {
             opacity: 0;
@@ -814,20 +1021,23 @@
 
         /* ─── Responsive ─── */
         @media (max-width: 900px) {
-            .hero-grid, .about-grid, .contact-wrap { grid-template-columns: 1fr; gap: 3rem; }
+            .hero-grid, .about-grid, .contact-wrap, .freelance-grid { grid-template-columns: 1fr; gap: 3rem; }
             .nav-links { display: none; }
             .nav-menu-btn { display: block; }
+            .stats-strip { grid-template-columns: repeat(2, 1fr); }
         }
 
         @media (max-width: 600px) {
             section { padding: 5rem 0; }
             .hero { padding: 100px 0 60px; }
             .hero-cta { flex-direction: column; align-items: flex-start; }
+            .freelance-card { padding: 2rem 1.5rem; }
         }
     </style>
 </head>
 <body>
 
+<div id="spotlight"></div>
 <div id="progress"></div>
 
 <!-- ── Nav ── -->
@@ -838,6 +1048,8 @@
         <li><a href="#experience">experience</a></li>
         <li><a href="#projects">projects</a></li>
         <li><a href="#skills">skills</a></li>
+        <li><a href="#certs">certs</a></li>
+        <li><a href="#freelance">freelance</a></li>
         <li><a href="#contact">contact</a></li>
     </ul>
     <button class="nav-menu-btn" id="menuBtn">≡</button>
@@ -903,6 +1115,25 @@
                 </div>
             </div>
 
+        </div>
+
+        <div class="stats-strip reveal d2">
+            <div class="stat">
+                <div class="stat-num" data-count="2" data-suffix="+"><span>0</span></div>
+                <div class="stat-lbl">Years Experience</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num" data-count="2" data-suffix=""><span>0</span></div>
+                <div class="stat-lbl">Publications</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num" data-count="9.57" data-decimals="2" data-suffix=""><span>0</span></div>
+                <div class="stat-lbl">CGPA / 10</div>
+            </div>
+            <div class="stat">
+                <div class="stat-num" data-count="4" data-suffix="×"><span>0</span></div>
+                <div class="stat-lbl">Excellence Awards</div>
+            </div>
         </div>
     </div>
 </section>
@@ -1221,6 +1452,61 @@
     </div>
 </section>
 
+<!-- ── Certifications ── -->
+<section id="certs">
+    <div class="container">
+        <div class="sec-head reveal">
+            <div class="sec-eyebrow">certifications</div>
+            <h2 class="sec-title">Credentials &amp; <em>continuous learning</em></h2>
+            <p class="sec-sub">Verified certifications and professional credentials.</p>
+        </div>
+
+        <div class="cert-grid">
+            <!-- CERT_PLACEHOLDER_START -->
+            <div class="cert-card reveal">
+                <div class="cert-icon">📜</div>
+                <div>
+                    <div class="cert-name">Certifications coming soon</div>
+                    <div class="cert-issuer">Awaiting details</div>
+                    <div class="cert-year">— share your LinkedIn cert list to populate this section</div>
+                </div>
+            </div>
+            <!-- CERT_PLACEHOLDER_END -->
+        </div>
+    </div>
+</section>
+
+<!-- ── Freelance ── -->
+<section id="freelance">
+    <div class="container">
+        <div class="freelance-card reveal">
+            <div class="freelance-grid">
+                <div>
+                    <div class="freelance-status"><span class="dot"></span> Available for Freelance</div>
+                    <h2 class="freelance-title">LabVIEW <em>consultation</em> &amp; test automation, on demand.</h2>
+                    <p class="freelance-body">
+                        Need a LabVIEW expert for a focused engagement? I help teams architect,
+                        debug, and ship reliable test &amp; automation software — from quick
+                        code reviews to full TestStand sequencer builds.
+                    </p>
+                    <ul class="freelance-offer">
+                        <li>LabVIEW architecture &amp; code review (Plugin / LVOOP / State Machines)</li>
+                        <li>TestStand sequence development &amp; debugging</li>
+                        <li>Test &amp; measurement automation, data logging pipelines</li>
+                        <li>CI/CD setup and technical documentation</li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="freelance-cta">
+                        <a href="mailto:kgiftlindevapriya2708@gmail.com?subject=LabVIEW%20Consultation%20Inquiry" class="btn btn-primary">Book a Consultation</a>
+                        <a href="https://www.linkedin.com/in/giftlin27/" target="_blank" class="btn btn-ghost">Message on LinkedIn ↗</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- ── Contact ── -->
 <section id="contact">
     <div class="container">
@@ -1262,8 +1548,8 @@
             <div class="reveal d2">
                 <div class="contact-headline">Let's build something <em>precise</em> together.</div>
                 <p class="contact-body">
-                    Whether it's a collaboration, a project conversation, or just a chat about
-                    test automation and semiconductor engineering — I'm always open.
+                    Whether it's a freelance LabVIEW consultation, a collaboration, or just a
+                    chat about test automation and post-silicon validation — I'm always open.
                 </p>
                 <div class="social-row">
                     <a href="https://github.com/Giftlin27" target="_blank" class="soc-btn">GH</a>
@@ -1288,14 +1574,61 @@
     </div>
 </footer>
 
+<button id="toTop" aria-label="Back to top">↑</button>
+
 <script>
-    // Scroll progress + nav
+    // Scroll progress + nav + back-to-top
+    const toTop = document.getElementById('toTop');
     window.addEventListener('scroll', () => {
         const s = document.documentElement.scrollTop;
         const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         document.getElementById('progress').style.width = (s / h * 100) + '%';
         document.getElementById('nav').classList.toggle('scrolled', s > 50);
+        toTop.classList.toggle('show', s > 600);
     });
+    toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // Mouse spotlight
+    const spot = document.getElementById('spotlight');
+    window.addEventListener('pointermove', e => {
+        spot.style.setProperty('--mx', e.clientX + 'px');
+        spot.style.setProperty('--my', e.clientY + 'px');
+    });
+
+    // Animated stat counters
+    const animateCount = el => {
+        const target = parseFloat(el.dataset.count);
+        const decimals = parseInt(el.dataset.decimals || '0', 10);
+        const suffix = el.dataset.suffix || '';
+        const span = el.querySelector('span');
+        const dur = 1400, start = performance.now();
+        const step = now => {
+            const p = Math.min((now - start) / dur, 1);
+            const eased = 1 - Math.pow(1 - p, 3);
+            span.textContent = (target * eased).toFixed(decimals);
+            if (p < 1) requestAnimationFrame(step);
+            else { span.textContent = target.toFixed(decimals); if (suffix) span.insertAdjacentHTML('afterend', '<span class="suffix">' + suffix + '</span>'); }
+        };
+        requestAnimationFrame(step);
+    };
+    const statObs = new IntersectionObserver((entries, o) => {
+        entries.forEach(e => { if (e.isIntersecting) { animateCount(e.target); o.unobserve(e.target); } });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.stat-num').forEach(el => statObs.observe(el));
+
+    // Scroll-spy active nav
+    const navMap = {};
+    document.querySelectorAll('.nav-links a').forEach(a => navMap[a.getAttribute('href').slice(1)] = a);
+    const spyObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+            const a = navMap[e.target.id];
+            if (a && e.isIntersecting) {
+                Object.values(navMap).forEach(x => x.classList.remove('active'));
+                a.classList.add('active');
+            }
+        });
+    }, { threshold: 0.3, rootMargin: '-30% 0px -50% 0px' });
+    document.querySelectorAll('section[id]').forEach(s => spyObs.observe(s));
 
     // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(a =>
